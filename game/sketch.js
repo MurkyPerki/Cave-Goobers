@@ -10,4 +10,6 @@ function setup() {
 
 function draw() {
     background(backgroundImage, width, height);
+
 }
+yoooo
