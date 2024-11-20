@@ -4,10 +4,10 @@ playerY = 300;
 playerW = 50;
 playerH = 50;
 playerSpeed = 10;
-// playerJump = false;
-// playerPos = (0, 0);
-// playerVelocity = createVector(50, 50);
-// playerGravity = 10;
+isJumping = false;
+// playerPos = createVector(0, 0);
+playerVelocity = 100;
+playerGravity = 10;
 
 function setup() {
     createCanvas(800, 600);
@@ -19,7 +19,11 @@ function draw() {
     let newPlayer = new Player(playerX, playerY, playerW, playerH);
     newPlayer.show();
     newPlayer.move();
-    
+    newPlayer.jump();
+    newPlayer.gravity();
+
+    console.log('player.y:' + playerY);
+
 }
 
 class Player {
@@ -29,14 +33,14 @@ class Player {
         this.playerW = playerW;
         this.playerH = playerH;
         this.playerSpeed = playerSpeed;
-        // this.playerJump = playerJump;
-        // this.playerVelocity = playerVelocity;
-        // this.playerGravity = playerGravity;
-        // this.playerPos = playerPos;
+        this.isJumping = isJumping;
+        this.playerVelocity = playerVelocity;
+        this.playerGravity = playerGravity;
+        //this.playerPos = playerPos;
     }
 
     move() {
-        // left right movement
+        // player left right movement
         if (keyIsDown(RIGHT_ARROW)) {
             playerX = playerX + playerSpeed;
         }
@@ -44,20 +48,26 @@ class Player {
         if (keyIsDown(LEFT_ARROW)) {
             playerX = playerX - playerSpeed;
         }
-
-        // jump
-        // if (keyIsDown === BACKSPACE) {
-        //     playerJump == true;
-        // }
-
-        // if (playerJump) {
-        //  this.playerY = playerY + playerVelocity; 
-        // }
     }
 
     show() {
         noStroke();
         fill(0);
         rect(this.playerX, this.playerY, this.playerW, this.playerH);
+    }
+
+    jump() {
+        if (keyIsDown(UP_ARROW) && !isJumping) {
+            playerY -= playerVelocity;
+
+            isJumping = true;
+        }
+    // if player.touchingGround reset isJumping true = false
+    }
+    
+    //touchingGround()
+
+    gravity() {
+         playerVelocity += playerGravity;
     }
 }
