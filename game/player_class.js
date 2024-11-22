@@ -9,14 +9,7 @@ class Player extends Entity {
         this.isJumping = false;
         this.playerVelocity = 0;
         this.playerGravity = 10;
-        //this.playerPos = playerPos;
     }
-
-    // die() {
-    //     super.die();
-
-    //     SwitchToStartScreen();
-    // }
 
     move() {
         // player left right movement
@@ -49,3 +42,9 @@ class Player extends Entity {
         playerVelocity += playerGravity;
     }
 }
+
+  // die() {
+    //     super.die();
+
+    //     SwitchToStartScreen();
+    // }

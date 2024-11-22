@@ -4,15 +4,6 @@ class Entity {
         // this.health = 100;
     }
 
-    // takeDamage(damage) {
-    //     this.health -= damage;
-    //     if (this.health <= 0) {
-    //         this.die();
-    //     }
-    // }
-
-    // die()
-
     update() {
         this.move();
         this.show();
@@ -21,4 +12,12 @@ class Entity {
     }
 
     //touchingGround()
+    // die()
+
+    // takeDamage(damage) {
+    //     this.health -= damage;
+    //     if (this.health <= 0) {
+    //         this.die();
+    //     }
+    // }
 }
