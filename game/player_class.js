@@ -1,6 +1,34 @@
 
+class Entity {
+    constructor() {
+        // this.health = 100;
+    }
+
+    // takeDamage(damage) {
+    //     this.health -= damage;
+    //     if (this.health <= 0) {
+    //         this.die();
+    //     }
+    // }
+
+    // die()
+
+    update() {
+        this.move();
+        this.show();
+        this.jump();
+        this.gravity();
+    }
+
+    //touchingGround()
+}
+
+
+
 class Player extends Entity {
     constructor(playerX, playerY, playerW, playerH) {
+       super();
+       
         this.playerX = playerX;
         this.playerY = playerY;
         this.playerW = playerW;
@@ -21,31 +49,31 @@ class Player extends Entity {
     move() {
         // player left right movement
         if (keyIsDown(RIGHT_ARROW)) {
-            playerX = playerX + playerSpeed;
+            this.playerX = this.playerX + this.playerSpeed;
         }
 
         if (keyIsDown(LEFT_ARROW)) {
-            playerX = playerX - playerSpeed;
+            this.playerX = this.playerX - this.playerSpeed;
         }
     }
 
     show() {
         noStroke();
         fill(0);
-        rect(playerX, playerY, playerW, playerH);
+        rect(this.playerX, this.playerY, this.playerW, this.playerH);
     }
 
     jump() {
         if (keyIsDown(UP_ARROW) && !isJumping) {
-            playerY -= playerVelocity;
+            this.playerY -= this.playerVelocity;
 
-            isJumping = true;
+            this.isJumping = true;
         }
         // if player.touchingGround reset isJumping true = false
     }
 
     gravity() {
-        if (playerY < 300)
-        playerVelocity += playerGravity;
+        if (this.playerY < 300)
+        this.playerVelocity += this.playerGravity;
     }
 }

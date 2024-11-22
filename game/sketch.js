@@ -1,4 +1,6 @@
 
+let player
+
 function setup() {
     createCanvas(800, 600);
 }
@@ -7,8 +9,8 @@ function draw() {
     background(240, 240, 240);
    
     // player
-    let newPlayer = new Player(400, 300, 50, 50);
-    newPlayer.update();
+    let player = new Player(400, 300, 50, 50);
+    player.update();
 
 }
 
