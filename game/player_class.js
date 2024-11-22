@@ -76,4 +76,7 @@ class Player extends Entity {
         if (this.playerY < 300)
         this.playerVelocity += this.playerGravity;
     }
+
+
+    
 }

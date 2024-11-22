@@ -3,14 +3,16 @@ let player
 
 function setup() {
     createCanvas(800, 600);
+    let player = new Player(400, 300, 50, 50);
 }
 
 function draw() {
     background(240, 240, 240);
    
     // player
-    let player = new Player(400, 300, 50, 50);
+    
     player.update();
+    player.show();
 
 }
 
