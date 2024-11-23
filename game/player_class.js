@@ -20,7 +20,8 @@ class Player extends Entity {
             this.playerX = this.playerX - this.playerSpeed;
         }
         if (keyIsDown(UP_ARROW) && !this.isJumping) {
-            this.playerVelocity = 8
+            this.playerVelocity = 20
+            this.isJumping = true;
         }
     }
 
@@ -40,6 +41,7 @@ class Player extends Entity {
         if (this.playerY >= 300) {
             this.playerVelocity = 0;
             this.playerY = 300;
+            this.isJumping = false;
            
         }
         // if player.touchingGround reset isJumping true = false
