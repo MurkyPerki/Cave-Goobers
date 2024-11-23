@@ -8,7 +8,7 @@ class Player extends Entity {
         this.playerSpeed = 10;
         this.isJumping = false;
         this.playerVelocity = 0;
-        this.playerGravity = 10;
+        this.playerGravity = 2;
     }
 
     move() {
@@ -16,9 +16,11 @@ class Player extends Entity {
         if (keyIsDown(RIGHT_ARROW)) {
             this.playerX = this.playerX + this.playerSpeed;
         }
-
         if (keyIsDown(LEFT_ARROW)) {
             this.playerX = this.playerX - this.playerSpeed;
+        }
+        if (keyIsDown(UP_ARROW) && !this.isJumping) {
+            this.playerVelocity = 8
         }
     }
 
@@ -29,18 +31,20 @@ class Player extends Entity {
     }
 
     jump() {
-        if (keyIsDown(UP_ARROW) && !isJumping) {
-            this.playerY -= this.playerVelocity;
+        // update player y pos
+        this.playerY -= this.playerVelocity;
 
-            this.isJumping = true;
+        if (this.playerY < 300) {
+            this.playerVelocity -= this.playerGravity;
+        }
+        if (this.playerY >= 300) {
+            this.playerVelocity = 0;
+            this.playerY = 300;
+           
         }
         // if player.touchingGround reset isJumping true = false
     }
 
-    gravity() {
-        if (this.playerY < 300)
-            this.playerVelocity += this.playerGravity;
-    }
 }
 
 // die() {

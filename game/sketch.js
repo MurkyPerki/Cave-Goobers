@@ -2,6 +2,7 @@ let player
 
 function setup() {
     createCanvas(800, 600);
+    
     player = new Player(400, 300, 50, 50);
 }
 
@@ -10,7 +11,6 @@ function draw() {
 
     // player
     player.update();
-    player.show();
 
 }
 
