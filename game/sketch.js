@@ -1,9 +1,13 @@
+
 let player
+let platform1
 
 function setup() {
     createCanvas(800, 600);
     
     player = new Player(400, 300, 50, 50);
+    platform1 = new Platform(400, 350, 200, 50);
+
 }
 
 function draw() {
@@ -11,6 +15,11 @@ function draw() {
 
     // player
     player.update();
+    platform1.show();
+
+    //test-platform-1 AABB
+    
+
 
 }
 

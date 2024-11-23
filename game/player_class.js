@@ -42,7 +42,6 @@ class Player extends Entity {
             this.playerVelocity = 0;
             this.playerY = 300;
             this.isJumping = false;
-           
         }
         // if player.touchingGround reset isJumping true = false
     }
