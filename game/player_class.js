@@ -35,12 +35,11 @@ class Player extends Entity {
         // update player y pos
         this.playerY -= this.playerVelocity;
 
-        if (this.playerY < 300) {
+        if (this.isJumping) {
             this.playerVelocity -= this.playerGravity;
         }
         if (this.playerY >= 300) {
             this.playerVelocity = 0;
-            this.playerY = 300;
             this.isJumping = false;
         }
         // if player.touchingGround reset isJumping true = false
@@ -50,14 +49,14 @@ class Player extends Entity {
         let onPlatform = false;
 
         for (let platform of platforms) {
-            if(collision.isCollidingAABB(this, platform)){
+            if (collision.isCollidingAABB(this, platform)) {
                 this.landOnPlatform(platform)
                 onPlatform = true
             }
         }
 
         // if you move of platform set falling to true 
-        if (!onPlatform){
+        if (!onPlatform) {
             this.isFalling = true;
         }
 
@@ -65,12 +64,12 @@ class Player extends Entity {
     }
 
 
-   landOnPlatform(platform) {
-    this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
-    this.isJumping = false
-    this.isFalling = false //? maybe should make a is falling? 
-    this.playerVelocity = 0;
-   }
+    landOnPlatform(platform) {
+        this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
+        this.isJumping = false
+        this.isFalling = false //? maybe should make a is falling? 
+        this.playerVelocity = 0;
+    }
 
 }
 
