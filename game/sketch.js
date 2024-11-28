@@ -1,12 +1,30 @@
 
-let player
-let platform1
+let platforms = [];
+let collision;
+let player;
+
 
 function setup() {
-    createCanvas(800, 600);
-    
+    createCanvas(1500, 800);
+
+    // class instances
     player = new Player(400, 300, 50, 50);
-    platform1 = new Platform(400, 350, 200, 50);
+    collision = new Collision();
+    
+    //test ground
+    platforms.push(new Platform(0, 750, 1500, 50));
+
+    /*
+    // platform test: random placement
+    for(let i = 0; i < 10; i++){
+        for(let j = 0; j < 10; j++){
+        let x = (i%50) * 150 - random(10,40)
+        let y = height / 5 * j + random(20,100)
+        platforms.push(new Platform(x, y, 80, 50));
+        }
+    }
+   */
+
 
 }
 
@@ -14,13 +32,15 @@ function draw() {
     background(240, 240, 240);
 
     // player
-    player.update();
-    platform1.show();
+    player.update(platforms);
 
-    //test-platform-1 AABB
-    
+    //check collision
+    player.handleCollsions(collision, platforms);
 
 
+    for (let platform of platforms) {
+        platform.render();
+    }
 }
 
 // let entities = [

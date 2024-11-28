@@ -25,7 +25,7 @@ class Player extends Entity {
         }
     }
 
-    show() {
+    render() {
         noStroke();
         fill(0);
         rect(this.playerX, this.playerY, this.playerW, this.playerH);
@@ -45,6 +45,32 @@ class Player extends Entity {
         }
         // if player.touchingGround reset isJumping true = false
     }
+
+    handleCollsions(collision, platforms) {
+        let onPlatform = false;
+
+        for (let platform of platforms) {
+            if(collision.isCollidingAABB(this, platform)){
+                this.landOnPlatform(platform)
+                onPlatform = true
+            }
+        }
+
+        // if you move of platform set falling to true 
+        if (!onPlatform){
+            this.isFalling = true;
+        }
+
+
+    }
+
+
+   landOnPlatform(platform) {
+    this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
+    this.isJumping = false
+    this.isFalling = false //? maybe should make a is falling? 
+    this.playerVelocity = 0;
+   }
 
 }
 

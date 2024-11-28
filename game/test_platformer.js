@@ -6,7 +6,7 @@ class Platform {
     this.platformH = platformH;
     }
 
-    show() {
+    render() {
         fill(255, 0, 0);
         rect(this.platformX, this.platformY, this.platformW, this.platformH);
     }
