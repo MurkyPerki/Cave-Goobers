@@ -14,6 +14,7 @@ function setup() {
     
     //test ground
     platforms.push(new Platform(0, 750, 1500, 50));
+    platforms.push(new Platform(600, 600, 300, 50));
 
     /*
     // platform test: random placement

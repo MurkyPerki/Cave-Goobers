@@ -10,22 +10,23 @@ class Player extends Entity {
         this.playerVelocity = 0;
         this.playerGravity = 2;
         this.onPlatform = false;
-        
+        this.isFalling = false;
+
     }
 
     move() {
         // player left right movement
-        if (keyIsDown(RIGHT_ARROW)) {
+        if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
             this.x = this.x + this.playerSpeed;
         }
-        if (keyIsDown(LEFT_ARROW)) {
+        if ((keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
             this.x = this.x - this.playerSpeed;
         }
         // player jump
-        if (keyIsDown(UP_ARROW) && !this.isJumping) {
+        if ((keyIsDown(UP_ARROW) || keyIsDown(32)) && !this.isJumping) {
             this.playerVelocity = 20
             this.isJumping = true;
-          
+
         }
     }
 
@@ -46,6 +47,10 @@ class Player extends Entity {
             }
         }
 
+        if (!this.onPlatform){
+            this.isFalling = true;
+        }
+
     }
 
 
@@ -61,9 +66,9 @@ class Player extends Entity {
         // update player y pos
         this.y -= this.playerVelocity;
 
-        if (this.isJumping) {
+        if (this.isJumping || this.isFalling) {
             this.playerVelocity -= this.playerGravity;
-        } 
+        }
         else if (this.onPlatform) {
             this.playerVelocity = 0;
             this.isJumping = false;
