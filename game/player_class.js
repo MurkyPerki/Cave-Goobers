@@ -1,23 +1,25 @@
 class Player extends Entity {
-    constructor(playerX, playerY, playerW, playerH) {
+    constructor(playerX, playerY, width, height) {
         super();
-        this.playerX = playerX;
-        this.playerY = playerY;
-        this.playerW = playerW;
-        this.playerH = playerH;
+        this.x = playerX;
+        this.y = playerY;
+        this.width = width;
+        this.height = height;
         this.playerSpeed = 10;
         this.isJumping = false;
         this.playerVelocity = 0;
         this.playerGravity = 2;
+        this.onPlatform = false;
+        // this.isFalling = false;
     }
 
     move() {
         // player left right movement
         if (keyIsDown(RIGHT_ARROW)) {
-            this.playerX = this.playerX + this.playerSpeed;
+            this.x = this.x + this.playerSpeed;
         }
         if (keyIsDown(LEFT_ARROW)) {
-            this.playerX = this.playerX - this.playerSpeed;
+            this.x = this.x - this.playerSpeed;
         }
         if (keyIsDown(UP_ARROW) && !this.isJumping) {
             this.playerVelocity = 20
@@ -28,37 +30,24 @@ class Player extends Entity {
     render() {
         noStroke();
         fill(0);
-        rect(this.playerX, this.playerY, this.playerW, this.playerH);
+        rect(this.x, this.y, this.width, this.height);
     }
 
-    jump() {
-        // update player y pos
-        this.playerY -= this.playerVelocity;
-
-        if (this.isJumping) {
-            this.playerVelocity -= this.playerGravity;
-        }
-        if (this.playerY >= 300) {
-            this.playerVelocity = 0;
-            this.isJumping = false;
-        }
-        // if player.touchingGround reset isJumping true = false
-    }
 
     handleCollsions(collision, platforms) {
-        let onPlatform = false;
+        this.onPlatform = false;
 
         for (let platform of platforms) {
             if (collision.isCollidingAABB(this, platform)) {
                 this.landOnPlatform(platform)
-                onPlatform = true
+                this.onPlatform = true
             }
         }
 
-        // if you move of platform set falling to true 
-        if (!onPlatform) {
-            this.isFalling = true;
-        }
+        // // if you move of platform set falling to true 
+        // if (!onPlatform) {
+        //     this.isFalling = true;
+        // }
 
 
     }
@@ -67,10 +56,24 @@ class Player extends Entity {
     landOnPlatform(platform) {
         this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
         this.isJumping = false
-        this.isFalling = false //? maybe should make a is falling? 
+        // this.isFalling = false //? maybe should make a is falling? 
         this.playerVelocity = 0;
     }
 
+
+    jump() {
+        // update player y pos
+        this.y -= this.playerVelocity;
+
+        if (this.isJumping) {
+            this.playerVelocity -= this.playerGravity;
+        }
+        if (this.onPlatform) {
+            this.playerVelocity = 0;
+            this.isJumping = false;
+        }
+        // if player.touchingGround reset isJumping true = false
+    }
 }
 
 // die() {

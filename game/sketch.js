@@ -8,7 +8,7 @@ function setup() {
     createCanvas(1500, 800);
 
     // class instances
-    player = new Player(400, 300, 50, 50);
+    player = new Player(400, 700, 50, 50);
     collision = new Collision();
     
     //test ground
