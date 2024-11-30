@@ -7,6 +7,7 @@ let player;
 function setup() {
     createCanvas(1500, 800);
 
+   
     // class instances
     player = new Player(400, 700, 50, 50);
     collision = new Collision();
@@ -33,11 +34,10 @@ function draw() {
 
     // player
     player.update(platforms);
+    console.log('py=' + player.y);
 
     //check collision
     player.handleCollsions(collision, platforms);
-
-
 
     for (let platform of platforms) {
         platform.render();

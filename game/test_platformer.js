@@ -1,14 +1,14 @@
 class Platform {
-    constructor(platformX, platformY, platformW, platformH) {
-    this.platformX = platformX;
-    this.platformY = platformY;
-    this.platformW = platformW;
-    this.platformH = platformH;
+    constructor(x, y, witdh, height) {
+    this.x = x;
+    this.y = y;
+    this.width = witdh;
+    this.height = height;
     }
 
     render() {
         fill(255, 0, 0);
-        rect(this.platformX, this.platformY, this.platformW, this.platformH);
+        rect(this.x, this.y, this.width, this.height);
     }
     
 }

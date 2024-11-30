@@ -1,8 +1,8 @@
 class Player extends Entity {
-    constructor(playerX, playerY, width, height) {
+    constructor(x, y, width, height) {
         super();
-        this.x = playerX;
-        this.y = playerY;
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
         this.playerSpeed = 10;
@@ -21,9 +21,11 @@ class Player extends Entity {
         if (keyIsDown(LEFT_ARROW)) {
             this.x = this.x - this.playerSpeed;
         }
+        // player jump
         if (keyIsDown(UP_ARROW) && !this.isJumping) {
             this.playerVelocity = 20
             this.isJumping = true;
+          
         }
     }
 
