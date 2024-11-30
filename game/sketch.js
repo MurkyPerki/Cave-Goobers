@@ -35,13 +35,21 @@ function draw() {
 
     // player
     player.update(platforms);
-    console.log('py=' + player.y);
+    //console.log('py=' + player.y);
 
     //check collision
     player.handleCollsions(collision, platforms);
 
     for (let platform of platforms) {
         platform.render();
+    }
+}
+
+function keyReleased() {
+    console.log('key released')
+    if (keyCode === UP_ARROW || keyCode === 32) {
+        console.log('key realesed11')
+        player.jumpReleased();
     }
 }
 

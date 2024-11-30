@@ -12,7 +12,6 @@ class Player extends Entity {
         this.isFalling = false;
         this.onPlatform = false;
         
-        this.jumpForce = 8;
         this.maxJumpHeight = 40;
         this.minJumpHeight = 20;
         // this.jumpTimeCounter = jumpTimeCounter;
@@ -29,7 +28,7 @@ class Player extends Entity {
         }
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32)) && !this.isJumping) {
-            this.playerVelocity = this.minJumpHeight;
+            this.playerVelocity = 40;
             this.isJumping = true;
         }
         //if the key is down => playerVelocity gets more until maximum jump
@@ -74,10 +73,14 @@ class Player extends Entity {
         if (this.isJumping || this.isFalling) {
             this.playerVelocity -= this.playerGravity;
         }
-        else if (this.onPlatform || this.playerVelocity >= this.maxJumpHeight) {
+        else if (this.onPlatform) {
             this.playerVelocity = 0;
             this.isJumping = false;
         }
+    }
+
+    jumpReleased() {
+      console.log("jump released");
     }
 }
 
