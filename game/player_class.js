@@ -11,7 +11,7 @@ class Player extends Entity {
         this.isJumping = false;
         this.isFalling = false;
         this.onPlatform = false;
-        
+
         this.maxJumpHeight = 40;
         this.minJumpHeight = 20;
         // this.jumpTimeCounter = jumpTimeCounter;
@@ -61,7 +61,6 @@ class Player extends Entity {
     landOnPlatform(platform) {
         this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
         this.isJumping = false
-        // this.isFalling = false //? maybe should make a is falling? 
         this.playerVelocity = 0;
     }
 
@@ -80,7 +79,9 @@ class Player extends Entity {
     }
 
     jumpReleased() {
-      console.log("jump released");
+        if (this.isFalling) {
+            this.playerGravity += 2
+        }
+        
     }
 }
-

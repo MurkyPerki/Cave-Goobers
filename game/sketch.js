@@ -46,9 +46,7 @@ function draw() {
 }
 
 function keyReleased() {
-    console.log('key released')
     if (keyCode === UP_ARROW || keyCode === 32) {
-        console.log('key realesed11')
         player.jumpReleased();
     }
 }
