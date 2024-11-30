@@ -38,6 +38,7 @@ function draw() {
     player.handleCollsions(collision, platforms);
 
 
+
     for (let platform of platforms) {
         platform.render();
     }

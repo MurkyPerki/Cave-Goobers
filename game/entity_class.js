@@ -1,7 +1,7 @@
 class Entity {
     constructor() {
-       // this.health = 100;
-        
+        // this.health = 100;
+
     }
 
     // takeDamage(damage) {
@@ -26,5 +26,10 @@ class Entity {
     //     */
     // }
 
-    //die()
+
+    // die() {
+    //     super.die();
+
+    //     SwitchToStartScreen();
+    // }
 }

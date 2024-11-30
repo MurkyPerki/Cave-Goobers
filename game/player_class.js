@@ -10,7 +10,7 @@ class Player extends Entity {
         this.playerVelocity = 0;
         this.playerGravity = 2;
         this.onPlatform = false;
-        // this.isFalling = false;
+        
     }
 
     move() {
@@ -44,12 +44,6 @@ class Player extends Entity {
             }
         }
 
-        // // if you move of platform set falling to true 
-        // if (!onPlatform) {
-        //     this.isFalling = true;
-        // }
-
-
     }
 
 
@@ -67,17 +61,11 @@ class Player extends Entity {
 
         if (this.isJumping) {
             this.playerVelocity -= this.playerGravity;
-        }
-        if (this.onPlatform) {
+        } 
+        else if (this.onPlatform) {
             this.playerVelocity = 0;
             this.isJumping = false;
         }
-        // if player.touchingGround reset isJumping true = false
     }
 }
 
-// die() {
-//     super.die();
-
-//     SwitchToStartScreen();
-// }
