@@ -6,12 +6,17 @@ class Player extends Entity {
         this.width = width;
         this.height = height;
         this.playerSpeed = 10;
-        this.isJumping = false;
         this.playerVelocity = 0;
         this.playerGravity = 2;
-        this.onPlatform = false;
+        this.isJumping = false;
         this.isFalling = false;
-
+        this.onPlatform = false;
+        
+        this.jumpForce = 8;
+        this.maxJumpHeight = 40;
+        this.minJumpHeight = 20;
+        // this.jumpTimeCounter = jumpTimeCounter;
+        // this.jumpTime = jumpTime;
     }
 
     move() {
@@ -24,10 +29,10 @@ class Player extends Entity {
         }
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32)) && !this.isJumping) {
-            this.playerVelocity = 20
+            this.playerVelocity = this.minJumpHeight;
             this.isJumping = true;
-
         }
+        //if the key is down => playerVelocity gets more until maximum jump
     }
 
     render() {
@@ -47,7 +52,7 @@ class Player extends Entity {
             }
         }
 
-        if (!this.onPlatform){
+        if (!this.onPlatform) {
             this.isFalling = true;
         }
 
@@ -69,7 +74,7 @@ class Player extends Entity {
         if (this.isJumping || this.isFalling) {
             this.playerVelocity -= this.playerGravity;
         }
-        else if (this.onPlatform) {
+        else if (this.onPlatform || this.playerVelocity >= this.maxJumpHeight) {
             this.playerVelocity = 0;
             this.isJumping = false;
         }
