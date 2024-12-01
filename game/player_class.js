@@ -68,6 +68,7 @@ class Player extends Entity {
     jump() {
         // update player y pos
         this.y -= this.playerVelocity;
+        //console.log('velocity='+this.playerVelocity)
 
         if (this.isJumping || this.isFalling) {
             this.playerVelocity -= this.playerGravity;
@@ -79,9 +80,7 @@ class Player extends Entity {
     }
 
     jumpReleased() {
-        if (this.isFalling) {
-            this.playerGravity += 2
-        }
-        
+        this.playerVelocity = this.playerVelocity/2;
+
     }
 }
