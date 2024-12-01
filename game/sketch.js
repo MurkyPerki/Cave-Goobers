@@ -48,6 +48,8 @@ function draw() {
 function keyReleased() {
     if (keyCode === UP_ARROW || keyCode === 32) {
         player.jumpReleased();
+        this.playerVelocity = 0;
+        this.playerGravity = 2;
     }
 }
 
