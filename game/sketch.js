@@ -31,7 +31,7 @@ function setup() {
 }
 
 function draw() {
-    background(240, 240, 240);
+    background(240, 240, 240, 50);
 
     // player
     player.update(platforms);
@@ -48,8 +48,7 @@ function draw() {
 function keyReleased() {
     if (keyCode === UP_ARROW || keyCode === 32) {
         player.jumpReleased();
-        this.playerVelocity = 0;
-        this.playerGravity = 2;
+        
     }
 }
 

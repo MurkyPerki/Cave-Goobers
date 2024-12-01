@@ -28,7 +28,7 @@ class Player extends Entity {
         }
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32)) && !this.isJumping) {
-            this.playerVelocity = 40;
+            this.playerVelocity = 36;
             this.isJumping = true;
         }
         //if the key is down => playerVelocity gets more until maximum jump
@@ -80,7 +80,8 @@ class Player extends Entity {
     }
 
     jumpReleased() {
-        this.playerVelocity = this.playerVelocity/2;
-
+        if (this.isJumping) {
+            this.playerVelocity = this.playerVelocity / 2;
+        }
     }
 }
