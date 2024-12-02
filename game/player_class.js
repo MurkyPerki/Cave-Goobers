@@ -51,9 +51,9 @@ class Player extends Entity {
             }
         }
 
-        if (!this.onPlatform) {
-            this.isFalling = true;
-        }
+        // if (!this.onPlatform) {
+        //     this.isFalling = true;
+        // }
 
     }
 
@@ -70,8 +70,9 @@ class Player extends Entity {
         this.y -= this.playerVelocity;
         //console.log('velocity='+this.playerVelocity)
 
-        if (this.isJumping || this.isFalling) {
+        if (this.isJumping )//|| this.isFalling) {
             this.playerVelocity -= this.playerGravity;
+            this.isFalling = true;
         }
         else if (this.onPlatform) {
             this.playerVelocity = 0;
