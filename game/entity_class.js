@@ -1,5 +1,6 @@
 class Entity {
     constructor() {
+        this.gameMode = 0;
         // this.health = 100;
 
     }
@@ -16,15 +17,6 @@ class Entity {
         this.move();
         this.jump();
     }
-
-    // touchingGround() {
-    //     if 
-
-    //     /*
-    //     AABB
-    //     if ( ${this.entityX} + ${this.entityW} >= tileX ) etc..
-    //     */
-    // }
 
 
     // die() {
