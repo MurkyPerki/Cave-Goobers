@@ -11,9 +11,11 @@ class Player extends Entity {
         this.isJumping = false;
         this.isFalling = false;
         this.onPlatform = false;
+        this.jumpCount = 0;
+        this.maxJump = 1;
 
-        this.maxJumpHeight = 40;
-        this.minJumpHeight = 20;
+        // this.maxJumpHeight = 40;
+        // this.minJumpHeight = 20;
         // this.jumpTimeCounter = jumpTimeCounter;
         // this.jumpTime = jumpTime;
     }
@@ -27,11 +29,14 @@ class Player extends Entity {
             this.x = this.x - this.playerSpeed;
         }
         // player jump
-        if ((keyIsDown(UP_ARROW) || keyIsDown(32)) && !this.isJumping) {
+        if ((keyIsDown(UP_ARROW) || keyIsDown(32))
+            && !this.isJumping
+        //jumpcount so the player can only jump once until mouse released
+            && this.jumpCount < this.maxJump) {
             this.playerVelocity = 36;
             this.isJumping = true;
+            this.jumpCount++;
         }
-        //if the key is down => playerVelocity gets more until maximum jump
     }
 
     render() {
@@ -51,9 +56,9 @@ class Player extends Entity {
             }
         }
 
-        // if (!this.onPlatform) {
-        //     this.isFalling = true;
-        // }
+        if (!this.onPlatform) {
+            this.isFalling = true;
+        }
 
     }
 
@@ -70,7 +75,7 @@ class Player extends Entity {
         this.y -= this.playerVelocity;
         //console.log('velocity='+this.playerVelocity)
 
-        if (this.isJumping )//|| this.isFalling) {
+        if (this.isJumping || this.isFalling) {
             this.playerVelocity -= this.playerGravity;
             this.isFalling = true;
         }
@@ -81,6 +86,10 @@ class Player extends Entity {
     }
 
     jumpReleased() {
+        //reset jump count (when key released)
+        this.jumpCount = 0;
+
+        //if key released velocity halves so that player can hold jump
         if (this.isJumping) {
             this.playerVelocity = this.playerVelocity / 2;
         }
