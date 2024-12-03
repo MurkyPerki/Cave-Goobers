@@ -1,4 +1,5 @@
 
+// let entities = [];
 let platforms = [];
 let collision;
 let player;
