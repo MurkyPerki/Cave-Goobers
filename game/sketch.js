@@ -4,9 +4,18 @@ let platforms = [];
 let collision;
 let player;
 
+let pixelFont;
+
+function preload() {
+   pixelFont = loadFont('\assets\fonts\Fipps-Regular.otf')
+}
+
 
 function setup() {
     createCanvas(1500, 800);
+
+    textFont(pixelFont);
+    text("hello", 50, 50)
 
    
     // class instances

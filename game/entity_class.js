@@ -1,7 +1,7 @@
 class Entity {
     constructor() {
-        this.gameMode = 0;
-        // this.health = 100;
+        this.isAlive = true;
+        this.health = 100;
 
     }
 
@@ -19,9 +19,17 @@ class Entity {
     }
 
 
-    // die() {
-    //     super.die();
 
-    //     SwitchToStartScreen();
+
+    // die() {
+
+    //     if (this.isAlive) {
+    //        entities.update();
+    //     }
+    //     if (this.health < 0) {
+    //         !this.isAlive;
+    //     }
+
+    //     // when player dies => SwitchToStartScreen();
     // }
 }
