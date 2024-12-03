@@ -7,7 +7,7 @@ let player;
 let pixelFont;
 
 function preload() {
-   pixelFont = loadFont('\assets\fonts\Fipps-Regular.otf')
+   pixelFont = loadFont('/assets/fonts/pixelfont1.ttf/')
 }
 
 
