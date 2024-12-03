@@ -5,10 +5,18 @@ let collision;
 let player;
 
 let pixelFont;
+let testFont;
+
+// function preload() {
+//    pixelFont = loadFont('/assets/fonts/pixelfont1.ttf')
+// }
 
 function preload() {
-   pixelFont = loadFont('/assets/fonts/pixelfont1.ttf/')
+   // pixelFont = loadFont('/assets/fonts/pixelfont1.ttf')
+   pixelFont = loadFont('http://localhost:8000/assets/fonts/pixelfont1.ttf'); // Use your local server path
+   testFont = loadFont('/assets/fonts/pixelFont.ttf');
 }
+
 
 
 function setup() {
