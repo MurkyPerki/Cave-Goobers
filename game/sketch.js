@@ -40,7 +40,7 @@ function setup() {
 }
 
 function draw() {
-    background(240, 240, 240,/* 50 */);
+    background(240, 240, 240, 50);
 
     fill (0)
     textFont(pixelFont);
