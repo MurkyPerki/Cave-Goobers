@@ -5,25 +5,16 @@ let collision;
 let player;
 
 let pixelFont;
-let testFont;
-
-// function preload() {
-//    pixelFont = loadFont('/assets/fonts/pixelfont1.ttf')
-// }
 
 function preload() {
-   // pixelFont = loadFont('/assets/fonts/pixelfont1.ttf')
-   pixelFont = loadFont('http://localhost:8000/assets/fonts/pixelfont1.ttf'); // Use your local server path
-   testFont = loadFont('/assets/fonts/pixelFont.ttf');
+   pixelFont = loadFont('pixelFont.ttf')
 }
-
 
 
 function setup() {
     createCanvas(1500, 800);
 
-    textFont(pixelFont);
-    text("hello", 50, 50)
+   
 
    
     // class instances
@@ -49,7 +40,12 @@ function setup() {
 }
 
 function draw() {
-    background(240, 240, 240, 50);
+    background(240, 240, 240,/* 50 */);
+
+    fill (0)
+    textFont(pixelFont);
+    textSize(32);
+    text("hello world", 50, 50);
 
     // player
     player.update(platforms);
