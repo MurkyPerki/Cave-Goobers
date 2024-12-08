@@ -15,17 +15,13 @@ class Entity {
     update() {
         
         this.move();
-        this.jump();
+        this.applyGravity();
         this.handleCollsions(platforms)
         this.render();
         this.renderDebug();
     }
 
-
-
-
     // die() {
-
     //     if (this.isAlive) {
     //        entities.update();
     //     }

@@ -72,7 +72,7 @@ class Player extends Entity {
 
 
     //! maybe we should rename this method its confusing.
-    jump() {
+    applyGravity() {
         // update player y pos
         this.y -= this.playerVelocity;
         //console.log('velocity='+this.playerVelocity)
