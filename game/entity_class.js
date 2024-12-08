@@ -16,6 +16,7 @@ class Entity {
         
         this.move();
         this.jump();
+        this.handleCollsions(platforms)
         this.render();
         this.renderDebug();
     }

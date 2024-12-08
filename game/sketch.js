@@ -22,7 +22,7 @@ function setup() {
    
     // class instances
     player = new Player(400, 700, 50, 50);
-    collision = new Collision();
+    
     
     //test ground
     platforms.push(new Platform(0, 750, 1500, 50));
@@ -52,8 +52,9 @@ function draw() {
 
     // player
     player.update();
-    player.handleCollsions(collision, platforms);
+    player.handleCollsions(platforms);
 
+    // console.log(platforms)
 
     for (let platform of platforms) {
         platform.render();

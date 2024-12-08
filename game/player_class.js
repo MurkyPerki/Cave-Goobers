@@ -48,7 +48,7 @@ class Player extends Entity {
     }
 
 
-    handleCollsions(collision, platforms) {
+    handleCollsions(platforms) {
 
 
         Collision.handleCollisions(this, platforms);
@@ -69,6 +69,8 @@ class Player extends Entity {
     // }
 
 
+
+    //! jump method is poorly named, should either be called different or split.
     jump() {
         // update player y pos
         this.y -= this.playerVelocity;
