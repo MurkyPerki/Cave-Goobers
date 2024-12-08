@@ -32,16 +32,6 @@ function setup() {
     platforms.push(new Platform(0, 750, 1500, 50));
     platforms.push(new Platform(600, 600, 300, 50));
 
-    /*
-    // platform test: random placement
-    for(let i = 0; i < 10; i++){
-        for(let j = 0; j < 10; j++){
-        let x = (i%50) * 150 - random(10,40)
-        let y = height / 5 * j + random(20,100)
-        platforms.push(new Platform(x, y, 80, 50));
-        }
-    }
-   */
 
 
 }
