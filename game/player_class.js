@@ -71,7 +71,7 @@ class Player extends Entity {
 
 
 
-    //! jump method is poorly named, should either be called different or split.
+    //! maybe we should rename this method its confusing.
     jump() {
         // update player y pos
         this.y -= this.playerVelocity;
