@@ -43,31 +43,30 @@ class Player extends Entity {
         noStroke();
         fill(0);
         rect(this.x, this.y, this.width, this.height);
+
+        console.log(this.y)
     }
 
 
     handleCollsions(collision, platforms) {
-        this.onPlatform = false;
 
-        for (let platform of platforms) {
-            if (collision.isCollidingAABB(this, platform)) {
-                this.landOnPlatform(platform)
-                this.onPlatform = true
-            }
-        }
 
-        if (!this.onPlatform) {
+        Collision.handleCollisions(this, platforms);
+
+        if (this.isGrounded) {
+            // But the collision code might already be handling the snapping.
+        } else {
             this.isFalling = true;
         }
 
     }
 
 
-    landOnPlatform(platform) {
-        this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
-        this.isJumping = false
-        this.playerVelocity = 0;
-    }
+    // landOnPlatform(platform) {
+    //     this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
+    //     this.isJumping = false
+    //     this.playerVelocity = 0;
+    // }
 
 
     jump() {
@@ -93,5 +92,39 @@ class Player extends Entity {
         if (this.isJumping) {
             this.playerVelocity = this.playerVelocity / 2;
         }
+    }
+
+
+    renderDebug(){
+
+        noStroke();
+    fill(0);
+    rect(this.x, this.y, this.width, this.height);
+
+    // Debug information
+    fill(255);
+    textSize(12);
+    text('Frame: ' + frameCount, 50, 50);
+    text('Velocity: ' + this.playerVelocity, 50, 65);
+    text('Position: (' + this.x + ', ' + this.y + ')', 50, 80);
+
+    if (this.isGrounded) {
+        fill(0, 255, 20);
+        text('isGrounded: ' + this.isGrounded, 50, 100);
+    } else {
+        fill(255, 0, 0); // Red when in the air
+        text('isGrounded: ' + this.isGrounded, 50, 100);
+    }
+
+    if (this.isJumping) {
+        fill(0, 255, 20);
+        text('isJumping: ' + this.isJumping, 50, 115);
+    } else {
+        fill(255, 0, 0); // Red when not jumping
+        text('isJumping: ' + this.isJumping, 50, 115);
+    }
+
+
+
     }
 }
