@@ -13,9 +13,11 @@ class Entity {
     // }
 
     update() {
-        this.render();
+        
         this.move();
         this.jump();
+        this.render();
+        this.renderDebug();
     }
 
 
