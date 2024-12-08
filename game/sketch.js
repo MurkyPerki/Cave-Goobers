@@ -7,8 +7,9 @@ let player;
 let img;
 let pixelFont;
 
-let canvasHeight = 4000
 let canvasWidth = 1200
+let canvasHeight = 4000
+
 
 function preload() {
     
