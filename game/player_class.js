@@ -96,32 +96,33 @@ class Player extends Entity {
 
 
     renderDebug(){
-
-        noStroke();
+    
+    
+    noStroke();
     fill(0);
     rect(this.x, this.y, this.width, this.height);
 
     // Debug information
-    fill(255);
+    fill(0);
     textSize(12);
-    text('Frame: ' + frameCount, 50, 50);
-    text('Velocity: ' + this.playerVelocity, 50, 65);
-    text('Position: (' + this.x + ', ' + this.y + ')', 50, 80);
+    text('Frame: ' + frameCount, 50, 100);
+    text('Velocity: ' + this.playerVelocity, 50, 130);
+    text('Position: (' + this.x + ', ' + this.y + ')', 50, 160);
 
     if (this.isGrounded) {
         fill(0, 255, 20);
-        text('isGrounded: ' + this.isGrounded, 50, 100);
+        text('isGrounded: ' + this.isGrounded, 50, 200);
     } else {
         fill(255, 0, 0); // Red when in the air
-        text('isGrounded: ' + this.isGrounded, 50, 100);
+        text('isGrounded: ' + this.isGrounded, 50, 200);
     }
 
     if (this.isJumping) {
         fill(0, 255, 20);
-        text('isJumping: ' + this.isJumping, 50, 115);
+        text('isJumping: ' + this.isJumping, 50, 230);
     } else {
         fill(255, 0, 0); // Red when not jumping
-        text('isJumping: ' + this.isJumping, 50, 115);
+        text('isJumping: ' + this.isJumping, 50, 230);
     }
 
 

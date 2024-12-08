@@ -6,6 +6,9 @@ let player;
 
 let pixelFont;
 
+let canvasHeight = 800
+let createWidth = 1500
+
 function preload() {
    pixelFont = loadFont('pixelFont.ttf')
 }
@@ -48,11 +51,9 @@ function draw() {
     text("hello world", 50, 50);
 
     // player
-    player.update(platforms);
-    //console.log('py=' + player.y);
-
-    //check collision
+    player.update();
     player.handleCollsions(collision, platforms);
+
 
     for (let platform of platforms) {
         platform.render();
