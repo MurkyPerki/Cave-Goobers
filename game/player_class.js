@@ -5,8 +5,9 @@ class Player extends Entity {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.vx = 0 // horizontal velocity, added just this. could rename to horizontal velocity
         this.playerSpeed = 10;
-        this.playerVelocity = 0;
+        this.playerVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
         this.playerGravity = 2;
         this.isJumping = false;
         this.isFalling = false;

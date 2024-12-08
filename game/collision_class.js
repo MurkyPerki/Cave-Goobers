@@ -9,7 +9,7 @@ class Collision {
             let vx = 0;
     
     
-            if (entity.playerVelocity !== 'undefined') {  //typeof
+            if (typeof entity.playerVelocity !== 'undefined') {  //typeof
                 vy = -entity.playerVelocity;
             }
         
@@ -73,9 +73,11 @@ class Collision {
 
 
         static wallCollision(entity) {
+            //collision right
             if (entity.x + entity.width >= canvasWidth) {
                 entity.x = canvasWidth - entity.width; 
             }
+             //collision left
             if (entity.x <= 0) {
                 entity.x = 0; 
             }
