@@ -41,7 +41,7 @@ class Player extends Entity {
 
     render() {
         noStroke();
-        fill(0);
+        fill(255);
         rect(this.x, this.y, this.width, this.height);
 
         console.log(this.y)
@@ -100,10 +100,6 @@ class Player extends Entity {
     renderDebug(){
     
     
-    noStroke();
-    fill(0);
-    rect(this.x, this.y, this.width, this.height);
-
     // Debug information
     fill(0);
     textSize(12);

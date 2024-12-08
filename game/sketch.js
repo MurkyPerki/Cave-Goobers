@@ -4,18 +4,21 @@ let platforms = [];
 let collision;
 let player;
 
+let img;
 let pixelFont;
 
-let canvasHeight = 800
-let createWidth = 1500
+let canvasHeight = 4000
+let canvasWidth = 1200
 
 function preload() {
+    
    pixelFont = loadFont('pixelFont.ttf')
+   img = loadImage('assets/images/game_background (1).jpg')
 }
 
 
 function setup() {
-    createCanvas(1500, 800);
+    createCanvas(canvasWidth, canvasHeight);
 
    
 
@@ -25,7 +28,7 @@ function setup() {
     
     
     //test ground
-    platforms.push(new Platform(0, 750, 1500, 50));
+    // platforms.push(new Platform(0, 750, 1500, 50));
     platforms.push(new Platform(600, 600, 300, 50));
 
     /*
@@ -43,7 +46,7 @@ function setup() {
 }
 
 function draw() {
-    background(240, 240, 240, 50);
+    background(img, 240, 240, 50);
 
     fill (0)
     textFont(pixelFont);
