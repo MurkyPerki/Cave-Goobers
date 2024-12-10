@@ -72,7 +72,7 @@ class Player extends Entity {
 
 
     //! maybe we should rename this method its confusing.
-    jump() {
+    applyGravity() {
         // update player y pos
         this.y -= this.playerVelocity;
         //console.log('velocity='+this.playerVelocity)
@@ -102,7 +102,7 @@ class Player extends Entity {
     
     
     // Debug information
-    fill(255);
+    fill(0);
     textSize(12);
     text('Frame: ' + frameCount, 50, 100);
     text('Velocity: ' + this.playerVelocity, 50, 130);

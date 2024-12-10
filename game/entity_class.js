@@ -15,7 +15,7 @@ class Entity {
     update() {
         
         this.move();
-        this.jump();
+        this.applyGravity();
         this.handleCollsions(platforms)
         this.render();
         this.renderDebug();
