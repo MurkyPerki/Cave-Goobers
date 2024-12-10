@@ -42,6 +42,11 @@ class Item {
             this.width -= 1
             this.height -= 1
 
+
+            //keep shrink to the center
+            this.x += 0.5
+            this.y += 0.5
+
         } else {
 
             this.aniOffset += this.aniSpeed;
@@ -60,10 +65,10 @@ class Item {
         fill(0, 140, 255)
         rect(this.x, this.y, this.width, this.height, 40, 20)
 
-        
-        noFill();
-        stroke(0, 255, 0)
-        rect(this.x, this.y, this.width, this.height)
+        //hitbox render
+        // noFill();
+        // stroke(0, 255, 0)
+        // rect(this.x, this.y, this.width, this.height)
         
     }
 

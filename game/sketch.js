@@ -1,5 +1,6 @@
 
 // let entities = [];
+let items = [];
 let platforms = [];
 let collision;
 let player;
@@ -28,7 +29,11 @@ function setup() {
     // class instances
     player = new Player(400, 700, 50, 50);
 
-    item = new Item(750,500,35,35)
+   
+
+    items.push(new Item(750,500,35,35))
+    items.push(new Item(100,350,35,35))
+    items.push(new Item(900,200,35,35))
     
     //test ground
     platforms.push(new Platform(0, 750, 1500, 50));
@@ -50,14 +55,16 @@ function draw() {
     player.update();
     player.handleCollsions(platforms);
 
-    // items
+    
     
 
     for (let platform of platforms) {
         platform.render();
     }
-
-    item.update();
+    for (let item of items) {
+        item.update();
+    }
+    
 }
 
 function keyReleased() {
