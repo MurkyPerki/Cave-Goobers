@@ -1,5 +1,4 @@
 
-
 // let entities = [];
 let platforms = [];
 let collision;
@@ -8,8 +7,11 @@ let player;
 let img;
 let pixelFont;
 
+//resolution 1920 x 1080
 let canvasWidth = 1920
 let canvasHeight = 1080
+
+let levelBG;
 
 // let camera = {x: 0, y: 0, width: 800, height: 600};
 
@@ -17,12 +19,20 @@ let canvasHeight = 1080
 function preload() {
     
    pixelFont = loadFont('pixelFont.ttf');
-  // img = loadImage('assets/images/game_background (1).jpg')
+   img = loadImage('assets/images/game_background (1).jpg')
 }
 
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
+
+    levelBG = new Sprite({
+      position: {
+        x: 0,
+        y: 0,
+      },
+      imageSrc: 'assets/images/game_background (1).jpg',
+    })
    
     // class instances
     player = new Player(400, 700, 50, 50);
@@ -36,13 +46,13 @@ function setup() {
 }
 
 function draw() {
-    //background(img, 1200, 4000);
-    background(255, 255, 0);
+    background(162, 163, 166);
+    levelBG.update();
 
-   // translate (canvasWidth/3 - player.x, canvasHeight/2 - player.y);
+    // translate (canvasWidth/3 - player.x, canvasHeight/2 - player.y);
     // translate (player.x + width / 2, -player.y + height / 2)
 
-    fill (0)
+    fill(0);
     textFont(pixelFont);
     textSize(32);
     text("hello world", 50, 50);
