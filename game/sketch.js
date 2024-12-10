@@ -13,7 +13,7 @@ let canvasHeight = 4000
 
 function preload() {
     
-   pixelFont = loadFont('pixelFont.ttf')
+   pixelFont = loadFont('assets/fonts/pixelFont.ttf')
    img = loadImage('assets/images/game_background (1).jpg')
 }
 
