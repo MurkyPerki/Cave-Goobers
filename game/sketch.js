@@ -46,27 +46,19 @@ function setup() {
 }
 
 function draw() {
-    background(162, 163, 166);
+    background(0);
 
     push();
     scale(1.6);
     levelBG.update();
     pop();
 
-    // translate (canvasWidth/3 - player.x, canvasHeight/2 - player.y);
-    // translate (player.x + width / 2, -player.y + height / 2)
-   // scale(1);
-    fill(0);
-    textFont(pixelFont);
-    textSize(32);
-    text("hello world", 50, 50);
+    //translate (canvasWidth/2 - player.x, canvasHeight/2 - player.y);
+    translate (player.x + width / 2, -player.y + height / 2)
 
     // player
     player.update();
     player.handleCollsions(platforms);
-
-    // console.log(platforms)
-
     for (let platform of platforms) {
         platform.render();
     }
@@ -88,5 +80,4 @@ function keyReleased() {
 //     const entity = entities[index];
 //     entity.update();
 // }
-
 // console.log('player.y:' + playerY);

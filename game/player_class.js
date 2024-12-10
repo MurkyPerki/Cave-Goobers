@@ -6,7 +6,7 @@ class Player extends Entity {
         this.width = width;
         this.height = height;
         this.vx = 0 // horizontal velocity, added just this. could rename to horizontal velocity
-        this.playerSpeed = 10;
+        this.playerSpeed = 12;
         this.playerVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
         this.playerGravity = 2;
         this.isJumping = false;
@@ -102,7 +102,7 @@ class Player extends Entity {
     
     
     // Debug information
-    fill(0);
+    fill(255);
     textSize(12);
     text('Frame: ' + frameCount, 50, 100);
     text('Velocity: ' + this.playerVelocity, 50, 130);
