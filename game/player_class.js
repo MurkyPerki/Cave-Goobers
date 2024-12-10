@@ -29,7 +29,7 @@ class Player extends Entity {
         // this.jumpTime = jumpTime;
     }
 
-    
+
 
     move() {
         // player left right movement
@@ -48,6 +48,10 @@ class Player extends Entity {
             this.isJumping = true;
             this.jumpCount++;
         }
+
+        // if (player.isJumping){
+        //     shouldPanCameraDown();
+        // }
     }
 
     render() {
@@ -71,12 +75,19 @@ class Player extends Entity {
     updateCameraBox() {
         this.cameraBox = {
             position: {
-                x: this.x -380,
-                y: this.y -250,
+                x: this.x - 380,
+                y: this.y - 250,
             },
-            width: 800,
-            height: 400,
+            width: 700,
+            height: 300,
         }
+
+        // shouldPanCameraDown({ canvas, camera }){
+        //     if (this.cameraBox.position.y <= Math.abs(camera.position.y)) {
+        //         camera.position.y -= this.playerVelocity.y
+        //     }
+        // }
+
     }
 
 

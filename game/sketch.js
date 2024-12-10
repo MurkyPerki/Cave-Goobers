@@ -12,6 +12,11 @@ let canvasWidth = 1920
 let canvasHeight = 1080
 
 let levelBG;
+let bgImageHeight = 4000;
+let scaledCanvas = {
+    width: canvasWidth / 1.6,
+    height: canvasHeight / 1.6,
+}
 
 // let camera = {x: 0, y: 0, width: 800, height: 600};
 
@@ -29,7 +34,7 @@ function setup() {
     levelBG = new Sprite({
       position: {
         x: 0,
-        y: -3200,
+        y: 0, //-3200
       },
       imageSrc: 'assets/images/game_background (1).jpg',
     })
@@ -46,10 +51,11 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(255);
 
     push();
     scale(1.6);
+    translate (0, -bgImageHeight + scaledCanvas.height);
     levelBG.update();
     pop();
 
