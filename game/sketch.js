@@ -1,4 +1,5 @@
 
+
 // let entities = [];
 let platforms = [];
 let collision;
@@ -7,8 +8,8 @@ let player;
 let img;
 let pixelFont;
 
-let canvasWidth = 1200
-let canvasHeight = 4000
+let canvasWidth = 1920
+let canvasHeight = 1080
 
 // let camera = {x: 0, y: 0, width: 800, height: 600};
 
@@ -22,13 +23,9 @@ function preload() {
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
-
-   
-
    
     // class instances
     player = new Player(400, 700, 50, 50);
-    
     
     //test ground
     platforms.push(new Platform(0, 750, 1500, 50));
@@ -40,9 +37,9 @@ function setup() {
 
 function draw() {
     //background(img, 1200, 4000);
-    background(255);
+    background(255, 255, 0);
 
-    translate (canvasWidth/3 - player.x, canvasHeight/2 - player.y);
+   // translate (canvasWidth/3 - player.x, canvasHeight/2 - player.y);
     // translate (player.x + width / 2, -player.y + height / 2)
 
     fill (0)
