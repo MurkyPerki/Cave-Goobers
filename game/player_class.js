@@ -15,11 +15,21 @@ class Player extends Entity {
         this.jumpCount = 0;
         this.maxJump = 1;
 
+        this.cameraBox = {
+            position: {
+                x: this.x,
+                y: this.y,
+            },
+            width: 800,
+            height: 600,
+        }
         // this.maxJumpHeight = 40;
         // this.minJumpHeight = 20;
         // this.jumpTimeCounter = jumpTimeCounter;
         // this.jumpTime = jumpTime;
     }
+
+    
 
     move() {
         // player left right movement
@@ -32,7 +42,7 @@ class Player extends Entity {
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
-        //jumpcount so the player can only jump once until mouse released
+            //jumpcount so the player can only jump once until mouse released
             && this.jumpCount < this.maxJump) {
             this.playerVelocity = 36;
             this.isJumping = true;
@@ -46,6 +56,27 @@ class Player extends Entity {
         rect(this.x, this.y, this.width, this.height);
 
         console.log(this.y)
+    }
+
+    renderCameraBox() {
+        fill(0, 0, 255, 50);
+        rect(
+            this.cameraBox.position.x,
+            this.cameraBox.position.y,
+            this.cameraBox.width,
+            this.cameraBox.height
+        )
+    }
+
+    updateCameraBox() {
+        this.cameraBox = {
+            position: {
+                x: this.x -380,
+                y: this.y -250,
+            },
+            width: 800,
+            height: 400,
+        }
     }
 
 
@@ -98,31 +129,31 @@ class Player extends Entity {
     }
 
 
-    renderDebug(){
-    
-    
-    // Debug information
-    fill(255);
-    textSize(12);
-    text('Frame: ' + frameCount, 50, 100);
-    text('Velocity: ' + this.playerVelocity, 50, 130);
-    text('Position: (' + this.x + ', ' + this.y + ')', 50, 160);
+    renderDebug() {
 
-    if (this.isGrounded) {
-        fill(0, 255, 20);
-        text('isGrounded: ' + this.isGrounded, 50, 200);
-    } else {
-        fill(255, 0, 0); // Red when in the air
-        text('isGrounded: ' + this.isGrounded, 50, 200);
-    }
 
-    if (this.isJumping) {
-        fill(0, 255, 20);
-        text('isJumping: ' + this.isJumping, 50, 230);
-    } else {
-        fill(255, 0, 0); // Red when not jumping
-        text('isJumping: ' + this.isJumping, 50, 230);
-    }
+        // Debug information
+        fill(255);
+        textSize(12);
+        text('Frame: ' + frameCount, 50, 100);
+        text('Velocity: ' + this.playerVelocity, 50, 130);
+        text('Position: (' + this.x + ', ' + this.y + ')', 50, 160);
+
+        if (this.isGrounded) {
+            fill(0, 255, 20);
+            text('isGrounded: ' + this.isGrounded, 50, 200);
+        } else {
+            fill(255, 0, 0); // Red when in the air
+            text('isGrounded: ' + this.isGrounded, 50, 200);
+        }
+
+        if (this.isJumping) {
+            fill(0, 255, 20);
+            text('isJumping: ' + this.isJumping, 50, 230);
+        } else {
+            fill(255, 0, 0); // Red when not jumping
+            text('isJumping: ' + this.isJumping, 50, 230);
+        }
 
 
 

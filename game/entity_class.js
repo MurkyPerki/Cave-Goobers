@@ -18,6 +18,8 @@ class Entity {
         this.applyGravity();
         this.handleCollsions(platforms)
         this.renderDebug();
+        this.renderCameraBox();
+        this.updateCameraBox();
     }
 
 

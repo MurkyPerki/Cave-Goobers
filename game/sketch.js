@@ -54,7 +54,7 @@ function draw() {
     pop();
 
     //translate (canvasWidth/2 - player.x, canvasHeight/2 - player.y);
-    translate (player.x + width / 2, -player.y + height / 2)
+   // translate (player.x + width / 2, -player.y + height / 2)
 
     // player
     player.update();
