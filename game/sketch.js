@@ -10,11 +10,13 @@ let pixelFont;
 let canvasWidth = 1200
 let canvasHeight = 4000
 
+// let camera = {x: 0, y: 0, width: 800, height: 600};
+
 
 function preload() {
     
-   pixelFont = loadFont('pixelFont.ttf')
-   img = loadImage('assets/images/game_background (1).jpg')
+   pixelFont = loadFont('pixelFont.ttf');
+  // img = loadImage('assets/images/game_background (1).jpg')
 }
 
 
@@ -37,7 +39,11 @@ function setup() {
 }
 
 function draw() {
-    background(img, 240, 240, 50);
+    //background(img, 1200, 4000);
+    background(255);
+
+    translate (canvasWidth/3 - player.x, canvasHeight/2 - player.y);
+    // translate (player.x + width / 2, -player.y + height / 2)
 
     fill (0)
     textFont(pixelFont);
