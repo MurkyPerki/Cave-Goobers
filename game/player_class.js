@@ -41,11 +41,12 @@ class Player extends Entity {
     }
 
     render() {
+      
         noStroke();
         fill(255);
         rect(this.x, this.y, this.width, this.height);
 
-        console.log(this.y)
+        // console.log(this.y)
     }
 
 

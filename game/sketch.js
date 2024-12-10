@@ -3,6 +3,7 @@
 let platforms = [];
 let collision;
 let player;
+let item 
 
 let img;
 let pixelFont;
@@ -26,7 +27,8 @@ function setup() {
    
     // class instances
     player = new Player(400, 700, 50, 50);
-    
+
+    item = new Item(750,500,35,35)
     
     //test ground
     platforms.push(new Platform(0, 750, 1500, 50));
@@ -48,11 +50,14 @@ function draw() {
     player.update();
     player.handleCollsions(platforms);
 
-    // console.log(platforms)
+    // items
+    
 
     for (let platform of platforms) {
         platform.render();
     }
+
+    item.update();
 }
 
 function keyReleased() {
