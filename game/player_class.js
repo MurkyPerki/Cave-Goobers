@@ -102,7 +102,7 @@ class Player extends Entity {
     
     
     // Debug information
-    fill(0);
+    fill(255);
     textSize(12);
     text('Frame: ' + frameCount, 50, 100);
     text('Velocity: ' + this.playerVelocity, 50, 130);

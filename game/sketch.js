@@ -29,7 +29,7 @@ function setup() {
     levelBG = new Sprite({
       position: {
         x: 0,
-        y: 0,
+        y: -3200,
       },
       imageSrc: 'assets/images/game_background (1).jpg',
     })
@@ -38,8 +38,8 @@ function setup() {
     player = new Player(400, 700, 50, 50);
     
     //test ground
-    platforms.push(new Platform(0, 750, 1500, 50));
-    platforms.push(new Platform(600, 600, 300, 50));
+    platforms.push(new Platform(0, 1030, 1920, 50));
+    //platforms.push(new Platform(600, 600, 300, 50));
 
 
 
@@ -47,11 +47,15 @@ function setup() {
 
 function draw() {
     background(162, 163, 166);
+
+    push();
+    scale(1.6);
     levelBG.update();
+    pop();
 
     // translate (canvasWidth/3 - player.x, canvasHeight/2 - player.y);
     // translate (player.x + width / 2, -player.y + height / 2)
-
+   // scale(1);
     fill(0);
     textFont(pixelFont);
     textSize(32);
