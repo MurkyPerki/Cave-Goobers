@@ -45,7 +45,8 @@ as you get higher up you notice that the creatures that are down here go from cu
   - **`isColliding(x1, y1, width1, height1, obj)`**: Basic rectangle-rectangle collision detection function.
   - **`entityCollision(entity1, entity2)`**: Checks if two entities overlap.
 
-Because all collision methods are static, you can call them without creating an instance of the `Collision` class.
+Because all collision methods are static, you can call them without creating an instance of the `Collision` class. the original Collsion logic was supposed to work with vectors, but we scraped that for now.
+
 
 ### Platforms
 
@@ -101,7 +102,7 @@ Because all collision methods are static, you can call them without creating an 
 ## Recommended Improvements
 
 - **Rename `playerVelocity` to `verticalVelocity`**: To clarify that it just has to do with the vertical Velocity
-- **Introduce Horizontal Velocity**: Instead of directly modifying `this.x` in `move()`, consider a `horizontalVelocity`, might work better with the collision logic.
+- **Introduce Horizontal Velocity**: Instead of directly modifying `this.x` in `move()`, a name like `horizontalVelocity`, might work better with the collision logic.
 - **Refactor Method Names**: For clarity, rename `applyGravity()` to `updateVerticalMovement()` or something similar with Vertical to avoid confusion.
 - **Use Classes and Instances More Consistently**: For future complexity, consider using non-static methods and pass references to `platforms` and `items`, or maintain a global game state object but we have to make sure it doesnt entangle our code to much.
 
