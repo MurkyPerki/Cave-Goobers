@@ -19,6 +19,7 @@ function preload() {
 
     pixelFont = loadFont('assets/fonts/pixelFont.ttf')
     img = loadImage('assets/images/game_background (1).jpg')
+    tempSprite = loadImage('assets/images/goboo.png')
 }
 
 
@@ -29,7 +30,7 @@ function setup() {
 
 
     // class instances
-    player = new Player(400, 700, 50, 50);
+    player = new Player(400, 700, 100, 100);
 
     enemies.push(new Enemy(10, 200, 30, 30))
 
