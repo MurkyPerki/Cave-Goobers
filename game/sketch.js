@@ -2,9 +2,11 @@
 // let entities = [];
 let items = [];
 let platforms = [];
+let enemies = [];
 let collision;
 let player;
-let item 
+let item;
+let enemy;
 
 let img;
 let pixelFont;
@@ -14,27 +16,27 @@ let canvasHeight = 4000
 
 
 function preload() {
-    
-   pixelFont = loadFont('assets/fonts/pixelFont.ttf')
-   img = loadImage('assets/images/game_background (1).jpg')
+
+    pixelFont = loadFont('assets/fonts/pixelFont.ttf')
+    img = loadImage('assets/images/game_background (1).jpg')
 }
 
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
 
-   
 
-   
+
+
     // class instances
     player = new Player(400, 700, 50, 50);
 
-   
+    enemies.push(new Enemy(10, 200, 30, 30))
 
-    items.push(new Item(750,500,35,35))
-    items.push(new Item(100,350,35,35))
-    items.push(new Item(900,200,35,35))
-    
+    items.push(new Item(750, 500, 35, 35))
+    items.push(new Item(100, 350, 35, 35))
+    items.push(new Item(900, 200, 35, 35))
+
     //test ground
     platforms.push(new Platform(0, 750, 1500, 50));
     platforms.push(new Platform(600, 600, 300, 50));
@@ -46,7 +48,7 @@ function setup() {
 function draw() {
     background(img, 240, 240, 50);
 
-    fill (0)
+    fill(0)
     textFont(pixelFont);
     textSize(32);
     text("hello world", 50, 50);
@@ -55,8 +57,8 @@ function draw() {
     player.update();
     player.handleCollsions(platforms);
 
-    
-    
+
+
 
     for (let platform of platforms) {
         platform.render();
@@ -64,13 +66,18 @@ function draw() {
     for (let item of items) {
         item.update();
     }
-    
+    for (let enemy of enemies) {
+
+        enemy.update(player);
+
+    }
+
 }
 
 function keyReleased() {
     if (keyCode === UP_ARROW || keyCode === 32) {
         player.jumpReleased();
-        
+
     }
 }
 
