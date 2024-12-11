@@ -52,14 +52,14 @@ Because all collision methods are static, you can call them without creating an 
 
 - Each `Platform` is defined by `x, y, width, height`.
 - Platforms are drawn as rectangles on the canvas.
-- The player stands on top of platforms if they land from above, and collides if jumping into them from below.
+- The player stands on top of platforms if they land from above, and boops head (collideds) if jumping into them from below.
 
 ### Items (Collectibles)
 
 - Items (instances of `Item`) have `x, y, width, height` and can be collected by the player.
 - `entityCollision(player, item)` checks if the player overlaps with the item.
-- When picked up, `isPickedUp` is set to `true`, and the item shrinks over time until it effectively disappears.
-- Items also animate (floating effect) when not picked up, using `sin()` to change the `y` position slightly.
+- When picked up, `isPickedUp` is set to `true`, and the item shrinks over time until it disappears.
+- Items is also animated (floating effect) when not picked up, using `sin()` to change the `y` position slightly.
 - Also made it so that the `x` and `y` postition get adjusted while shrinking, so that it shrinks towards the middle instead of to the corner.
 
 ```js
