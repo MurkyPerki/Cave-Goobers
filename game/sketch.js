@@ -10,6 +10,8 @@ let pixelFont;
 //resolution 1920 x 1080
 let canvasWidth = 1920
 let canvasHeight = 1080
+let translateX;
+let translateY;
 
 let levelBG;
 let bgImageHeight = 4000;
@@ -53,14 +55,16 @@ function setup() {
 function draw() {
     background(255);
 
+    //starting pos translate
+    translateX = 0;
+    //aligns background
+    translateY = -bgImageHeight + scaledCanvas.height;
+
     push();
     scale(1.6);
-    translate (0, -bgImageHeight + scaledCanvas.height);
+    translate (translateX, translateY);
     levelBG.update();
     pop();
-
-    //translate (canvasWidth/2 - player.x, canvasHeight/2 - player.y);
-   // translate (player.x + width / 2, -player.y + height / 2)
 
     // player
     player.update();
