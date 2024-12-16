@@ -33,19 +33,7 @@ class Enemy {
     }
 
 
-    //* attack
-
-    handleWindAttack(){
-
-        //maybe use dist p5 func
-        //attack timer
-        //
-
-
-    }
-
-
-
+  
 
     //* movement
 
