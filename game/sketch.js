@@ -20,8 +20,6 @@ let scaledCanvas = {
     height: canvasHeight / 1.6,
 }
 
-// let camera = {x: 0, y: 0, width: 800, height: 600};
-
 
 function preload() {
     
@@ -41,11 +39,12 @@ function setup() {
       imageSrc: 'assets/images/game_background (1).jpg',
     })
    
-    // class instances
-    player = new Player(400, 700, 50, 50);
+    // class instances 
+    player = new Player(400, 300, 50, 50);
     
     //test ground
-    platforms.push(new Platform(0, 1030, 1920, 50));
+    platforms.push(new Platform(0, 400, 1920, 50));
+    //platforms.push(new Platform(0, 1030, 1920, 50));
     //platforms.push(new Platform(600, 600, 300, 50));
 
 
@@ -63,7 +62,7 @@ function draw() {
     push();
     scale(1.6);
     translate (translateX, translateY);
-    levelBG.update();
+    levelBG.render();
     pop();
 
     // player
