@@ -20,7 +20,7 @@ class Entity {
         this.renderDebug();
         this.renderCameraBox();
         this.updateCameraBox();
-        this.shouldPanCameraDown();
+        
     }
 
 

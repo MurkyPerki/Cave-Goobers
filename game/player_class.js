@@ -49,9 +49,7 @@ class Player extends Entity {
             this.jumpCount++;
         }
 
-        if (player.isJumping){
-            shouldPanCameraDown();
-        }
+        
     }
 
     render() {
@@ -84,11 +82,7 @@ class Player extends Entity {
 
     }
 
-    shouldPanCameraDown() {
-        if (this.cameraBox.position.y <= Math.abs(translateY)) {
-            translateY -= this.playerVelocity
-        }
-    }
+    
 
     handleCollsions(platforms) {
 
