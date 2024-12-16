@@ -16,10 +16,10 @@ class Enemy {
     }
 
 
-    update() {
+    update(player) {
 
         this.movement();
-        this.handleCollision()
+        this.handleCollision(player)
         this.render();
 
     }

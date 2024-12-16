@@ -34,6 +34,8 @@ function setup() {
 
     enemies.push(new Enemy(10, 200, 30, 30))
 
+    enemies.push(new WindEnemy(200,300,30,30));
+
     items.push(new Item(750, 500, 35, 35))
     items.push(new Item(100, 350, 35, 35))
     items.push(new Item(900, 200, 35, 35))
@@ -59,6 +61,10 @@ function draw() {
     player.handleCollsions(platforms);
 
 
+    // temp draw wind enem
+  
+   
+
 
 
     for (let platform of platforms) {
@@ -68,9 +74,9 @@ function draw() {
         item.update();
     }
     for (let enemy of enemies) {
-
+        
         enemy.update(player);
-
+        
     }
 
 }

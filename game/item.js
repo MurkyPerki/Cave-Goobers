@@ -26,7 +26,7 @@ class Item {
 
         this.render();
         this.pickedUp();
-        console.log(this.isPickedUp)
+        // console.log(this.isPickedUp)
     }
 
 
