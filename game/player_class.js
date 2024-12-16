@@ -3,17 +3,18 @@ class Player extends Entity {
         super();
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = width / 1.6;
+        this.height = height / 1.6;
         this.vx = 0 // horizontal velocity, added just this. could rename to horizontal velocity
-        this.playerSpeed = 12;
+        this.playerSpeed = 12 / 1.6;
         this.playerVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
-        this.playerGravity = 2;
+        this.playerGravity = 2 / 1.6;
         this.isJumping = false;
         this.isFalling = false;
         this.onPlatform = false;
         this.jumpCount = 0;
         this.maxJump = 1;
+        this.cameraYPos = this.y;
 
         this.cameraBox = {
             position: {
@@ -28,7 +29,7 @@ class Player extends Entity {
 
 
     move() {
-        // player left right movement
+        //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
             this.x = this.x + this.playerSpeed;
         }
@@ -40,14 +41,14 @@ class Player extends Entity {
             && !this.isJumping
             //jumpcount so the player can only jump once until released
             && this.jumpCount < this.maxJump) {
-            this.playerVelocity = 36;
+            this.playerVelocity = 36 / 1.6;
             this.isJumping = true;
             this.jumpCount++;
         }
     }
 
-     //! maybe we should rename this method its confusing.
-     applyGravity() {
+    //! maybe we should rename this method its confusing.
+    applyGravity() {
         // update player y pos
         this.y -= this.playerVelocity;
         //console.log('velocity='+this.playerVelocity)
@@ -95,6 +96,7 @@ class Player extends Entity {
 
 
     updateCameraBox() {
+       
         this.cameraBox = {
             position: {
                 x: this.x - 325,
@@ -106,14 +108,9 @@ class Player extends Entity {
 
     }
 
-
-    shouldPanCameraDown() {
-        if (this.cameraBox.position.y <= translateY) {
-            // translateY -= this.playerVelocity
-            console.log('translated')
-        }
+    updateCameraPosition(){
+      //  this.cameraYPos = this.y;
     }
-
 
     handleCollsions(platforms) {
 
@@ -136,7 +133,7 @@ class Player extends Entity {
 
 
 
-   
+
 
     renderDebug() {
         // Debug information
@@ -145,7 +142,8 @@ class Player extends Entity {
         text('Frame: ' + frameCount, 50, 100);
         text('Velocity: ' + this.playerVelocity, 50, 130);
         text('Position: (' + this.x + ', ' + this.y + ')', 50, 160);
-        text('camerBoxY' + this.cameraBox.position.y, 50, 50)
+        text('camerBoxY = ' + this.cameraBox.position.y, 50, 50)
+        text('playerY = ' + this.y, 50, 25)
 
         if (this.isGrounded) {
             fill(0, 255, 20);

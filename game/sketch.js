@@ -40,13 +40,11 @@ function setup() {
     })
    
     // class instances 
-    player = new Player(400, 300, 50, 50);
+    player = new Player(400, 3650, 50, 50);
     
     //test ground
-    platforms.push(new Platform(0, 400, 1920, 50));
-    //platforms.push(new Platform(0, 1030, 1920, 50));
-    //platforms.push(new Platform(600, 600, 300, 50));
-
+    platforms.push(new Platform(0, 3680, 1920 / 1.6, 50 /1.6));
+    platforms.push(new Platform(width / 3.2, 3580, 300/ 1.6, 50 / 1.6));
 
 
 }
@@ -57,13 +55,16 @@ function draw() {
     //starting pos translate
     translateX = 0;
     //aligns background
-    translateY = -bgImageHeight + scaledCanvas.height;
+    translateY = scaledCanvas.height /2 - player.cameraYPos;
 
     push();
-    scale(1.6);
+    scale (1.6);
     translate (translateX, translateY);
+    console.log('translateY:' + translateY)
+    
+  
     levelBG.render();
-    pop();
+    
 
     // player
     player.update();
@@ -71,6 +72,8 @@ function draw() {
     for (let platform of platforms) {
         platform.render();
     }
+    pop ();
+    
 }
 
 function keyReleased() {
