@@ -13,10 +13,7 @@ class Entity {
     // }
 
     update() {
-        
-        this.move();
-        this.applyGravity();
-        this.handleCollsions(platforms)
+    
         this.render();
         this.move();
         this.applyGravity();
