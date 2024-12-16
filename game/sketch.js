@@ -14,7 +14,7 @@ let translateX;
 let translateY;
 
 let levelBG;
-let bgImageHeight = 4000;
+let bgImageHeight = 2196;
 let scaledCanvas = {
     width: canvasWidth / 1.6,
     height: canvasHeight / 1.6,
@@ -26,7 +26,7 @@ let scaledCanvas = {
 function preload() {
     
    pixelFont = loadFont('pixelFont.ttf');
-   img = loadImage('assets/images/game_background (1).jpg')
+   img = loadImage('assets/images/Background.jpg')
 }
 
 
@@ -38,7 +38,7 @@ function setup() {
         x: 0,
         y: 0, //-3200
       },
-      imageSrc: 'assets/images/game_background (1).jpg',
+      imageSrc: 'assets/images/Background.jpg',
     })
    
     // class instances
@@ -53,7 +53,7 @@ function setup() {
 }
 
 function draw() {
-    background(255);
+    background(img);
 
     //starting pos translate
     translateX = 0;
@@ -71,6 +71,24 @@ function draw() {
     player.handleCollsions(platforms);
     for (let platform of platforms) {
         platform.render();
+    }
+
+    let platformCollisions2D = [];
+    for(leti = 0; i < platformCollisions2D.length; i += 35){
+        platformCollisions2D.push(platformCollisions.slice(i, i + 35));
+    }
+
+    let collisionBlocks = [];
+    platformCollisions2D.forEach((row, y) => {
+    row.forEach((symbol, x) => {
+    if(symbol === 2) {
+        collisionBlocks.push(new CollisionBlock(y * 18, x * 18))
+    }
+    })
+    })
+
+    for(let collisionBlock of collisionBlocks) {
+        collisionBlock.show();
     }
 }
 
