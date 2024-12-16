@@ -5,8 +5,9 @@ class Player extends Entity {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.playerSpeed = 10;
-        this.playerVelocity = 0;
+        this.vx = 0 // horizontal velocity, added just this. could rename to horizontal velocity
+        this.playerSpeed = 12;
+        this.playerVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
         this.playerGravity = 2;
         this.isJumping = false;
         this.isFalling = false;
@@ -14,11 +15,21 @@ class Player extends Entity {
         this.jumpCount = 0;
         this.maxJump = 1;
 
+        this.cameraBox = {
+            position: {
+                x: this.x,
+                y: this.y,
+            },
+            width: 800,
+            height: 600,
+        }
         // this.maxJumpHeight = 40;
         // this.minJumpHeight = 20;
         // this.jumpTimeCounter = jumpTimeCounter;
         // this.jumpTime = jumpTime;
     }
+
+
 
     move() {
         // player left right movement
@@ -31,46 +42,79 @@ class Player extends Entity {
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
-        //jumpcount so the player can only jump once until mouse released
+            //jumpcount so the player can only jump once until mouse released
             && this.jumpCount < this.maxJump) {
             this.playerVelocity = 36;
             this.isJumping = true;
             this.jumpCount++;
         }
+
+        // if (player.isJumping){
+        //     shouldPanCameraDown();
+        // }
     }
 
     render() {
         noStroke();
-        fill(0);
+        fill(255);
         rect(this.x, this.y, this.width, this.height);
+
+        console.log(this.y)
+    }
+
+    renderCameraBox() {
+        fill(0, 0, 255, 50);
+        rect(
+            this.cameraBox.position.x,
+            this.cameraBox.position.y,
+            this.cameraBox.width,
+            this.cameraBox.height
+        )
+    }
+
+    updateCameraBox() {
+        this.cameraBox = {
+            position: {
+                x: this.x - 380,
+                y: this.y - 250,
+            },
+            width: 700,
+            height: 300,
+        }
+
+        // shouldPanCameraDown({ canvas, camera }){
+        //     if (this.cameraBox.position.y <= Math.abs(camera.position.y)) {
+        //         camera.position.y -= this.playerVelocity.y
+        //     }
+        // }
+
     }
 
 
-    handleCollsions(collision, platforms) {
-        this.onPlatform = false;
+    handleCollsions(platforms) {
 
-        for (let platform of platforms) {
-            if (collision.isCollidingAABB(this, platform)) {
-                this.landOnPlatform(platform)
-                this.onPlatform = true
-            }
-        }
 
-        if (!this.onPlatform) {
+        Collision.handleCollisions(this, platforms);
+
+        if (this.isGrounded) {
+            // But the collision code might already be handling the snapping.
+        } else {
             this.isFalling = true;
         }
 
     }
 
 
-    landOnPlatform(platform) {
-        this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
-        this.isJumping = false
-        this.playerVelocity = 0;
-    }
+    // landOnPlatform(platform) {
+    //     this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
+    //     this.isJumping = false
+    //     this.playerVelocity = 0;
+    // }
 
 
-    jump() {
+
+    //! maybe we should rename this method its confusing.
+    applyGravity() {
         // update player y pos
         this.y -= this.playerVelocity;
         //console.log('velocity='+this.playerVelocity)
@@ -93,5 +137,36 @@ class Player extends Entity {
         if (this.isJumping) {
             this.playerVelocity = this.playerVelocity / 2;
         }
+    }
+
+
+    renderDebug() {
+
+
+        // Debug information
+        fill(255);
+        textSize(12);
+        text('Frame: ' + frameCount, 50, 100);
+        text('Velocity: ' + this.playerVelocity, 50, 130);
+        text('Position: (' + this.x + ', ' + this.y + ')', 50, 160);
+
+        if (this.isGrounded) {
+            fill(0, 255, 20);
+            text('isGrounded: ' + this.isGrounded, 50, 200);
+        } else {
+            fill(255, 0, 0); // Red when in the air
+            text('isGrounded: ' + this.isGrounded, 50, 200);
+        }
+
+        if (this.isJumping) {
+            fill(0, 255, 20);
+            text('isJumping: ' + this.isJumping, 50, 230);
+        } else {
+            fill(255, 0, 0); // Red when not jumping
+            text('isJumping: ' + this.isJumping, 50, 230);
+        }
+
+
+
     }
 }

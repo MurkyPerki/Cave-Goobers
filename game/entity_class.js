@@ -15,7 +15,11 @@ class Entity {
     update() {
         this.render();
         this.move();
-        this.jump();
+        this.applyGravity();
+        this.handleCollsions(platforms)
+        this.renderDebug();
+        this.renderCameraBox();
+        this.updateCameraBox();
     }
 
 

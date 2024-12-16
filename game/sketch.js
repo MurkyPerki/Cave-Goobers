@@ -4,56 +4,67 @@ let platforms = [];
 let collision;
 let player;
 
+let img;
 let pixelFont;
 
+//resolution 1920 x 1080
+let canvasWidth = 1920
+let canvasHeight = 1080
+
+let levelBG;
+let bgImageHeight = 4000;
+let scaledCanvas = {
+    width: canvasWidth / 1.6,
+    height: canvasHeight / 1.6,
+}
+
+// let camera = {x: 0, y: 0, width: 800, height: 600};
+
+
 function preload() {
-   pixelFont = loadFont('pixelFont.ttf')
+    
+   pixelFont = loadFont('pixelFont.ttf');
+   img = loadImage('assets/images/game_background (1).jpg')
 }
 
 
 function setup() {
-    createCanvas(1500, 800);
+    createCanvas(canvasWidth, canvasHeight);
 
-   
-
+    levelBG = new Sprite({
+      position: {
+        x: 0,
+        y: 0, //-3200
+      },
+      imageSrc: 'assets/images/game_background (1).jpg',
+    })
    
     // class instances
     player = new Player(400, 700, 50, 50);
-    collision = new Collision();
     
     //test ground
-    platforms.push(new Platform(0, 750, 1500, 50));
-    platforms.push(new Platform(600, 600, 300, 50));
+    platforms.push(new Platform(0, 1030, 1920, 50));
+    //platforms.push(new Platform(600, 600, 300, 50));
 
-    /*
-    // platform test: random placement
-    for(let i = 0; i < 10; i++){
-        for(let j = 0; j < 10; j++){
-        let x = (i%50) * 150 - random(10,40)
-        let y = height / 5 * j + random(20,100)
-        platforms.push(new Platform(x, y, 80, 50));
-        }
-    }
-   */
 
 
 }
 
 function draw() {
-    background(240, 240, 240, 50);
+    background(255);
 
-    fill (0)
-    textFont(pixelFont);
-    textSize(32);
-    text("hello world", 50, 50);
+    push();
+    scale(1.6);
+    translate (0, -bgImageHeight + scaledCanvas.height);
+    levelBG.update();
+    pop();
+
+    //translate (canvasWidth/2 - player.x, canvasHeight/2 - player.y);
+   // translate (player.x + width / 2, -player.y + height / 2)
 
     // player
-    player.update(platforms);
-    //console.log('py=' + player.y);
-
-    //check collision
-    player.handleCollsions(collision, platforms);
-
+    player.update();
+    player.handleCollsions(platforms);
     for (let platform of platforms) {
         platform.render();
     }
@@ -75,5 +86,4 @@ function keyReleased() {
 //     const entity = entities[index];
 //     entity.update();
 // }
-
 // console.log('player.y:' + playerY);
