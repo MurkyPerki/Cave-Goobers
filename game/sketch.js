@@ -8,6 +8,7 @@ let player;
 let item;
 let enemy;
 
+let baby;
 let img;
 let pixelFont;
 
@@ -32,6 +33,7 @@ function preload() {
     pixelFont = loadFont('assets/fonts/pixelFont.ttf')
     img = loadImage('assets/images/game_background (1).jpg')
     tempSprite = loadImage('assets/images/goboo.png')
+    baby = loadImage('assets/images/baby goober 3.png')
 }
 
 
@@ -54,14 +56,15 @@ function setup() {
 
     enemies.push(new WindEnemy(200,300,30,30));
 
-    items.push(new Item(750, 500, 35, 35))
-    items.push(new Item(100, 350, 35, 35))
-    items.push(new Item(900, 200, 35, 35))
+    items.push(new Item(750, 500, 80, 80))
+    items.push(new Item(100, 350, 80, 80))
+    items.push(new Item(900, 200, 80, 80))
 
     //test ground
     platforms.push(new Platform(0, 1030, 1920, 50));
     //platforms.push(new Platform(600, 600, 300, 50));
 
+    createPlatformsTilemap2D(floorCollisions2)
 
 
 }
@@ -108,6 +111,33 @@ function keyReleased() {
         player.jumpReleased();
 
     }
+}
+
+
+
+
+let tileWidth = 64;
+let tileHeight = 64;
+
+function createPlatformsTilemap2D(tilemap2D) {
+
+    platforms = [];
+    for (let row = 0; row < tilemap2D.length; row++) {
+        for (let col = 0; col < tilemap2D[row].length; col++) {
+            let tileValue = tilemap2D[row][col];
+            if (tileValue === 2) {
+                let x = col * tileWidth;
+                let y = row * tileHeight;
+                platforms.push(new Platform(x, y, tileWidth, tileHeight))
+
+
+            }
+
+        }
+
+    }
+
+
 }
 
 // let entities = [

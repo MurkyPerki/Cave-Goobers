@@ -38,7 +38,7 @@ class Item {
 
         }
 
-        if (this.isPickedUp && (this.width && this.height) > 0) {
+        if (this.isPickedUp && this.width > 0 && this.height > 0) {
             this.width -= 1
             this.height -= 1
 
@@ -46,6 +46,19 @@ class Item {
             //keep shrink to the center
             this.x += 0.5
             this.y += 0.5
+
+        } else if (this.isPickedUp) {
+            // The item is fully shrunk. 
+            this.width = 1;
+            this.height = 1;
+
+
+            let index = items.indexOf(this);
+            if (index > -1) {
+                items.splice(index, 1);
+            }
+
+          
 
         } else {
 
@@ -60,16 +73,17 @@ class Item {
 
     render() {
 
-        
+
         noStroke()
         fill(0, 140, 255)
-        rect(this.x, this.y, this.width, this.height, 40, 20)
+        image(baby, this.x, this.y, this.width, this.height)
+        // rect(this.x, this.y, this.width, this.height, 40, 20)
 
         //hitbox render
         // noFill();
         // stroke(0, 255, 0)
         // rect(this.x, this.y, this.width, this.height)
-        
+
     }
 
 
