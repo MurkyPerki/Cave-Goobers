@@ -1,9 +1,14 @@
 
 // let entities = [];
+let items = [];
 let platforms = [];
+let enemies = [];
 let collision;
 let player;
+let item;
+let enemy;
 
+let baby;
 let img;
 let pixelFont;
 
@@ -24,9 +29,11 @@ let scaledCanvas = {
 
 
 function preload() {
-    
-   pixelFont = loadFont('pixelFont.ttf');
-   img = loadImage('assets/images/Background.jpg')
+
+    pixelFont = loadFont('assets/fonts/pixelFont.ttf')
+    img = loadImage('assets/images/Background.jpg')
+    tempSprite = loadImage('assets/images/goboo.png')
+    baby = loadImage('assets/images/baby goober 3.png')
 }
 
 
@@ -41,13 +48,23 @@ function setup() {
       imageSrc: 'assets/images/Background.jpg',
     })
    
+
     // class instances
-    player = new Player(400, 700, 50, 50);
-    
+    player = new Player(400, 700, 100, 100);
+
+    enemies.push(new Enemy(10, 200, 30, 30))
+
+    enemies.push(new WindEnemy(200,300,30,30));
+
+    items.push(new Item(750, 500, 80, 80))
+    items.push(new Item(100, 350, 80, 80))
+    items.push(new Item(900, 200, 80, 80))
+
     //test ground
     platforms.push(new Platform(0, 1030, 1920, 50));
     //platforms.push(new Platform(600, 600, 300, 50));
 
+    createPlatformsTilemap2D(floorCollisions2)
 
 
 }
@@ -65,10 +82,16 @@ function draw() {
     translate (translateX, translateY);
     levelBG.update();
     pop();
+    
+    fill(0)
+    textFont(pixelFont);
+    textSize(32);
+    text("hello world", 50, 50);
 
     // player
     player.update();
     player.handleCollsions(platforms);
+    
     for (let platform of platforms) {
         platform.render();
     }
@@ -90,13 +113,49 @@ function draw() {
     for(let collisionBlock of collisionBlocks) {
         collisionBlock.show();
     }
+    for (let item of items) {
+        item.update();
+    }
+    for (let enemy of enemies) {
+        
+        enemy.update(player);
+        
+    }
+
 }
 
 function keyReleased() {
     if (keyCode === UP_ARROW || keyCode === 32) {
         player.jumpReleased();
-        
+
     }
+}
+
+
+
+
+let tileWidth = 64;
+let tileHeight = 64;
+
+function createPlatformsTilemap2D(tilemap2D) {
+
+    platforms = [];
+    for (let row = 0; row < tilemap2D.length; row++) {
+        for (let col = 0; col < tilemap2D[row].length; col++) {
+            let tileValue = tilemap2D[row][col];
+            if (tileValue === 2) {
+                let x = col * tileWidth;
+                let y = row * tileHeight;
+                platforms.push(new Platform(x, y, tileWidth, tileHeight))
+
+
+            }
+
+        }
+
+    }
+
+
 }
 
 // let entities = [

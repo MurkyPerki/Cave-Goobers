@@ -13,6 +13,7 @@ class Entity {
     // }
 
     update() {
+    
         this.render();
         this.move();
         this.applyGravity();
@@ -23,11 +24,7 @@ class Entity {
         
     }
 
-
-
-
     // die() {
-
     //     if (this.isAlive) {
     //        entities.update();
     //     }

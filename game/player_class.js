@@ -53,11 +53,14 @@ class Player extends Entity {
     }
 
     render() {
-        noStroke();
-        fill(255);
-        rect(this.x, this.y, this.width, this.height);
 
-        console.log(this.y)
+
+        image(tempSprite,this.x, this.y,this.width,this.height )
+        // noStroke();
+        // fill(255);
+        // rect(this.x, this.y, this.width, this.height);
+
+        // console.log(this.y)
     }
 
     renderCameraBox() {
@@ -137,7 +140,7 @@ class Player extends Entity {
 
 
         // Debug information
-        fill(255);
+        fill(0);
         textSize(12);
         text('Frame: ' + frameCount, 50, 100);
         text('Velocity: ' + this.playerVelocity, 50, 130);
