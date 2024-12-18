@@ -109,7 +109,7 @@ class Player extends Entity {
     }
 
     updateCameraPosition(){
-      //  this.cameraYPos = this.y;
+       this.cameraYPos = this.y;
     }
 
     handleCollsions(platforms) {
