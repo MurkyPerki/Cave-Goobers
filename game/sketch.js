@@ -91,10 +91,12 @@ function draw() {
     // player
     player.update();
     player.handleCollsions(platforms);
-    
+    push();
+    scale(0.55)
     for (let platform of platforms) {
         platform.render();
     }
+    pop();
     
     for (let item of items) {
         item.update();
