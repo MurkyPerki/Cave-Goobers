@@ -100,6 +100,10 @@ class Collision {
                 entity1.y + entity1.height > entity2.y
             );
         }
+
+    
+
+        // add rect vs ellipse collision
     }
     
     

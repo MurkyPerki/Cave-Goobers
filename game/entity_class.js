@@ -13,6 +13,7 @@ class Entity {
     // }
 
     update() {
+    
         this.render();
         this.move();
         this.applyGravity();
@@ -20,14 +21,11 @@ class Entity {
         this.renderDebug();
         this.renderCameraBox();
         this.updateCameraBox();
+        
         this.updateCameraPosition();
     }
 
-
-
-
     // die() {
-
     //     if (this.isAlive) {
     //        entities.update();
     //     }
