@@ -19,10 +19,10 @@ let translateX;
 let translateY;
 
 let levelBG;
-let bgImageHeight = 2196;
+//let bgImageHeight = 2196;
 let scaledCanvas = {
-    width: canvasWidth / 1.6,
-    height: canvasHeight / 1.6,
+    width: canvasWidth / 3.1,
+    height: canvasHeight / 3.1,
 }
 
 
@@ -43,7 +43,7 @@ function setup() {
         x: 0,
         y: 0, //-3200
       },
-      imageSrc: 'assets/images/Background.jpg',
+      imageSrc: 'assets/images/new Background.png',
     })
    
     
@@ -80,7 +80,7 @@ function draw() {
     translateY = scaledCanvas.height /2 - player.cameraYPos;
 
     push();
-    scale (1.6);
+    scale (3.1);
     translate (translateX, translateY);
     console.log('translateY:' + translateY)
     
