@@ -54,7 +54,7 @@ function setup() {
 
     enemies.push(new Enemy(10, 200, 30, 30))
 
-    enemies.push(new WindEnemy(200,300,30,30));
+    enemies.push(new WindEnemy(200,700,30,30));
 
     items.push(new Item(750, 500, 100, 80))
     items.push(new Item(100, 350, 100, 80))
