@@ -92,7 +92,7 @@ function draw() {
     player.update();
     
     push();
-    scale(0.55)
+    scale(0.3)
     player.handleCollsions(platforms);
     for (let platform of platforms) {
         platform.render();
