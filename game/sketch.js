@@ -6,16 +6,12 @@ let enemies = [];
 let collision;
 let player;
 let item;
-let enemy;
-
 let baby;
 let img;
-let pixelFont;
-
-let translateX;
-let translateY;
-
 let levelBG;
+let gameObbjecten = [];
+
+let pixelFont;
 
 function preload() {
     pixelFont = loadFont('assets/fonts/pixelFont.ttf')
@@ -23,7 +19,6 @@ function preload() {
     tempSprite = loadImage('assets/images/goboo.png')
     baby = loadImage('assets/images/baby goober 3.png')
 }
-
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -35,7 +30,6 @@ function setup() {
         },
         imageSrc: 'assets/images/gameBG.png',
     })
-
 
     // class instances
     player = new Player(400, 700, 100, 100);
@@ -49,20 +43,16 @@ function setup() {
     items.push(new Item(900, 200, 100, 80))
 
     createPlatformsTilemap2D(floorCollisions2)
-
-
 }
 
 function draw() {
     background(255);
 
-    //starting pos translate
-    translateX = 0;
-    //aligns background
-    translateY = windowHeight / 2 - player.cameraYPos;
+    //Camera
+    let cameraY = windowHeight / 2 - player.cameraYPos;
 
     push();
-    translate(translateX, translateY);
+    translate(0, cameraY);
 
     levelBG.render();
 
@@ -83,7 +73,6 @@ function draw() {
     for (let enemy of enemies) {
         enemy.render();
         enemy.update(player);
-
     }
 
     pop();

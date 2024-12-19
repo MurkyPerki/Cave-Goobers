@@ -32,9 +32,6 @@ class Enemy {
 
     }
 
-
-  
-
     //* movement
 
     movement() {
@@ -44,7 +41,7 @@ class Enemy {
         this.x += this.veloctityX
         this.y += this.veloctityY
 
-        if (this.x + this.width > canvasWidth || this.x < 0) {
+        if (this.x + this.width > windowWidth || this.x < 0) {
             this.veloctityX *= -1;
         }
 
@@ -55,15 +52,15 @@ class Enemy {
 
     handleCollision() {
 
-       if(Collision.entityCollision(this, player)) {
+        if (Collision.entityCollision(this, player)) {
 
             player.playerVelocity = 0
-            
-       }
+
+        }
 
 
-       
-       
+
+
     }
 
 
