@@ -89,6 +89,7 @@ function draw() {
     
 
     // player
+    player.render();
     player.update();
     
     push();
@@ -103,10 +104,11 @@ function draw() {
 
 
     for (let item of items) {
+        item.render();
         item.update();
     }
     for (let enemy of enemies) {
-        
+        enemy.render();
         enemy.update(player);
         
     }

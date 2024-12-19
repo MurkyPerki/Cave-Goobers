@@ -5,34 +5,16 @@ class Entity {
 
     }
 
-    // takeDamage(damage) {
-    //     this.health -= damage;
-    //     if (this.health <= 0) {
-    //         this.die();
-    //     }
-    // }
-
     update() {
-    
-        this.render();
         this.move();
         this.applyGravity();
-        // this.handleCollsions(platforms)
-        this.renderDebug();
-        this.renderCameraBox();
         this.updateCameraBox();
-        
         this.updateCameraPosition();
     }
 
-    // die() {
-    //     if (this.isAlive) {
-    //        entities.update();
-    //     }
-    //     if (this.health < 0) {
-    //         !this.isAlive;
-    //     }
-
-    //     // when player dies => SwitchToStartScreen();
-    // }
+    render() {
+        this.render();
+        this.renderDebug();
+        this.renderCameraBox();
+    }
 }

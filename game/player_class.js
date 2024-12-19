@@ -50,7 +50,6 @@ class Player extends Entity {
     applyGravity() {
         // update player y pos
         this.y -= this.playerVelocity;
-        //console.log('velocity='+this.playerVelocity)
 
         if (this.isJumping || this.isFalling) {
             this.playerVelocity -= this.playerGravity;
@@ -76,14 +75,12 @@ class Player extends Entity {
 
     render() {
 
-
         image(tempSprite,this.x, this.y,this.width,this.height )
         strokeWeight(3)
         stroke(0,255,0);
         noFill();
         rect(this.x, this.y, this.width, this.height);
 
-        // console.log(this.y)
     }
 
 
@@ -126,16 +123,6 @@ class Player extends Entity {
         }
 
     }
-
-
-    // landOnPlatform(platform) {
-    //     this.y = platform.y - this.height; // makes it so hat player sticks to top of the platform
-    //     this.isJumping = false
-    //     this.playerVelocity = 0;
-    // }
-
-
-
 
 
     renderDebug() {
