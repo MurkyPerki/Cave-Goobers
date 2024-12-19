@@ -48,8 +48,8 @@ function setup() {
    
     
     //test ground
-    platforms.push(new Platform(0, 3680, 1920 / 1.6, 50 /1.6));
-    platforms.push(new Platform(width / 3.2, 3580, 300/ 1.6, 50 / 1.6));
+    // platforms.push(new Platform(0, 3680, 1920 / 1.6, 50 /1.6));
+    // platforms.push(new Platform(width / 3.2, 3580, 300/ 1.6, 50 / 1.6));
 
     // class instances
     player = new Player(400, 700, 100, 100);
@@ -94,29 +94,31 @@ function draw() {
     push();
     scale(0.55)
     player.handleCollsions(platforms);
+
     for (let platform of platforms) {
         platform.render();
     }
     pop();
     
 
-    let platformCollisions2D = [];
-    for(let i = 0; i < platformCollisions2D.length; i += 35){
-        platformCollisions2D.push(platformCollisions.slice(i, i + 35));
-    }
+    // let platformCollisions2D = [];
+    // for(let i = 0; i < platformCollisions2D.length; i += 35){
+    //     platformCollisions2D.push(platformCollisions.slice(i, i + 35));
+    // }
 
-    let collisionBlocks = [];
-    platformCollisions2D.forEach((row, y) => {
-    row.forEach((symbol, x) => {
-    if(symbol === 2) {
-        collisionBlocks.push(new CollisionBlock(y * 18, x * 18))
-    }
-    })
-    })
+    // let collisionBlocks = [];
+    // platformCollisions2D.forEach((row, y) => {
+    // row.forEach((symbol, x) => {
+    // if(symbol === 2) {
+    //     collisionBlocks.push(new CollisionBlock(y * 18, x * 18))
+    // }
+    // })
+    // })
 
-    for(let collisionBlock of collisionBlocks) {
-        collisionBlock.show();
-    }
+    // for(let collisionBlock of collisionBlocks) {
+    //     collisionBlock.show();
+    // }
+
     for (let item of items) {
         item.update();
     }
