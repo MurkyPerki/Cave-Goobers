@@ -27,7 +27,6 @@ let scaledCanvas = {
 
 
 function preload() {
-
     pixelFont = loadFont('assets/fonts/pixelFont.ttf')
     img = loadImage('assets/images/Background.jpg')
     tempSprite = loadImage('assets/images/goboo.png')
@@ -45,6 +44,7 @@ function setup() {
       },
       imageSrc: 'assets/images/new Background.png',
     })
+   
    
     
     //test ground
@@ -80,19 +80,19 @@ function draw() {
     translateY = scaledCanvas.height /2 - player.cameraYPos;
 
     push();
-    scale (3.1);
+    //scale (3.1);
     translate (translateX, translateY);
-    console.log('translateY:' + translateY)
     
   
     levelBG.render();
+    //levelBG.image.resize(width, 0);
     
 
     // player
     player.update();
     
     push();
-    scale(0.3)
+    //scale(0.3)
     player.handleCollsions(platforms);
 
     for (let platform of platforms) {
@@ -124,10 +124,11 @@ function keyReleased() {
 
 
 
-let tileWidth = 64;
-let tileHeight = 64;
+
 
 function createPlatformsTilemap2D(tilemap2D) {
+    let tileWidth = width / tilemap2D[0].length;
+    let tileHeight = tileWidth;
 
     platforms = [];
     for (let row = 0; row < tilemap2D.length; row++) {
