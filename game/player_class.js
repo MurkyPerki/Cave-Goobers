@@ -40,7 +40,7 @@ class Player extends Entity {
             && !this.isJumping
             //jumpcount so the player can only jump once until released
             && this.jumpCount < this.maxJump) {
-            this.playerVelocity = 36 / 1.6;
+            this.playerVelocity = 36;
             this.isJumping = true;
             this.jumpCount++;
         }

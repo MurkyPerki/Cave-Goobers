@@ -6,8 +6,7 @@ class Sprite{
     }
 
     render(){
+        this.image.width = windowWidth;
         image(this.image, this.position.x, this.position.y);
     }
-
-
 }
