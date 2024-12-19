@@ -79,9 +79,10 @@ class Player extends Entity {
 
 
         image(tempSprite,this.x, this.y,this.width,this.height )
-        // noStroke();
-        // fill(255);
-        // rect(this.x, this.y, this.width, this.height);
+        strokeWeight(3)
+        stroke(0,255,0);
+        noFill();
+        rect(this.x, this.y, this.width, this.height);
 
         // console.log(this.y)
     }
