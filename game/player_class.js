@@ -24,7 +24,6 @@ class Player extends Entity {
             width: 800,
             height: 600,
         }
-
     }
 
 
