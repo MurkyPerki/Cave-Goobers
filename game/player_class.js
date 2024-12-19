@@ -3,17 +3,18 @@ class Player extends Entity {
         super();
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = width / 1.6;
+        this.height = height / 1.6;
         this.vx = 0 // horizontal velocity, added just this. could rename to horizontal velocity
-        this.playerSpeed = 12;
+        this.playerSpeed = 12 / 1.6;
         this.playerVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
-        this.playerGravity = 2;
+        this.playerGravity = 2 / 1.6;
         this.isJumping = false;
         this.isFalling = false;
         this.onPlatform = false;
         this.jumpCount = 0;
         this.maxJump = 1;
+        this.cameraYPos = this.y;
 
         this.cameraBox = {
             position: {
@@ -23,16 +24,12 @@ class Player extends Entity {
             width: 800,
             height: 600,
         }
-        // this.maxJumpHeight = 40;
-        // this.minJumpHeight = 20;
-        // this.jumpTimeCounter = jumpTimeCounter;
-        // this.jumpTime = jumpTime;
+
     }
 
 
-
     move() {
-        // player left right movement
+        //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
             this.x = this.x + this.playerSpeed;
         }
@@ -42,15 +39,41 @@ class Player extends Entity {
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
-            //jumpcount so the player can only jump once until mouse released
+            //jumpcount so the player can only jump once until released
             && this.jumpCount < this.maxJump) {
-            this.playerVelocity = 36;
+            this.playerVelocity = 36 / 1.6;
             this.isJumping = true;
             this.jumpCount++;
         }
-
-        
     }
+
+    //! maybe we should rename this method its confusing.
+    applyGravity() {
+        // update player y pos
+        this.y -= this.playerVelocity;
+        //console.log('velocity='+this.playerVelocity)
+
+        if (this.isJumping || this.isFalling) {
+            this.playerVelocity -= this.playerGravity;
+            this.isFalling = true;
+        }
+        else if (this.onPlatform) {
+            this.playerVelocity = 0;
+            this.isJumping = false;
+        }
+    }
+
+
+    jumpReleased() {
+        //reset jump count (when key released)
+        this.jumpCount = 0;
+
+        //if key released velocity halves so that player can hold jump
+        if (this.isJumping) {
+            this.playerVelocity = this.playerVelocity / 2;
+        }
+    }
+
 
     render() {
 
@@ -63,6 +86,7 @@ class Player extends Entity {
         // console.log(this.y)
     }
 
+
     renderCameraBox() {
         fill(0, 0, 255, 50);
         rect(
@@ -73,7 +97,9 @@ class Player extends Entity {
         )
     }
 
+
     updateCameraBox() {
+       
         this.cameraBox = {
             position: {
                 x: this.x - 325,
@@ -85,10 +111,11 @@ class Player extends Entity {
 
     }
 
-    
+    updateCameraPosition(){
+       this.cameraYPos = this.y;
+    }
 
     handleCollsions(platforms) {
-
 
         Collision.handleCollisions(this, platforms);
 
@@ -109,42 +136,17 @@ class Player extends Entity {
 
 
 
-    //! maybe we should rename this method its confusing.
-    applyGravity() {
-        // update player y pos
-        this.y -= this.playerVelocity;
-        //console.log('velocity='+this.playerVelocity)
-
-        if (this.isJumping || this.isFalling) {
-            this.playerVelocity -= this.playerGravity;
-            this.isFalling = true;
-        }
-        else if (this.onPlatform) {
-            this.playerVelocity = 0;
-            this.isJumping = false;
-        }
-    }
-
-    jumpReleased() {
-        //reset jump count (when key released)
-        this.jumpCount = 0;
-
-        //if key released velocity halves so that player can hold jump
-        if (this.isJumping) {
-            this.playerVelocity = this.playerVelocity / 2;
-        }
-    }
 
 
     renderDebug() {
-
-
         // Debug information
         fill(0);
         textSize(12);
         text('Frame: ' + frameCount, 50, 100);
         text('Velocity: ' + this.playerVelocity, 50, 130);
         text('Position: (' + this.x + ', ' + this.y + ')', 50, 160);
+        text('camerBoxY = ' + this.cameraBox.position.y, 50, 50)
+        text('playerY = ' + this.y, 50, 25)
 
         if (this.isGrounded) {
             fill(0, 255, 20);
@@ -161,8 +163,5 @@ class Player extends Entity {
             fill(255, 0, 0); // Red when not jumping
             text('isJumping: ' + this.isJumping, 50, 230);
         }
-
-
-
     }
 }

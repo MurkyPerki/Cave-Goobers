@@ -9,7 +9,5 @@ class Sprite{
         image(this.image, this.position.x, this.position.y);
     }
 
-    update() {
-        levelBG.render();
-    }
+
 }

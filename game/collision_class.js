@@ -21,7 +21,7 @@ class Collision {
     
             Collision.verticalCollision(entity, platforms, nextY, vy);
             Collision.horizontalCollision(entity, platforms, nextX, vx);
-            Collision.groundCollision(entity);
+            //Collision.groundCollision(entity);
             Collision.wallCollision(entity);
         }
     
@@ -62,14 +62,14 @@ class Collision {
             }
         }
     
-        static groundCollision(entity) {
-            if (entity.y + entity.height >= canvasHeight) {
-                entity.y = canvasHeight - entity.height;
-                entity.isGrounded = true;
-                entity.isJumping = false;
-                // No direct velocity to reset, but you can reset playerVelocity in the player if needed.
-            }
-        }
+        // static groundCollision(entity) {
+        //     if (entity.y + entity.height >= canvasHeight) {
+        //         entity.y = canvasHeight - entity.height;
+        //         entity.isGrounded = true;
+        //         entity.isJumping = false;
+        //         // No direct velocity to reset, but you can reset playerVelocity in the player if needed.
+        //     }
+        // }
 
 
         static wallCollision(entity) {

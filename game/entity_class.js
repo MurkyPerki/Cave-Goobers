@@ -22,6 +22,7 @@ class Entity {
         this.renderCameraBox();
         this.updateCameraBox();
         
+        this.updateCameraPosition();
     }
 
     // die() {
