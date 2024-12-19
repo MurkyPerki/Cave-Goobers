@@ -33,45 +33,57 @@ class Item {
 
     pickedUp() {
 
-        if (Collision.entityCollision(this, player)) {
+        if (this.isPickedUp) {
+            this.shrinkAndRemove();
+        } else if (Collision.entityCollision(this, player)) {
             this.isPickedUp = true;
-
-        }
-
-        if (this.isPickedUp && this.width > 0 && this.height > 0) {
-            this.width -= 1
-            this.height -= 1
-
-
-            //keep shrink to the center
-            this.x += 0.5
-            this.y += 0.5
-
-        } else if (this.isPickedUp) {
-            // The item is fully shrunk. 
-            this.width = 1;
-            this.height = 1;
-
-
-            let index = items.indexOf(this);
-            if (index > -1) {
-                items.splice(index, 1);
-            }
-
-          
-
         } else {
-
-            this.aniOffset += this.aniSpeed;
-            this.y = this.originalY + sin(this.aniOffset) * this.aniRange;
-
+            this.animate();
         }
 
     }
 
 
 
+    shrinkAndRemove(){
+
+        if (this.width > 0 && this.height > 0) {
+          
+            this.width -= 1.5;
+            this.height -= 1;
+            this.x += 0.75;
+            this.y += 0.5;
+            
+        } else {
+           
+            this.width = 0;
+            this.height = 0;
+    
+            let index = items.indexOf(this);
+            if (index > -1) {
+                items.splice(index, 1);
+            }
+        }
+
+
+    }
+
+
+
+    animate(){
+
+        this.aniOffset += this.aniSpeed;
+        this.y = this.originalY + sin(this.aniOffset) * this.aniRange;
+    }
+
+
     render() {
+
+
+        if (this.width <= 0 || this.height <= 0){
+
+            return;
+        }
 
 
         noStroke()

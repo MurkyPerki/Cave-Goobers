@@ -15,6 +15,8 @@ class WindEnemy extends Enemy {
     update(player) {
         super.update();
 
+        
+
         if (frameCount - this.lastAttack > this.windCooldown) {
             if (this.isPlayerInRange(player)) {
                 this.windPush(player); 

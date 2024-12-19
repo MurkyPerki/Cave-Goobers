@@ -56,9 +56,9 @@ function setup() {
 
     enemies.push(new WindEnemy(200,300,30,30));
 
-    items.push(new Item(750, 500, 80, 80))
-    items.push(new Item(100, 350, 80, 80))
-    items.push(new Item(900, 200, 80, 80))
+    items.push(new Item(750, 500, 100, 80))
+    items.push(new Item(100, 350, 100, 80))
+    items.push(new Item(900, 200, 100, 80))
 
     //test ground
     platforms.push(new Platform(0, 1030, 1920, 50));
