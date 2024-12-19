@@ -19,7 +19,7 @@ let translateX;
 let translateY;
 
 let levelBG;
-//let bgImageHeight = 2196;
+
 let scaledCanvas = {
     width: canvasWidth / 3.1,
     height: canvasHeight / 3.1,
@@ -45,11 +45,6 @@ function setup() {
       imageSrc: 'assets/images/new Background.png',
     })
    
-   
-    
-    //test ground
-    // platforms.push(new Platform(0, 3680, 1920 / 1.6, 50 /1.6));
-    // platforms.push(new Platform(width / 3.2, 3580, 300/ 1.6, 50 / 1.6));
 
     // class instances
     player = new Player(400, 700, 100, 100);
@@ -61,10 +56,6 @@ function setup() {
     items.push(new Item(750, 500, 100, 80))
     items.push(new Item(100, 350, 100, 80))
     items.push(new Item(900, 200, 100, 80))
-
-    //test ground
-    // platforms.push(new Platform(0, 1030, 1920, 50));
-    //platforms.push(new Platform(600, 600, 300, 50));
 
     createPlatformsTilemap2D(floorCollisions2)
 
