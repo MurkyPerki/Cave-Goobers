@@ -101,23 +101,6 @@ function draw() {
     pop();
     
 
-    // let platformCollisions2D = [];
-    // for(let i = 0; i < platformCollisions2D.length; i += 35){
-    //     platformCollisions2D.push(platformCollisions.slice(i, i + 35));
-    // }
-
-    // let collisionBlocks = [];
-    // platformCollisions2D.forEach((row, y) => {
-    // row.forEach((symbol, x) => {
-    // if(symbol === 2) {
-    //     collisionBlocks.push(new CollisionBlock(y * 18, x * 18))
-    // }
-    // })
-    // })
-
-    // for(let collisionBlock of collisionBlocks) {
-    //     collisionBlock.show();
-    // }
 
     for (let item of items) {
         item.update();
