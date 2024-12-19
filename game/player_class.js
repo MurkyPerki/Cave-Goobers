@@ -5,7 +5,7 @@ class Player extends Entity {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.horizontalVelocity = 0 
+        this.horizontalVelocity = 0;
         this.playerSpeed = 12;
         this.playerVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
         this.playerGravity = 2;
@@ -28,12 +28,14 @@ class Player extends Entity {
 
 
     move() {
+
+        this.horizontalVelocity = 0;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
-            this.x = this.x + this.playerSpeed;
+            this.horizontalVelocity = this.playerSpeed;
         }
         if ((keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
-            this.x = this.x - this.playerSpeed;
+            this.horizontalVelocity = -this.playerSpeed;
         }
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))

@@ -12,7 +12,10 @@ class Collision {
             if (typeof entity.playerVelocity !== 'undefined') {  //typeof
                 vy = -entity.playerVelocity;
             }
-        
+            
+            if (typeof entity.horizontalVelocity !== 'undefined') {
+                vx = entity.horizontalVelocity;
+            }
     
             entity.isGrounded = false;
     
@@ -23,6 +26,8 @@ class Collision {
             Collision.horizontalCollision(entity, platforms, nextX, vx);
             //Collision.groundCollision(entity);
             // Collision.wallCollision(entity);
+
+            entity.horizontalVelocity = 0;
         }
     
     
@@ -43,6 +48,10 @@ class Collision {
                  
                     break;
                 }
+            }
+
+            if (!entity.isGrounded && vy < 0) {
+                entity.isFalling = true;
             }
         }
     
