@@ -72,7 +72,7 @@ function setup() {
 }
 
 function draw() {
-    background(img);
+    background(255);
 
     //starting pos translate
     translateX = 0;
@@ -100,7 +100,7 @@ function draw() {
     
 
     let platformCollisions2D = [];
-    for(leti = 0; i < platformCollisions2D.length; i += 35){
+    for(let i = 0; i < platformCollisions2D.length; i += 35){
         platformCollisions2D.push(platformCollisions.slice(i, i + 35));
     }
 
