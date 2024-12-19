@@ -63,7 +63,7 @@ function setup() {
     items.push(new Item(900, 200, 100, 80))
 
     //test ground
-    platforms.push(new Platform(0, 1030, 1920, 50));
+    // platforms.push(new Platform(0, 1030, 1920, 50));
     //platforms.push(new Platform(600, 600, 300, 50));
 
     createPlatformsTilemap2D(floorCollisions2)
@@ -90,9 +90,10 @@ function draw() {
 
     // player
     player.update();
-    player.handleCollsions(platforms);
+    
     push();
     scale(0.55)
+    player.handleCollsions(platforms);
     for (let platform of platforms) {
         platform.render();
     }
