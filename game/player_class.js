@@ -3,12 +3,12 @@ class Player extends Entity {
         super();
         this.x = x;
         this.y = y;
-        this.width = width / 1.6;
-        this.height = height / 1.6;
+        this.width = width;
+        this.height = height;
         this.horizontalVelocity = 0 
-        this.playerSpeed = 12 / 1.6;
+        this.playerSpeed = 12;
         this.playerVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
-        this.playerGravity = 2 / 1.6;
+        this.playerGravity = 2;
         this.isJumping = false;
         this.isFalling = false;
         this.onPlatform = false;
