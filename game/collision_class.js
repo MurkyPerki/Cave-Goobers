@@ -24,7 +24,7 @@ class Collision {
     
             Collision.verticalCollision(entity, platforms, nextY, vy);
             Collision.horizontalCollision(entity, platforms, nextX, vx);
-            //Collision.groundCollision(entity);
+            // Collision.groundCollision(entity);
             // Collision.wallCollision(entity);
 
             entity.horizontalVelocity = 0;

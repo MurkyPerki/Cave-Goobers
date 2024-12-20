@@ -9,7 +9,7 @@ let item;
 let baby;
 let img;
 let levelBG;
-let gameObbjecten = [];
+let gameObjecten = [];
 
 let pixelFont;
 
