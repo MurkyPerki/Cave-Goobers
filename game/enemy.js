@@ -54,7 +54,7 @@ class Enemy {
 
         if (Collision.entityCollision(this, player)) {
 
-            player.playerVelocity = 0
+            player.verticalVelocity = 0
 
         }
 

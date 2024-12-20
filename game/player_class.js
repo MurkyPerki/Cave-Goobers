@@ -7,7 +7,7 @@ class Player extends Entity {
         this.height = height;
         this.horizontalVelocity = 0;
         this.playerSpeed = 12;
-        this.playerVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
+        this.verticalVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
         this.playerGravity = 2;
         this.isJumping = false;
         this.isFalling = false;
@@ -42,7 +42,7 @@ class Player extends Entity {
             && !this.isJumping
             //jumpcount so the player can only jump once until released
             && this.jumpCount < this.maxJump) {
-            this.playerVelocity = 36;
+            this.verticalVelocity = 36;
             this.isJumping = true;
             this.jumpCount++;
         }
@@ -51,14 +51,14 @@ class Player extends Entity {
     //! maybe we should rename this method its confusing.
     applyGravity() {
         // update player y pos
-        this.y -= this.playerVelocity;
+        this.y -= this.verticalVelocity;
 
         if (this.isJumping || this.isFalling) {
-            this.playerVelocity -= this.playerGravity;
+            this.verticalVelocity -= this.playerGravity;
             this.isFalling = true;
         }
         else if (this.onPlatform) {
-            this.playerVelocity = 0;
+            this.verticalVelocity = 0;
             this.isJumping = false;
         }
     }
@@ -70,7 +70,7 @@ class Player extends Entity {
 
         //if key released velocity halves so that player can hold jump
         if (this.isJumping) {
-            this.playerVelocity = this.playerVelocity / 2;
+            this.verticalVelocity = this.verticalVelocity / 2;
         }
     }
 
@@ -132,7 +132,7 @@ class Player extends Entity {
         fill(0);
         textSize(12);
         text('Frame: ' + frameCount, 50, 100);
-        text('Velocity: ' + this.playerVelocity, 50, 130);
+        text('Velocity: ' + this.verticalVelocity, 50, 130);
         text('Position: (' + this.x + ', ' + this.y + ')', 50, 160);
         text('camerBoxY = ' + this.cameraBox.position.y, 50, 50)
         text('playerY = ' + this.y, 50, 25)
