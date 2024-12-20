@@ -9,8 +9,8 @@ class Collision {
             let vx = 0;
     
     
-            if (typeof entity.playerVelocity !== 'undefined') {  //typeof
-                vy = -entity.playerVelocity;
+            if (typeof entity.verticalVelocity !== 'undefined') {  //typeof
+                vy = -entity.verticalVelocity;
             }
             
             if (typeof entity.horizontalVelocity !== 'undefined') {
@@ -39,11 +39,11 @@ class Collision {
                         entity.y = platform.y - entity.height;
                         entity.isGrounded = true;
                         entity.isJumping = false;
-                        entity.playerVelocity = 0;
+                        entity.verticalVelocity = 0;
                     } else {
                         // Collision from below (jumping up into platform)
                         entity.y = platform.y + platform.height;
-                        entity.playerVelocity = 0;
+                        entity.verticalVelocity = 0;
                     }
                  
                     break;
