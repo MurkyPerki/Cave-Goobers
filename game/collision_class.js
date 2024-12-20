@@ -12,7 +12,10 @@ class Collision {
             if (typeof entity.playerVelocity !== 'undefined') {  //typeof
                 vy = -entity.playerVelocity;
             }
-        
+            
+            if (typeof entity.horizontalVelocity !== 'undefined') {
+                vx = entity.horizontalVelocity;
+            }
     
             entity.isGrounded = false;
     
@@ -23,6 +26,8 @@ class Collision {
             Collision.horizontalCollision(entity, platforms, nextX, vx);
             // Collision.groundCollision(entity);
             // Collision.wallCollision(entity);
+
+            entity.horizontalVelocity = 0;
         }
     
     
@@ -44,6 +49,10 @@ class Collision {
                     break;
                 }
             }
+
+            if (!entity.isGrounded && vy < 0) {
+                entity.isFalling = true;
+            }
         }
     
         static horizontalCollision(entity, platforms, nextX, vx) {
@@ -56,20 +65,17 @@ class Collision {
                         // Collision moving left
                         entity.x = platform.x + platform.width;
                     }
-                  
+                    entity.horizontalVelocity = 0;
                     break;
                 }
             }
+
+            if (entity.horizontalVelocity !== 0) {
+                entity.x += vx;
+            }
         }
     
-        // static groundCollision(entity) {
-        //     if (entity.y + entity.height >= canvasHeight) {
-        //         entity.y = canvasHeight - entity.height;
-        //         entity.isGrounded = true;
-        //         entity.isJumping = false;
-        //         // No direct velocity to reset, but you can reset playerVelocity in the player if needed.
-        //     }
-        // }
+    
 
 
         static wallCollision(entity) {
