@@ -29,7 +29,7 @@ class Player extends Entity {
 
     move() {
 
-        this.horizontalVelocity = 0;
+        this.horizontalVelocity *= 0.5;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
             this.horizontalVelocity = this.playerSpeed;

@@ -7,9 +7,8 @@ class WindEnemy extends Enemy {
         this.windStrength = 5;
         this.windCooldown = 120;
         this.lastAttack = 0;
-        this.activeWindForce = null;
         this.windDuration = 60;
-        this.windTimer = 0;
+        
 
 
 
@@ -18,17 +17,13 @@ class WindEnemy extends Enemy {
     update(player) {
         super.update();
 
-        if (this.activeWindForce){
-            this.windPush(player);
-
-        }
+       
 
         if (frameCount - this.lastAttack > this.windCooldown) {
             if (this.isPlayerInRange(player)) {
-                this.startWindPush(player); 
+                this.applyWindImpulse(player); 
                 this.lastAttack = frameCount; 
             }
-
             // console.log(this.distance)
             // console.log(frameCount)
         }
@@ -40,35 +35,17 @@ class WindEnemy extends Enemy {
     }
 
 
-    startWindPush(){
-
+    applyWindImpulse(player) {
+     
         let direction = createVector(player.x - this.x, player.y - this.y);
         direction.normalize();
 
-
-        this.activeWindForce = direction.mult(this.windStrength);  // have to use math func because * doesnt work on vector(objects)
-
-        this.windTimer = this.windDuration;
-
-    }
+        let impulseMagnitude = this.windStrength * 5;
+        let impulse = direction.mult(impulseMagnitude);
 
 
-
-    windPush(player) {
-
-        if (this.windTimer > 0){
-
-            player.x += this.activeWindForce.x * (this.windTimer / this.windDuration); 
-            player.y += this.activeWindForce.y * (this.windTimer / this.windDuration);
-
-
-            this.windTimer -= 1;
-
-            if (this.windTimer <=0) {
-                this.activeWindForce = null;
-            }
-        }
-    
+        player.horizontalVelocity += impulse.x;  
+        player.verticalVelocity   -= impulse.y;  
     }
 
 

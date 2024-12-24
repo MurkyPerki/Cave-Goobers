@@ -27,7 +27,7 @@ class Collision {
             // Collision.groundCollision(entity);
             // Collision.wallCollision(entity);
 
-            entity.horizontalVelocity = 0;
+            // entity.horizontalVelocity = 0;
         }
     
     
