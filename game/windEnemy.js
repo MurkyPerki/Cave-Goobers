@@ -4,7 +4,7 @@ class WindEnemy extends Enemy {
         super(x, y, width, height);
     
         this.windRange = 500;
-        this.windStrength = 5;
+        this.windStrength = 10;
         this.windCooldown = 120;
         this.lastAttack = 0;
         this.windDuration = 60;
@@ -45,7 +45,7 @@ class WindEnemy extends Enemy {
 
 
         player.horizontalVelocity += impulse.x;  
-        player.verticalVelocity   -= impulse.y;  
+        player.verticalVelocity   -= impulse.y; 
     }
 
 
