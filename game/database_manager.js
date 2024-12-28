@@ -2,7 +2,7 @@
 class Databasemanager {
     constructor() {
         this.setupDatabase();
-        this.createNewSession()
+        this.createNewSession("test")
     }
 
     async setupDatabase(){
@@ -13,9 +13,14 @@ class Databasemanager {
         })
     }
 
-    // async createNewSession(playerName) {
-    //     try {
-    //         const query = "INSERT INTO Sessions (pl"
-    //     }
-    // }
+    async createNewSession(playerName) {
+        try {
+            const query1 = "INSERT INTO leaderboard (score, lastUpdated) VALUES(?, ?)";
+            const response = await HICCloud.API.queryDatabase(query1, [playerName]);
+
+            console.log("Leaderboard created succesfully", response);
+        } catch (error) {
+            console.log("Failed to create session", error);
+        }
+    }
 }
