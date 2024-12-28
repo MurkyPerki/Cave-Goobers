@@ -12,17 +12,11 @@ class Item {
         this.aniRange = 10;
         this.isPickedUp = false
 
-
-
-
     }
 
 
 
     update() {
-
-
-
 
         this.render();
         this.pickedUp();
