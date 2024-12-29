@@ -1,4 +1,5 @@
 
+let databaseManager;
 // let entities = [];
 let items = [];
 let platforms = [];
@@ -22,6 +23,7 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    databaseManager = new Databasemanager(); 
 
     levelBG = new Sprite({
         position: {
