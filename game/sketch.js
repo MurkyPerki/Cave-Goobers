@@ -62,7 +62,7 @@ function draw() {
 
 
     //Camera
-    let cameraY = windowHeight / 2 - player.cameraYPos;
+   // let cameraY = windowHeight / 2 - player.cameraYPos;
 
     push();
    // translate(0, cameraY);

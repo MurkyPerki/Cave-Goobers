@@ -15,7 +15,7 @@ class Entity {
     update() {
         this.player.update();
         for (let entity of this.entities) {
-            entity.update();
+            entity.update(this.player);
         }
     }
 

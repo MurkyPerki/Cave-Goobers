@@ -6,7 +6,7 @@ class Player {
         this.height = height;
         this.horizontalVelocity = 0;
         this.playerSpeed = 12;
-        this.verticalVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
+        this.verticalVelocity = 0; 
         this.playerGravity = 2;
         this.isJumping = false;
         this.isFalling = false;

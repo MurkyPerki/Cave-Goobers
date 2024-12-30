@@ -17,10 +17,12 @@ class Enemy {
 
 
     update(player) {
-
+        if(!player) {
+            console.warn("Enemy.update: Player is undefined")
+            return;
+        }
         this.movement();
         this.handleCollision(player)
-        this.render();
 
     }
 
@@ -50,7 +52,7 @@ class Enemy {
 
     //* handleCollision
 
-    handleCollision() {
+    handleCollision(player) {
 
         if (Collision.entityCollision(this, player)) {
 
