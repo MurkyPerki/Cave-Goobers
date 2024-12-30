@@ -28,7 +28,6 @@ class Player extends Entity {
 
 
     move() {
-
         this.horizontalVelocity *= 0.5;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
@@ -45,6 +44,8 @@ class Player extends Entity {
             this.verticalVelocity = 36;
             this.isJumping = true;
             this.jumpCount++;
+            //player wall glide
+           
         }
     }
 
@@ -76,10 +77,9 @@ class Player extends Entity {
 
 
     render() {
-
-        image(tempSprite,this.x, this.y,this.width,this.height )
+        image(tempSprite, this.x, this.y, this.width, this.height)
         strokeWeight(3)
-        stroke(0,255,0);
+        stroke(0, 255, 0);
         noFill();
         rect(this.x, this.y, this.width, this.height);
 
@@ -98,7 +98,6 @@ class Player extends Entity {
 
 
     updateCameraBox() {
-       
         this.cameraBox = {
             position: {
                 x: this.x - 325,
@@ -110,12 +109,11 @@ class Player extends Entity {
 
     }
 
-    updateCameraPosition(){
-       this.cameraYPos = this.y;
+    updateCameraPosition() {
+        this.cameraYPos = this.y;
     }
 
     handleCollsions(platforms) {
-
         Collision.handleCollisions(this, platforms);
 
         if (this.isGrounded) {

@@ -1,4 +1,8 @@
 
+let databaseManager;
+let sceneManager;
+let enityManager
+let itemManager
 // let entities = [];
 let items = [];
 let platforms = [];
@@ -78,6 +82,7 @@ function draw() {
     pop();
 }
 
+//this has to stay here
 function keyReleased() {
     if (keyCode === UP_ARROW || keyCode === 32) {
         player.jumpReleased();
@@ -108,13 +113,4 @@ function createPlatformsTilemap2D(tilemap2D) {
 
 }
 
-// let entities = [
-//     new Player(playerX, playerY, playerW, playerH),
-//     new Enemy(),
-//     new Enemy(),
-// ]
-// for (let index = 0; index < entities.length; index++) {
-//     const entity = entities[index];
-//     entity.update();
-// }
-// console.log('player.y:' + playerY);
+
