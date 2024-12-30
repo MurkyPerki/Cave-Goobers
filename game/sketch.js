@@ -1,19 +1,20 @@
 
 let databaseManager;
 let sceneManager;
-let enityManager
-let itemManager
-// let entities = [];
-let items = [];
-let platforms = [];
-let enemies = [];
+let entityManager;
+let objectManager;
+
+
+// let items = [];
+// let platforms = [];
+// let enemies = [];
 let collision;
-let player;
-let item;
+// let player;
+// let item;
 let baby;
 let img;
 let levelBG;
-let gameObjecten = [];
+
 
 let pixelFont;
 
@@ -26,6 +27,10 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+ 
+    //initialize managers
+    entityManager = new Entity();
+    entityManager.initializeEntities();
 
     levelBG = new Sprite({
         position: {
@@ -36,48 +41,52 @@ function setup() {
     })
 
     // class instances
-    player = new Player(400, 700, 100, 100);
+    // player = new Player(400, 700, 100, 100);
 
-    enemies.push(new Enemy(10, 200, 30, 30))
+    // enemies.push(new Enemy(10, 200, 30, 30))
 
-    enemies.push(new WindEnemy(200, 700, 30, 30));
+    // enemies.push(new WindEnemy(200, 700, 30, 30));
 
-    items.push(new Item(750, 500, 100, 80))
-    items.push(new Item(100, 350, 100, 80))
-    items.push(new Item(900, 200, 100, 80))
+    // items.push(new Item(750, 500, 100, 80))
+    // items.push(new Item(100, 350, 100, 80))
+    // items.push(new Item(900, 200, 100, 80))
 
-    createPlatformsTilemap2D(floorCollisions2)
+    // createPlatformsTilemap2D(floorCollisions2)
 }
 
 function draw() {
     background(255);
 
+    entityManager.update();
+    entityManager.render();
+
+
     //Camera
     let cameraY = windowHeight / 2 - player.cameraYPos;
 
     push();
-    translate(0, cameraY);
+   // translate(0, cameraY);
 
     levelBG.render();
 
-    // player
-    player.render();
-    player.update();
+    // // player
+    // player.render();
+    // player.update();
 
-    player.handleCollsions(platforms);
+    // player.handleCollsions(platforms);
 
-    for (let platform of platforms) {
-        platform.render();
-    }
+    // for (let platform of platforms) {
+    //     platform.render();
+    // }
 
-    for (let item of items) {
-        item.render();
-        item.update();
-    }
-    for (let enemy of enemies) {
-        enemy.render();
-        enemy.update(player);
-    }
+    // for (let item of items) {
+    //     item.render();
+    //     item.update();
+    // }
+    // for (let enemy of enemies) {
+    //     enemy.render();
+    //     enemy.update(player);
+    // }
 
     pop();
 }

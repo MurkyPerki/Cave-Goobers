@@ -1,6 +1,5 @@
-class Player extends Entity {
+class Player {
     constructor(x, y, width, height) {
-        super();
         this.x = x;
         this.y = y;
         this.width = width;
@@ -26,6 +25,20 @@ class Player extends Entity {
         }
     }
 
+    update() {
+        this.move();
+        this.applyGravity();
+        this.updateCameraBox();
+        this.updateCameraPosition();
+    }
+
+    render() {
+        image(tempSprite, this.x, this.y, this.width, this.height)
+        strokeWeight(3)
+        stroke(0, 255, 0);
+        noFill();
+        rect(this.x, this.y, this.width, this.height);
+    }
 
     move() {
         this.horizontalVelocity *= 0.5;
@@ -74,17 +87,6 @@ class Player extends Entity {
             this.verticalVelocity = this.verticalVelocity / 2;
         }
     }
-
-
-    render() {
-        image(tempSprite, this.x, this.y, this.width, this.height)
-        strokeWeight(3)
-        stroke(0, 255, 0);
-        noFill();
-        rect(this.x, this.y, this.width, this.height);
-
-    }
-
 
     renderCameraBox() {
         fill(0, 0, 255, 50);
