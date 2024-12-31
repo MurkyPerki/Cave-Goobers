@@ -5,6 +5,13 @@ class EntityManager {
         this.enemies = [];
         this.items = [];
         this.platforms = [];
+        this.levelBG = new Sprite({
+            position: {
+                x: 0,
+                y: 0,
+            },
+            imageSrc: 'assets/images/gameBG.png',
+        })
     }
 
     initializeEntities() {
@@ -22,8 +29,8 @@ class EntityManager {
     createPlatformsTilemap2D(tilemap2D) {
         let tileWidth = width / tilemap2D[0].length;
         let tileHeight = tileWidth;
-    
-       // this.platforms = [];
+
+        // this.platforms = [];
         for (let row = 0; row < tilemap2D.length; row++) {
             for (let col = 0; col < tilemap2D[row].length; col++) {
                 let tileValue = tilemap2D[row][col];
@@ -31,8 +38,8 @@ class EntityManager {
                     let x = col * tileWidth;
                     let y = row * tileHeight;
                     this.platforms.push(new Platform(x, y, tileWidth, tileHeight))
-    
-    
+
+
                 }
             }
         }
@@ -51,6 +58,7 @@ class EntityManager {
 
     render() {
         this.player.render();
+        this.levelBG.render();
         for (let enemy of this.enemies) {
             enemy.render();
         }

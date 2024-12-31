@@ -18,15 +18,6 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    //create bg object
-    levelBG = new Sprite({
-        position: {
-            x: 0,
-            y: 0,
-        },
-        imageSrc: 'assets/images/gameBG.png',
-    })
-
     //initialize managers
     entityManager = new EntityManager();
     entityManager.initializeEntities();
@@ -39,8 +30,6 @@ function draw() {
 
     push();
     translate(0, cameraY);
-    levelBG.render();
-   
     entityManager.player.handleCollsions(entityManager.platforms);
     // platforms are defined here in sketch but i want to render from entityManager >:(
     // for (let platform of entityManager.platforms) {
@@ -55,7 +44,6 @@ function draw() {
 function keyReleased() {
     if (keyCode === UP_ARROW || keyCode === 32) {
         entityManager.player.jumpReleased();
-
     }
 }
 
