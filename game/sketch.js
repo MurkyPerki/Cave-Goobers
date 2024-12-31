@@ -3,7 +3,7 @@ let databaseManager;
 let sceneManager;
 let entityManager;
 let player;
-let platforms;
+//let platforms;
 
 let baby;
 let levelBG;
@@ -30,8 +30,8 @@ function setup() {
     //initialize managers
     entityManager = new EntityManager();
     entityManager.initializeEntities();
-    player = entityManager.player;
-    platforms = entityManager.platforms;
+   // player = entityManager.player;
+   // platforms = entityManager.platforms;
 
     //createPlatformsTilemap2D(floorCollisions2)
 }
@@ -39,13 +39,13 @@ function setup() {
 function draw() {
     background(255);
     //camera
-    let cameraY = windowHeight / 2 - player.cameraYPos;
+    let cameraY = windowHeight / 2 - entityManager.player.cameraYPos;
 
     push();
     translate(0, cameraY);
     levelBG.render();
    
-    player.handleCollsions(platforms);
+    entityManager.player.handleCollsions(entityManager.platforms);
     // for (let platform of platforms) {
     //     platform.render();
     // }
@@ -57,7 +57,7 @@ function draw() {
 //this has to stay here
 function keyReleased() {
     if (keyCode === UP_ARROW || keyCode === 32) {
-        player.jumpReleased();
+        entityManager.player.jumpReleased();
 
     }
 }

@@ -56,8 +56,8 @@ class EntityManager {
         for (let item of this.items) {
             item.render();
         }
-        for (platform of this.platforms) {
-            platform.render();
-        }
+        // for (platform of this.platforms) {
+        //     platform.render();
+        // }
     }
 }
