@@ -2,7 +2,6 @@
 let databaseManager;
 let sceneManager;
 let entityManager;
-let objectManager;
 
 
 //let player = entityManager.player
@@ -29,10 +28,10 @@ function setup() {
     
     //initialize managers
     entityManager = new EntityManager();
-    objectManager = new ObjectManager();
+   
 
     entityManager.initializeEntities();
-    objectManager.initializeObjects();
+   
 
     levelBG = new Sprite({
         position: {
@@ -61,12 +60,13 @@ function draw() {
 
     entityManager.update();
     entityManager.render();
+   
 
     //Camera
-     let cameraY = windowHeight / 2 - player.cameraYPos;
+    // let cameraY = windowHeight / 2 - player.cameraYPos;
 
     push();
-     translate(0, cameraY);
+    // translate(0, cameraY);
 
     levelBG.render();
 
