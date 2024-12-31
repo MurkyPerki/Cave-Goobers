@@ -35,7 +35,7 @@ class Player {
     render() {
         image(tempSprite, this.x, this.y, this.width, this.height)
         strokeWeight(3)
-        stroke(0, 255, 0);
+        //stroke(0, 255, 0);
         noFill();
         rect(this.x, this.y, this.width, this.height);
     }
@@ -57,8 +57,7 @@ class Player {
             this.verticalVelocity = 36;
             this.isJumping = true;
             this.jumpCount++;
-            //player wall glide
-           
+            //player wall glide 
         }
     }
 
@@ -108,7 +107,6 @@ class Player {
             width: 700,
             height: 300,
         }
-
     }
 
     updateCameraPosition() {
@@ -123,7 +121,6 @@ class Player {
         } else {
             this.isFalling = true;
         }
-
     }
 
 

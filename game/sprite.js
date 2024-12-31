@@ -3,6 +3,7 @@ class Sprite{
     constructor({position, imageSrc}) {
      this.position = position;
      this.image = loadImage(imageSrc);
+     
     }
 
     render(){

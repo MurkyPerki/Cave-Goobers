@@ -39,28 +39,12 @@ class Item {
         } else {
             this.width = 0;
             this.height = 0;
-            let index = this.items.indexOf(this);
+            let index = this.items.indexOf(this); //changed items to this.items, so it reaches items[] in entitymanager
             if (index > -1) {
-                this.items.splice(index, 1);
+                this.items.splice(index, 1); //same here
             }
         }
     }
-    
-    // shrinkAndRemove(){
-    //     if (this.width > 0 && this.height > 0) {
-    //         this.width -= 1.5;
-    //         this.height -= 1;
-    //         this.x += 0.75;
-    //         this.y += 0.5; 
-    //     } else {
-    //         this.width = 0;
-    //         this.height = 0;
-    //         let index = items.indexOf(this);
-    //         if (index > -1) {
-    //             items.splice(index, 1);
-    //         }
-    //     }
-    // }
 
     animate(){
         this.aniOffset += this.aniSpeed;
@@ -82,11 +66,4 @@ class Item {
         // stroke(0, 255, 0)
         // rect(this.x, this.y, this.width, this.height)
     }
-
-
-
-
-
-
-
 }

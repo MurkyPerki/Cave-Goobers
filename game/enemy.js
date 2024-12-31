@@ -13,10 +13,6 @@ class Enemy {
     }
 
     update(player) {
-        // if(!player) {
-        //     console.warn("Enemy.update: Player is undefined")
-        //     return;
-        // }
         this.movement();
         this.handleCollision(player)
     }

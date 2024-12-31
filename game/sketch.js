@@ -5,15 +5,12 @@ let entityManager;
 
 let player;
 
-
 let baby;
-let img;
 let levelBG;
 let pixelFont;
 
 function preload() {
     pixelFont = loadFont('assets/fonts/pixelFont.ttf')
-    img = loadImage('assets/images/gameBG.png')
     tempSprite = loadImage('assets/images/goboo.png')
     baby = loadImage('assets/images/baby goober 3.png')
 }
@@ -53,13 +50,7 @@ function draw() {
     }
     entityManager.update();
     entityManager.render();
-
-   
-
     pop();
- 
-
-
 }
 
 //this has to stay here
