@@ -4,14 +4,38 @@ class EntityManager {
         this.player = new Player(400, 700, 100, 100);
         this.enemies = [];
         this.items = [];
+        this.platforms = [];
     }
 
     initializeEntities() {
+        //enemies
         this.enemies.push(new Enemy(10, 200, 30, 30));
         this.enemies.push(new WindEnemy(200, 700, 30, 30));
+        //items
         this.items.push(new Item(750, 500, 100, 80, this.items))
         this.items.push(new Item(100, 350, 100, 80, this.items))
         this.items.push(new Item(900, 200, 100, 80, this.items))
+        //platforms
+        this.createPlatformsTilemap2D(floorCollisions2);
+    }
+
+    createPlatformsTilemap2D(tilemap2D) {
+        let tileWidth = width / tilemap2D[0].length;
+        let tileHeight = tileWidth;
+    
+       // platforms = [];
+        for (let row = 0; row < tilemap2D.length; row++) {
+            for (let col = 0; col < tilemap2D[row].length; col++) {
+                let tileValue = tilemap2D[row][col];
+                if (tileValue === 2) {
+                    let x = col * tileWidth;
+                    let y = row * tileHeight;
+                    this.platforms.push(new Platform(x, y, tileWidth, tileHeight))
+    
+    
+                }
+            }
+        }
     }
 
     update() {
@@ -31,6 +55,9 @@ class EntityManager {
         }
         for (let item of this.items) {
             item.render();
+        }
+        for (platform of this.platforms) {
+            platform.render();
         }
     }
 }
