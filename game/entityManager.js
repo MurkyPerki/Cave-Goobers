@@ -57,8 +57,9 @@ class EntityManager {
     }
 
     render() {
-        this.player.render();
         this.levelBG.render();
+        this.player.render();
+
         for (let enemy of this.enemies) {
             enemy.render();
         }
@@ -70,5 +71,6 @@ class EntityManager {
         //     console.log(platform)
         //     platform.render();
         // }
+      
     }
 }
