@@ -42,6 +42,7 @@ function draw() {
     levelBG.render();
    
     entityManager.player.handleCollsions(entityManager.platforms);
+    // platforms are defined here in sketch but i want entityManager >:(
     // for (let platform of entityManager.platforms) {
     //     platform.render();
     // }
