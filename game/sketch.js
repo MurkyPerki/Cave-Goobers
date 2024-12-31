@@ -1,7 +1,7 @@
 
 // let entities = [];
 let items = [];
-let platforms = [];
+//let platforms = [];
 let enemies = [];
 let collision;
 let player;
