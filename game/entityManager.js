@@ -23,7 +23,7 @@ class EntityManager {
         let tileWidth = width / tilemap2D[0].length;
         let tileHeight = tileWidth;
     
-       // platforms = [];
+       // this.platforms = [];
         for (let row = 0; row < tilemap2D.length; row++) {
             for (let col = 0; col < tilemap2D[row].length; col++) {
                 let tileValue = tilemap2D[row][col];
@@ -36,6 +36,7 @@ class EntityManager {
                 }
             }
         }
+        //console.log(this.platforms) yes working
     }
 
     update() {
@@ -56,7 +57,9 @@ class EntityManager {
         for (let item of this.items) {
             item.render();
         }
+        //platform is undefined but why??????
         // for (platform of this.platforms) {
+        //     console.log(platform)
         //     platform.render();
         // }
     }

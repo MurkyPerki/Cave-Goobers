@@ -1,10 +1,10 @@
 
+//managers
 let databaseManager;
 let sceneManager;
 let entityManager;
-let player;
-//let platforms;
 
+//sprites/fonts
 let baby;
 let levelBG;
 let pixelFont;
@@ -30,10 +30,6 @@ function setup() {
     //initialize managers
     entityManager = new EntityManager();
     entityManager.initializeEntities();
-   // player = entityManager.player;
-   // platforms = entityManager.platforms;
-
-    //createPlatformsTilemap2D(floorCollisions2)
 }
 
 function draw() {
@@ -46,7 +42,7 @@ function draw() {
     levelBG.render();
    
     entityManager.player.handleCollsions(entityManager.platforms);
-    // for (let platform of platforms) {
+    // for (let platform of entityManager.platforms) {
     //     platform.render();
     // }
     entityManager.update();
