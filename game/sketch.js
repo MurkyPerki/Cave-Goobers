@@ -3,6 +3,7 @@ let databaseManager;
 let sceneManager;
 let entityManager;
 
+let player;
 
 //let player = entityManager.player
 // let items = [];
@@ -25,21 +26,22 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    
-    //initialize managers
-    entityManager = new EntityManager();
-   
 
-    entityManager.initializeEntities();
-   
-
+    //create bg object
     levelBG = new Sprite({
         position: {
             x: 0,
-            y: 0, 
+            y: 0,
         },
         imageSrc: 'assets/images/gameBG.png',
     })
+
+    //initialize managers
+    entityManager = new EntityManager();
+    entityManager.initializeEntities();
+    player = entityManager.player;
+
+
 
     // class instances
     // player = new Player(400, 700, 100, 100);
@@ -57,39 +59,23 @@ function setup() {
 
 function draw() {
     background(255);
-
-    entityManager.update();
-    entityManager.render();
-   
-
-    //Camera
-    // let cameraY = windowHeight / 2 - player.cameraYPos;
+    //camera
+    let cameraY = windowHeight / 2 - player.cameraYPos;
 
     push();
-    // translate(0, cameraY);
-
+    translate(0, cameraY);
     levelBG.render();
 
-    // // player
-    // player.render();
-    // player.update();
-
     // player.handleCollsions(platforms);
-
     // for (let platform of platforms) {
     //     platform.render();
     // }
-
-    // for (let item of items) {
-    //     item.render();
-    //     item.update();
-    // }
-    // for (let enemy of enemies) {
-    //     enemy.render();
-    //     enemy.update(player);
-    // }
-
     pop();
+    
+    entityManager.update();
+    entityManager.render();
+
+
 }
 
 //this has to stay here
