@@ -1,5 +1,5 @@
 
-class Entity {
+class EntityManager {
     constructor() {
         this.player = new Player(400, 700, 100, 100);
         this.entities = [];

@@ -5,6 +5,7 @@ let entityManager;
 let objectManager;
 
 
+//let player = entityManager.player
 // let items = [];
 // let platforms = [];
 // let enemies = [];
@@ -27,8 +28,11 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     
     //initialize managers
-    entityManager = new Entity();
+    entityManager = new EntityManager();
+    objectManager = new ObjectManager();
+
     entityManager.initializeEntities();
+    objectManager.initializeObjects();
 
     levelBG = new Sprite({
         position: {
@@ -59,10 +63,10 @@ function draw() {
     entityManager.render();
 
     //Camera
-    // let cameraY = windowHeight / 2 - player.cameraYPos;
+     let cameraY = windowHeight / 2 - player.cameraYPos;
 
     push();
-    // translate(0, cameraY);
+     translate(0, cameraY);
 
     levelBG.render();
 
