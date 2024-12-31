@@ -42,7 +42,7 @@ function draw() {
     levelBG.render();
    
     entityManager.player.handleCollsions(entityManager.platforms);
-    // platforms are defined here in sketch but i want entityManager >:(
+    // platforms are defined here in sketch but i want to render from entityManager >:(
     // for (let platform of entityManager.platforms) {
     //     platform.render();
     // }
@@ -59,24 +59,6 @@ function keyReleased() {
     }
 }
 
-// function createPlatformsTilemap2D(tilemap2D) {
-//     let tileWidth = width / tilemap2D[0].length;
-//     let tileHeight = tileWidth;
-
-//     platforms = [];
-//     for (let row = 0; row < tilemap2D.length; row++) {
-//         for (let col = 0; col < tilemap2D[row].length; col++) {
-//             let tileValue = tilemap2D[row][col];
-//             if (tileValue === 2) {
-//                 let x = col * tileWidth;
-//                 let y = row * tileHeight;
-//                 platforms.push(new Platform(x, y, tileWidth, tileHeight))
-
-
-//             }
-//         }
-//     }
-// }
 
 
 
