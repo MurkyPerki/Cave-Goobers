@@ -1,6 +1,6 @@
 
 class Item {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, items) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -9,7 +9,8 @@ class Item {
         this.aniOffset = 0;
         this.aniSpeed = 0.1;
         this.aniRange = 10;
-        this.isPickedUp = false
+        this.isPickedUp = false;
+        this.items = items;
 
     }
 
@@ -38,12 +39,28 @@ class Item {
         } else {
             this.width = 0;
             this.height = 0;
-            let index = items.indexOf(this);
+            let index = this.items.indexOf(this);
             if (index > -1) {
-                items.splice(index, 1);
+                this.items.splice(index, 1);
             }
         }
     }
+    
+    // shrinkAndRemove(){
+    //     if (this.width > 0 && this.height > 0) {
+    //         this.width -= 1.5;
+    //         this.height -= 1;
+    //         this.x += 0.75;
+    //         this.y += 0.5; 
+    //     } else {
+    //         this.width = 0;
+    //         this.height = 0;
+    //         let index = items.indexOf(this);
+    //         if (index > -1) {
+    //             items.splice(index, 1);
+    //         }
+    //     }
+    // }
 
     animate(){
         this.aniOffset += this.aniSpeed;

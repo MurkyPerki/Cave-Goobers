@@ -5,13 +5,7 @@ let entityManager;
 
 let player;
 
-//let player = entityManager.player
-// let items = [];
-// let platforms = [];
-// let enemies = [];
-let collision;
-// let player;
-// let item;
+
 let baby;
 let img;
 let levelBG;
@@ -41,19 +35,6 @@ function setup() {
     entityManager.initializeEntities();
     player = entityManager.player;
 
-
-
-    // class instances
-    // player = new Player(400, 700, 100, 100);
-
-    // enemies.push(new Enemy(10, 200, 30, 30))
-
-    // enemies.push(new WindEnemy(200, 700, 30, 30));
-
-    // items.push(new Item(750, 500, 100, 80))
-    // items.push(new Item(100, 350, 100, 80))
-    // items.push(new Item(900, 200, 100, 80))
-
     createPlatformsTilemap2D(floorCollisions2)
 }
 
@@ -66,13 +47,14 @@ function draw() {
     translate(0, cameraY);
     levelBG.render();
    
-    entityManager.update();
-    entityManager.render();
-
     player.handleCollsions(platforms);
     for (let platform of platforms) {
         platform.render();
     }
+    entityManager.update();
+    entityManager.render();
+
+   
 
     pop();
  
@@ -103,9 +85,7 @@ function createPlatformsTilemap2D(tilemap2D) {
 
 
             }
-
         }
-
     }
 }
 
