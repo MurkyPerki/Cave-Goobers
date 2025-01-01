@@ -52,11 +52,11 @@ class Enemy {
 
     handleCollision() {
 
-        if (Collision.entityCollision(this, player)) {
+        // if (Collision.entityCollision(this, player)) {
 
-            player.verticalVelocity = 0
+        //     player.verticalVelocity = 0
 
-        }
+        // }
 
 
 

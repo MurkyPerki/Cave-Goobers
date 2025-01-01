@@ -8,12 +8,13 @@ class Entity {
     update() {
         this.move();
         this.applyGravity();
+        this.handleCollisions(platforms, enemies);
         this.updateCameraBox();
         this.updateCameraPosition();
     }
 
     render() {
-        this.render();
+        // this.render();
         this.renderDebug();
         this.renderCameraBox();
     }

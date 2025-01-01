@@ -6,7 +6,7 @@ class Player extends Entity {
         this.width = width;
         this.height = height;
         this.horizontalVelocity = 0;
-        this.playerSpeed = 12;
+        this.playerSpeed = 3;
         this.verticalVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
         this.playerGravity = 2;
         this.isJumping = false;
@@ -29,6 +29,7 @@ class Player extends Entity {
 
     move() {
 
+        console.log('move called' + frameCount)
         this.horizontalVelocity *= 0.5;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
@@ -114,9 +115,10 @@ class Player extends Entity {
        this.cameraYPos = this.y;
     }
 
-    handleCollsions(platforms) {
+    handleCollisions(platforms, enemies) {
 
         Collision.handleCollisions(this, platforms);
+        Collision.handleCollisions(this, enemies);
 
         if (this.isGrounded) {
             // But the collision code might already be handling the snapping.

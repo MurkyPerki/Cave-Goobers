@@ -62,7 +62,7 @@ function draw() {
     player.render();
     player.update();
 
-    player.handleCollsions(platforms);
+    player.handleCollisions(platforms, enemies);
 
     for (let platform of platforms) {
         platform.render();
