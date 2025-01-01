@@ -5,6 +5,8 @@ class EntityManager {
         this.enemies = [];
         this.items = [];
         this.platforms = [];
+        const collidables = [];
+
         this.levelBG = new Sprite({
             position: {
                 x: 0,
@@ -24,6 +26,8 @@ class EntityManager {
         this.items.push(new Item(900, 200, 100, 80, this.items))
         //platforms
         this.createPlatformsTilemap2D(floorCollisions2);
+
+        this.collidables = [...this.platforms, ...this.enemies];
     }
 
     createPlatformsTilemap2D(tilemap2D) {

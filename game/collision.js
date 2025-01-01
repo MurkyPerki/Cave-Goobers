@@ -66,7 +66,7 @@ class Collision {
                         entity.x = platform.x + platform.width;
                     }
                     entity.horizontalVelocity = 0;
-                    break;
+                    // break;
                 }
             }
 
