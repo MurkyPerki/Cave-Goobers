@@ -1,8 +1,8 @@
 
 //managers
 let databaseManager;
-let sceneManager;
 let entityManager;
+let sceneManager; // if necessarry
 
 //sprites/fonts
 let baby;
@@ -31,12 +31,12 @@ function draw() {
     push();
     translate(0, cameraY);
     entityManager.player.handleCollsions(entityManager.platforms);
-    // platforms are defined here in sketch but i want to render from entityManager >:(
-    // for (let platform of entityManager.platforms) {
-    //     platform.render();
-    // }
     entityManager.update();
     entityManager.render();
+    // platforms are defined here in sketch but i want to render from entityManager >:(
+        for (let platform of entityManager.platforms) {
+            platform.render();
+        }
     pop();
 }
 
@@ -46,8 +46,3 @@ function keyReleased() {
         entityManager.player.jumpReleased();
     }
 }
-
-
-
-
-
