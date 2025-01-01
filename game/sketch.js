@@ -4,6 +4,7 @@ let items = [];
 let platforms = [];
 let enemies = [];
 let collision;
+let entity
 let player;
 let item;
 let baby;
@@ -57,8 +58,9 @@ function draw() {
     levelBG.render();
 
     // player
-    player.render();
-    player.update();
+    entity.update();
+    entity.render();
+    
 
     player.handleCollsions(platforms);
 
