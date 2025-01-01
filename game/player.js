@@ -1,13 +1,12 @@
-class Player extends Entity {
+class Player {
     constructor(x, y, width, height) {
-        super();
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.horizontalVelocity = 0;
         this.playerSpeed = 12;
-        this.verticalVelocity = 0; // is just vertical velocity atm. could rename to verticalVelocity
+        this.verticalVelocity = 0; 
         this.playerGravity = 2;
         this.isJumping = false;
         this.isFalling = false;
@@ -26,9 +25,22 @@ class Player extends Entity {
         }
     }
 
+    update() {
+        this.move();
+        this.applyGravity();
+        this.updateCameraBox();
+        this.updateCameraPosition();
+    }
+
+    render() {
+        image(tempSprite, this.x, this.y, this.width, this.height)
+        strokeWeight(3)
+        //stroke(0, 255, 0);
+        noFill();
+        rect(this.x, this.y, this.width, this.height);
+    }
 
     move() {
-
         this.horizontalVelocity *= 0.5;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
@@ -45,6 +57,7 @@ class Player extends Entity {
             this.verticalVelocity = 36;
             this.isJumping = true;
             this.jumpCount++;
+            //player wall glide 
         }
     }
 
@@ -74,18 +87,6 @@ class Player extends Entity {
         }
     }
 
-
-    render() {
-
-        image(tempSprite,this.x, this.y,this.width,this.height )
-        strokeWeight(3)
-        stroke(0,255,0);
-        noFill();
-        rect(this.x, this.y, this.width, this.height);
-
-    }
-
-
     renderCameraBox() {
         fill(0, 0, 255, 50);
         rect(
@@ -98,7 +99,6 @@ class Player extends Entity {
 
 
     updateCameraBox() {
-       
         this.cameraBox = {
             position: {
                 x: this.x - 325,
@@ -107,15 +107,13 @@ class Player extends Entity {
             width: 700,
             height: 300,
         }
-
     }
 
-    updateCameraPosition(){
-       this.cameraYPos = this.y;
+    updateCameraPosition() {
+        this.cameraYPos = this.y;
     }
 
     handleCollsions(platforms) {
-
         Collision.handleCollisions(this, platforms);
 
         if (this.isGrounded) {
@@ -123,7 +121,6 @@ class Player extends Entity {
         } else {
             this.isFalling = true;
         }
-
     }
 
 

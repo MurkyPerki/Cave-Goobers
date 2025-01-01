@@ -2,27 +2,25 @@ class WindEnemy extends Enemy {
 
     constructor(x, y, width, height) {
         super(x, y, width, height);
-    
+
         this.windRange = 500;
         this.windStrength = 10;
         this.windCooldown = 120;
         this.lastAttack = 0;
         this.windDuration = 60;
-        
+
 
 
 
     }
 
     update(player) {
-        super.update();
-
-       
+        super.update(player);
 
         if (frameCount - this.lastAttack > this.windCooldown) {
             if (this.isPlayerInRange(player)) {
-                this.applyWindImpulse(player); 
-                this.lastAttack = frameCount; 
+                this.applyWindImpulse(player);
+                this.lastAttack = frameCount;
             }
             // console.log(this.distance)
             // console.log(frameCount)
@@ -36,7 +34,7 @@ class WindEnemy extends Enemy {
 
 
     applyWindImpulse(player) {
-     
+
         let direction = createVector(player.x - this.x, player.y - this.y);
         direction.normalize();
 
@@ -44,8 +42,8 @@ class WindEnemy extends Enemy {
         let impulse = direction.mult(impulseMagnitude);
 
 
-        player.horizontalVelocity += impulse.x;  
-        player.verticalVelocity   -= impulse.y; 
+        player.horizontalVelocity += impulse.x;
+        player.verticalVelocity -= impulse.y;
     }
 
 
@@ -53,7 +51,7 @@ class WindEnemy extends Enemy {
 
         super.render();
         fill(0, 30, 255)
-        rect(this.x, this.y , this.width, this.height)
+        rect(this.x, this.y, this.width, this.height)
 
     }
 

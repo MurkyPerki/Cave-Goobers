@@ -1,7 +1,6 @@
 
-class Gamemode extends Entity {
+class Gamemode {
     constructor() {
-        // super();
         // this.mode = 0
     }
 
