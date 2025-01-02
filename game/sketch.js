@@ -4,6 +4,8 @@ let drawManager;
 let databaseManager;
 let entityManager;
 let sceneManager; // if necessarry
+let gameScreen;
+let start = false;
 
 //sprites/fonts
 let baby;
@@ -18,16 +20,29 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-
+ 
     //initialize managers
     drawManager = new DrawManager();
     entityManager = new EntityManager();
 
     entityManager.initializeEntities();
+    gameScreen = new Gamescreen();
 }
 
 function draw() {
+   
     drawManager.managesAll();
+     
+   if(!start){
+   gameScreen.startscreen();
+    }
+   
+}
+
+function keyPressed(){
+    if(key === " "){
+        start = true;
+    }
 }
 
 //this has to stay here
