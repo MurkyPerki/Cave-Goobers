@@ -61,9 +61,11 @@ class Collision {
                     if (vx > 0) {
                         // Collision moving right
                         entity.x = platform.x - entity.width;
+                        entity.collidedRight = true;
                     } else if (vx < 0) {
                         // Collision moving left
                         entity.x = platform.x + platform.width;
+                        entity.collidedLeft = true;
                     }
                     entity.horizontalVelocity = 0;
                     // break;
