@@ -76,6 +76,7 @@ class Collision {
                 }
             }
 
+            // move
             if (entity.horizontalVelocity !== 0) {
                 entity.x += vx;
             }
