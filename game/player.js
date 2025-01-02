@@ -6,7 +6,7 @@ class Player {
         this.height = height;
         this.horizontalVelocity = 0;
         this.playerSpeed = 12;
-        this.verticalVelocity = 0; 
+        this.verticalVelocity = 0;
         this.playerGravity = 2;
         this.isJumping = false;
         this.isFalling = false;
@@ -16,12 +16,21 @@ class Player {
         this.cameraYPos = this.y;
 
         this.cameraBox = {
-            position: {
+            pos: {
                 x: this.x,
                 y: this.y,
             },
             width: 800,
             height: 600,
+        }
+
+        this.wallCollDetectionBoxLeft = {
+            pos: {
+                x: this.x,
+                y: this.y
+            },
+            width: 100,
+            height: 50,
         }
     }
 
@@ -30,9 +39,16 @@ class Player {
         this.applyGravity();
         this.updateCameraBox();
         this.updateCameraPosition();
+        this.updateWallCollDectBox();
     }
 
     render() {
+        this.renderPlayer();
+        // this.renderCameraBox();
+        this.renderWallCollDectBox();
+    }
+
+    renderPlayer() {
         image(tempSprite, this.x, this.y, this.width, this.height)
         strokeWeight(3)
         //stroke(0, 255, 0);
@@ -59,6 +75,16 @@ class Player {
             this.jumpCount++;
             //player wall glide 
         }
+    }
+
+    wallbounce() {
+        /* 
+
+        1. collions between left wallCollDectBox 
+        2. collision check
+        if ()
+
+        */
     }
 
     //! maybe we should rename this method its confusing.
@@ -90,17 +116,27 @@ class Player {
     renderCameraBox() {
         fill(0, 0, 255, 50);
         rect(
-            this.cameraBox.position.x,
-            this.cameraBox.position.y,
+            this.cameraBox.pos.x,
+            this.cameraBox.pos.y,
             this.cameraBox.width,
             this.cameraBox.height
+        )
+    }
+
+    renderWallCollDectBox() {
+        fill(252, 3, 232);
+        rect(
+            this.wallCollDetectionBoxLeft.pos.x,
+            this.wallCollDetectionBoxLeft.pos.y,
+            this.wallCollDetectionBoxLeft.width,
+            this.wallCollDetectionBoxLeft.height
         )
     }
 
 
     updateCameraBox() {
         this.cameraBox = {
-            position: {
+            pos: {
                 x: this.x - 325,
                 y: this.y - 200,
             },
@@ -109,8 +145,26 @@ class Player {
         }
     }
 
+    updateWallCollDectBox() {
+        //left side (magenta colored)
+        this.wallCollDetectionBoxLeft = {
+            pos: {
+                x: this.x,
+                y: this.y + 30
+            },
+            width: -25,
+            height: 25,
+        } 
+
+        //right side
+    }
+
     updateCameraPosition() {
         this.cameraYPos = this.y;
+    }
+    handleWallCollisions(platforms){
+       Collision.handleCollisions(this.wallCollDetectionBoxLeft, platforms)
+       
     }
 
     handleCollsions(platforms) {
