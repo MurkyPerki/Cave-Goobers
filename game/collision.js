@@ -56,20 +56,27 @@ class Collision {
         }
     
         static horizontalCollision(entity, platforms, nextX, vx) {
+
+            entity.collidedLeft = false;
+            entity.collidedRight = false;
+
             for (const platform of platforms) {
                 if (Collision.isColliding(nextX, entity.y, entity.width, entity.height, platform)) {
                     if (vx > 0) {
                         // Collision moving right
                         entity.x = platform.x - entity.width;
+                        entity.collidedRight = true;
                     } else if (vx < 0) {
                         // Collision moving left
                         entity.x = platform.x + platform.width;
+                        entity.collidedLeft = true;
                     }
                     entity.horizontalVelocity = 0;
-                    break;
+                    // break;
                 }
             }
 
+            // move
             if (entity.horizontalVelocity !== 0) {
                 entity.x += vx;
             }
