@@ -5,7 +5,7 @@ class EntityManager {
         this.enemies = [];
         this.items = [];
         this.platforms = [];
-        const collidables = [];
+       
 
         this.levelBG = new Sprite({
             position: {
