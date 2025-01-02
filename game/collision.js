@@ -56,7 +56,7 @@ class Collision {
         }
     
         static horizontalCollision(entity, platforms, nextX, vx) {
-            
+
             entity.collidedLeft = false;
             entity.collidedRight = false;
 

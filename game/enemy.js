@@ -12,9 +12,9 @@ class Enemy {
         // this.moveSpeed = 4;
     }
 
-    update(player) {
+    update() {
         this.movement();
-        // this.handleCollision(player)
+       
     }
 
     render() {
@@ -32,10 +32,6 @@ class Enemy {
         }
     }
 
-    // handleCollision(player) {
-    //     if (Collision.entityCollision(this, player)) {
-    //         player.verticalVelocity = 0
-    //     }
-    // }
+ 
 }
 

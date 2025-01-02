@@ -49,6 +49,8 @@ class Player {
         if ((keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
             this.horizontalVelocity = -this.playerSpeed;
         }
+
+       
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping

@@ -34,8 +34,8 @@ class Item {
         if (this.width > 0 && this.height > 0) {
             this.width -= 1.5;
             this.height -= 1;
-            this.x += 0.75;
-            this.y += 0.5; 
+            this.x += 0.5;
+            this.y += 0.5;
         } else {
             this.width = 0;
             this.height = 0;
