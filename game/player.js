@@ -34,12 +34,13 @@ class Player {
         }
     }
 
-    update() {
+    update(platforms) {
         this.move();
         this.applyGravity();
         this.updateCameraBox();
         this.updateCameraPosition();
         this.updateWallCollDectBox();
+       // this.checkWallColl(platforms);
     }
 
     render() {
@@ -65,13 +66,11 @@ class Player {
         if ((keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
             this.horizontalVelocity = -this.playerSpeed;
         }
-
-       
         // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
             //jumpcount so the player can only jump once until released
-            && this.jumpCount < this.maxJump) {
+            && this.jumpCount < this.maxJump && this.isGrounded) {
             this.verticalVelocity = 36;
             this.isJumping = true;
             this.jumpCount++;
@@ -79,14 +78,17 @@ class Player {
         }
     }
 
-    wallbounce() {
-        /* 
+    wallJump() {
+        /*
+        if(this.Wallcoll etc. collidingLeft) // if coll is true
+        this.isJumping = true;
+         else if (false)
+         this.jumping = false
 
-        1. collions between left wallCollDectBox 
-        2. collision check
-        if ()
-
+        // return(this.jumping is false)
         */
+        console.log('wall jump!');
+        
     }
 
     //! maybe we should rename this method its confusing.
@@ -97,11 +99,13 @@ class Player {
         if (this.isJumping || this.isFalling) {
             this.verticalVelocity -= this.playerGravity;
             this.isFalling = true;
+            this.isGrounded = false;
         }
         else if (this.onPlatform) {
             this.verticalVelocity = 0;
             this.isJumping = false;
         }
+       
     }
 
 
@@ -128,8 +132,8 @@ class Player {
     renderWallCollDectBox() {
         fill(252, 3, 232);
         rect(
-            this.wallCollDetectionBoxLeft.pos.x,
-            this.wallCollDetectionBoxLeft.pos.y,
+            this.wallCollDetectionBoxLeft.x,
+            this.wallCollDetectionBoxLeft.y,
             this.wallCollDetectionBoxLeft.width,
             this.wallCollDetectionBoxLeft.height
         )
@@ -150,13 +154,12 @@ class Player {
     updateWallCollDectBox() {
         //left side (magenta colored)
         this.wallCollDetectionBoxLeft = {
-            pos: {
-                x: this.x,
-                y: this.y + 30
-            },
+            x: this.x,
+            y: this.y + 30,
             width: -25,
             height: 25,
-        } 
+            
+        }
 
         //right side
     }
@@ -164,9 +167,14 @@ class Player {
     updateCameraPosition() {
         this.cameraYPos = this.y;
     }
-    handleWallCollisions(platforms){
-       Collision.handleCollisions(this.wallCollDetectionBoxLeft, platforms)
-       
+
+    checkWallColl(platforms) {
+        Collision.handleCollisions(this.wallCollDetectionBoxLeft, platforms)
+
+        if (this.wallCollDetectionBoxLeft.collidedLeft) {
+            console.log('collision!')
+            this.wallJump();
+        }
     }
 
     handleCollsions(platforms) {
@@ -177,6 +185,8 @@ class Player {
         } else {
             this.isFalling = true;
         }
+
+
     }
 
 
