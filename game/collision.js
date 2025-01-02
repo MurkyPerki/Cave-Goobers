@@ -56,6 +56,10 @@ class Collision {
         }
     
         static horizontalCollision(entity, platforms, nextX, vx) {
+            
+            entity.collidedLeft = false;
+            entity.collidedRight = false;
+
             for (const platform of platforms) {
                 if (Collision.isColliding(nextX, entity.y, entity.width, entity.height, platform)) {
                     if (vx > 0) {
