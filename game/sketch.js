@@ -6,6 +6,7 @@ let entityManager;
 let sceneManager; // if necessarry
 let gameScreen;
 let start = false;
+let startScreen;
 
 //sprites/fonts
 let baby;
@@ -16,6 +17,7 @@ function preload() {
     pixelFont = loadFont('assets/fonts/pixelFont.ttf')
     tempSprite = loadImage('assets/images/goboo.png')
     baby = loadImage('assets/images/baby goober 3.png')
+    startScreen = loadImage('assets/images/startscreenBackground.jpg')
 }
 
 function setup() {
