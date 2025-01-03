@@ -40,7 +40,7 @@ class Player {
         this.updateCameraBox();
         this.updateCameraPosition();
         this.updateWallCollDectBox();
-       // this.checkWallColl(platforms);
+        this.checkWallColl(platforms);
     }
 
     render() {
