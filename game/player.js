@@ -25,12 +25,11 @@ class Player {
         }
 
         this.wallCollDetectionBoxLeft = {
-            pos: {
-                x: this.x,
-                y: this.y
-            },
-            width: 100,
-            height: 50,
+            x: this.x,
+            y: this.y + 30,
+            width: -25,
+            height: 25,
+
         }
     }
 
@@ -88,7 +87,7 @@ class Player {
         // return(this.jumping is false)
         */
         console.log('wall jump!');
-        
+
     }
 
     //! maybe we should rename this method its confusing.
@@ -105,7 +104,7 @@ class Player {
             this.verticalVelocity = 0;
             this.isJumping = false;
         }
-       
+
     }
 
 
@@ -158,7 +157,7 @@ class Player {
             y: this.y + 30,
             width: -25,
             height: 25,
-            
+
         }
 
         //right side
@@ -169,11 +168,25 @@ class Player {
     }
 
     checkWallColl(platforms) {
-        Collision.handleCollisions(this.wallCollDetectionBoxLeft, platforms)
+        Collision.isColliding(
+            this.wallCollDetectionBoxLeft.x,
+            this.wallCollDetectionBoxLeft.y,
+            this.wallCollDetectionBoxLeft.width,
+            this.wallCollDetectionBoxLeft.height,
+            platforms
+        )
 
-        if (this.wallCollDetectionBoxLeft.collidedLeft) {
+        if (Collision.isColliding(
+            this.wallCollDetectionBoxLeft.x,
+            this.wallCollDetectionBoxLeft.y,
+            this.wallCollDetectionBoxLeft.width,
+            this.wallCollDetectionBoxLeft.height,
+            platforms
+        )) {
             console.log('collision!')
             this.wallJump();
+        } else {
+            console.log('colleeeel')
         }
     }
 

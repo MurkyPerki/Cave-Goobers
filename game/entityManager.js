@@ -51,7 +51,7 @@ class EntityManager {
     }
 
     update() {
-        this.player.update();
+        this.player.update(this.platforms);
         for (let enemy of this.enemies) {
             enemy.update(this.player);
         }
