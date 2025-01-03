@@ -25,9 +25,9 @@ class Player {
         }
 
         this.wallCollDetectionBoxLeft = {
-            x: this.x,
+            x: this.x - 25,
             y: this.y + 30,
-            width: -25,
+            width: 25,
             height: 25,
 
         }
@@ -153,9 +153,9 @@ class Player {
     updateWallCollDectBox() {
         //left side (magenta colored)
         this.wallCollDetectionBoxLeft = {
-            x: this.x,
+            x: this.x - 25,
             y: this.y + 30,
-            width: -25,
+            width: 25,
             height: 25,
 
         }
@@ -168,26 +168,31 @@ class Player {
     }
 
     checkWallColl(platforms) {
-        Collision.isColliding(
-            this.wallCollDetectionBoxLeft.x,
-            this.wallCollDetectionBoxLeft.y,
-            this.wallCollDetectionBoxLeft.width,
-            this.wallCollDetectionBoxLeft.height,
-            platforms
-        )
+        let collided = false;
 
-        if (Collision.isColliding(
-            this.wallCollDetectionBoxLeft.x,
-            this.wallCollDetectionBoxLeft.y,
-            this.wallCollDetectionBoxLeft.width,
-            this.wallCollDetectionBoxLeft.height,
-            platforms
-        )) {
-            console.log('collision!')
-            this.wallJump();
-        } else {
-            console.log('colleeeel')
+        for (let platform of platforms) {
+            if (Collision.isColliding(
+                this.wallCollDetectionBoxLeft.x,
+                this.wallCollDetectionBoxLeft.y,
+                this.wallCollDetectionBoxLeft.width,
+                this.wallCollDetectionBoxLeft.height,
+                platform
+            )) {
+                console.log("collision!");
+                collided = true;
+                break;
+            }
+            if (collided) {
+               // this.wallJump();
+               this.isJumping = true;
+            }
+
+            if (!collided) {
+                // console.log('no collision!')
+                this.isJumping = false;
+            }
         }
+
     }
 
     handleCollsions(platforms) {
