@@ -72,6 +72,7 @@ class Player {
             && this.jumpCount < this.maxJump && this.isGrounded) {
             this.verticalVelocity = 36;
             this.isJumping = true;
+            this.isGrounded = false;
             this.jumpCount++;
             //player wall glide 
         }
@@ -103,6 +104,7 @@ class Player {
         else if (this.onPlatform) {
             this.verticalVelocity = 0;
             this.isJumping = false;
+            this.isGrounded = true;
         }
 
     }
@@ -168,8 +170,9 @@ class Player {
     }
 
     checkWallColl(platforms) {
-        let collided = false;
+        this.collided = false;
 
+        // checks collision for every platform in platforms array
         for (let platform of platforms) {
             if (Collision.isColliding(
                 this.wallCollDetectionBoxLeft.x,
@@ -178,19 +181,19 @@ class Player {
                 this.wallCollDetectionBoxLeft.height,
                 platform
             )) {
-                console.log("collision!");
-                collided = true;
+                this.collided = true;
                 break;
             }
-            if (collided) {
-               // this.wallJump();
-               this.isJumping = true;
-            }
-
-            if (!collided) {
-                // console.log('no collision!')
+        }
+        if (this.collided && this.isJumping) { //some reason collided by itself isn't recognized as collided = true
+            // this.wallJump();
+            
+            this.verticalVelocity = 26;
+            if(this.isFalling) {
                 this.isJumping = false;
             }
+            
+            console.log("collision!");
         }
 
     }
