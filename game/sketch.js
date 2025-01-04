@@ -35,9 +35,7 @@ function draw() {
    
     drawManager.managesAll();
      
-   if(!start){
-   gameScreen.startscreen();
-    }
+  
    
 }
 
