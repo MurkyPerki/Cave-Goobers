@@ -29,7 +29,7 @@ class Player extends Entity {
 
     move() {
 
-        console.log('move called' + frameCount)
+        // console.log('move called' + frameCount)
         this.horizontalVelocity *= 0.5;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {

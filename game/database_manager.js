@@ -5,7 +5,7 @@ class Databasemanager {
         this.createNewSession("test")
     }
 
-    async setupDatabase(){
+    async setupDatabase() {
         HICCloud.API.configure({
             url: "https://api.hbo-ict.cloud",
             apiKey: "pb2gdd2425_niipiimaayaa24.3B3N75HE2BI77K6Y",
@@ -15,8 +15,24 @@ class Databasemanager {
 
     async createNewSession(playerName) {
         try {
-            const query1 = "INSERT INTO leaderboard (score, lastUpdated) VALUES(?, ?)";
-            const response = await HICCloud.API.queryDatabase(query1, [playerName]);
+        
+            const createPlayerQuery = `
+              INSERT INTO player (name) 
+              VALUES (?)
+            `;
+            const playerResponse = await HICCloud.API.queryDatabase(createPlayerQuery, [playerName]);
+
+
+           
+            const playerId = playerResponse.insertId;
+
+           
+            const score = 0;            
+            const now = new Date();     
+
+
+            const query1 = "INSERT INTO leaderboard (player_id, score, lastUpdated) VALUES(?, ?, ?)";
+            const response = await HICCloud.API.queryDatabase(query1, [playerId, score, now]);
 
             console.log("Leaderboard created succesfully", response);
         } catch (error) {
