@@ -29,7 +29,13 @@ class Player {
             y: this.y + 30,
             width: 25,
             height: 25,
+        }
 
+        this.wallCollDetectionBoxRight = {
+            x: this.x + 25,
+            y: this.y + 30,
+            width: 25,
+            height: 25,
         }
     }
 
@@ -78,19 +84,6 @@ class Player {
         }
     }
 
-    wallJump() {
-        /*
-        if(this.Wallcoll etc. collidingLeft) // if coll is true
-        this.isJumping = true;
-         else if (false)
-         this.jumping = false
-
-        // return(this.jumping is false)
-        */
-        console.log('wall jump!');
-
-    }
-
     //! maybe we should rename this method its confusing.
     applyGravity() {
         // update player y pos
@@ -106,9 +99,7 @@ class Player {
             this.isJumping = false;
             this.isGrounded = true;
         }
-
     }
-
 
     jumpReleased() {
         //reset jump count (when key released)
@@ -120,6 +111,17 @@ class Player {
         }
     }
 
+    updateCameraBox() {
+        this.cameraBox = {
+            pos: {
+                x: this.x - 325,
+                y: this.y - 200,
+            },
+            width: 700,
+            height: 300,
+        }
+    }
+    
     renderCameraBox() {
         fill(0, 0, 255, 50);
         rect(
@@ -130,26 +132,8 @@ class Player {
         )
     }
 
-    renderWallCollDectBox() {
-        fill(252, 3, 232);
-        rect(
-            this.wallCollDetectionBoxLeft.x,
-            this.wallCollDetectionBoxLeft.y,
-            this.wallCollDetectionBoxLeft.width,
-            this.wallCollDetectionBoxLeft.height
-        )
-    }
-
-
-    updateCameraBox() {
-        this.cameraBox = {
-            pos: {
-                x: this.x - 325,
-                y: this.y - 200,
-            },
-            width: 700,
-            height: 300,
-        }
+    updateCameraPosition() {
+        this.cameraYPos = this.y;
     }
 
     updateWallCollDectBox() {
@@ -162,14 +146,34 @@ class Player {
 
         }
 
-        //right side
+        //right side (yellow colored)
+        this.wallCollDetectionBoxRight = {
+            x: this.x + 100,
+            y: this.y + 30,
+            width: 25,
+            height: 25,
+
+        }
     }
 
-    updateCameraPosition() {
-        this.cameraYPos = this.y;
+    renderWallCollDectBox() {
+        fill(252, 3, 232);
+        rect(
+            this.wallCollDetectionBoxLeft.x,
+            this.wallCollDetectionBoxLeft.y,
+            this.wallCollDetectionBoxLeft.width,
+            this.wallCollDetectionBoxLeft.height
+        )
+        fill (252, 186, 3)
+        rect(
+            this.wallCollDetectionBoxRight.x,
+            this.wallCollDetectionBoxRight.y,
+            this.wallCollDetectionBoxRight.width,
+            this.wallCollDetectionBoxRight.height
+        )
     }
 
-    checkWallColl(platforms) {
+    checkWallColl(platforms) { //rename to walljump or sm
         this.collided = false;
 
         // checks collision for every platform in platforms array
@@ -185,15 +189,31 @@ class Player {
                 break;
             }
         }
-        if (this.collided && this.isJumping) { //some reason collided by itself isn't recognized as collided = true
-            // this.wallJump();
-            
+        if (this.collided && this.isJumping) {
             this.verticalVelocity = 26;
-            if(this.isFalling) {
+            if (this.isFalling) {
                 this.isJumping = false;
             }
-            
-            console.log("collision!");
+        }
+
+        // right side player
+        for (let platform of platforms) {
+            if (Collision.isColliding(
+                this.wallCollDetectionBoxRight.x,
+                this.wallCollDetectionBoxRight.y,
+                this.wallCollDetectionBoxRight.width,
+                this.wallCollDetectionBoxRight.height,
+                platform
+            )) {
+                this.collided = true;
+                break;
+            }
+        }
+        if (this.collided && this.isJumping) {
+            this.verticalVelocity = 26;
+            if (this.isFalling) {
+                this.isJumping = false;
+            }
         }
 
     }
