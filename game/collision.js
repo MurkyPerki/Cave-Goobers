@@ -32,17 +32,24 @@ class Collision {
     
     
         static verticalCollision(entity, platforms, nextY, vy) {
+
+            const colX = entity.x + entity.collisionBox.offsetX;
+            const colY = nextY + entity.collisionBox.offsetY; 
+            const colWidth = entity.collisionBox.width;
+            const colHeight = entity.collisionBox.height;
+
+
             for (const platform of platforms) {
-                if (Collision.isColliding(entity.x, nextY, entity.width, entity.height, platform)) {
+                if (Collision.isColliding(colX, colY, colWidth, colHeight, platform)) {
                     if (vy >= 0) {
                         // Collision from above (falling down onto platform)
-                        entity.y = platform.y - entity.height;
+                        entity.y = platform.y - entity.collisionBox.height - entity.collisionBox.offsetY;
                         entity.isGrounded = true;
                         entity.isJumping = false;
                         entity.verticalVelocity = 0;
                     } else {
                         // Collision from below (jumping up into platform)
-                        entity.y = platform.y + platform.height;
+                        entity.y = platform.y + platform.height - entity.collisionBox.offsetY;
                         entity.verticalVelocity = 0;
                     }
                  
@@ -56,19 +63,24 @@ class Collision {
         }
     
         static horizontalCollision(entity, platforms, nextX, vx) {
-
             entity.collidedLeft = false;
             entity.collidedRight = false;
+            
+            const colX = nextX + entity.collisionBox.offsetX;
+            const colY = entity.y + entity.collisionBox.offsetY;
+            const colWidth = entity.collisionBox.width;
+            const colHeight = entity.collisionBox.height;
+
 
             for (const platform of platforms) {
-                if (Collision.isColliding(nextX, entity.y, entity.width, entity.height, platform)) {
+                if (Collision.isColliding(colX, colY, colWidth, colHeight, platform)) {
                     if (vx > 0) {
                         // Collision moving right
-                        entity.x = platform.x - entity.width;
+                        entity.x = platform.x - entity.collisionBox.width - entity.collisionBox.offsetX;
                         entity.collidedRight = true;
                     } else if (vx < 0) {
                         // Collision moving left
-                        entity.x = platform.x + platform.width;
+                        entity.x = platform.x + platform.width - entity.collisionBox.offsetX;
                         entity.collidedLeft = true;
                     }
                     entity.horizontalVelocity = 0;
