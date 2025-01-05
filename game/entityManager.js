@@ -18,8 +18,8 @@ class EntityManager {
 
     initializeEntities() {
         //enemies
-        this.enemies.push(new Enemy(10, 200, 30, 30));
-        this.enemies.push(new WindEnemy(200, 700, 30, 30));
+        this.enemies.push(new Enemy(10, 500, 30, 30));
+        this.enemies.push(new WindEnemy(200, 2000, 30, 30));
         //items
         this.items.push(new Item(750, 500, 100, 80, this.items))
         this.items.push(new Item(100, 350, 100, 80, this.items))
@@ -58,6 +58,8 @@ class EntityManager {
         for (let item of this.items) {
             item.update(this.player);
         }
+
+        this.player.handleCollsions(entityManager.collidables);
     }
 
     render() {

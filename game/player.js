@@ -4,10 +4,12 @@ class Player {
         this.y = y;
         this.width = width;
         this.height = height;
+
         this.horizontalVelocity = 0;
         this.playerSpeed = 12;
         this.verticalVelocity = 0; 
         this.playerGravity = 2;
+
         this.isJumping = false;
         this.isFalling = false;
         this.onPlatform = false;
@@ -23,6 +25,15 @@ class Player {
             width: 800,
             height: 600,
         }
+
+        this.collisionBox = {
+            offsetX: 15,       
+            offsetY: 10,        
+            width:  width - 35,  
+            height: height - 16  
+        };
+
+
     }
 
     update() {
@@ -38,6 +49,16 @@ class Player {
         //stroke(0, 255, 0);
         noFill();
         rect(this.x, this.y, this.width, this.height);
+
+
+        stroke(0, 255, 0);
+        const cBox = this.collisionBox;
+        rect(
+          this.x + cBox.offsetX,
+          this.y + cBox.offsetY,
+          cBox.width,
+          cBox.height
+        );
     }
 
     move() {
