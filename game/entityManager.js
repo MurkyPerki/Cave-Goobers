@@ -19,7 +19,7 @@ class EntityManager {
     initializeEntities() {
         //enemies
         this.enemies.push(new Enemy(10, 500, 30, 30));
-        this.enemies.push(new WindEnemy(200, 2000, 30, 30));
+        this.enemies.push(new WindEnemy(200, 600, 30, 30));
         //items
         this.items.push(new Item(750, 500, 100, 80, this.items))
         this.items.push(new Item(100, 350, 100, 80, this.items))
