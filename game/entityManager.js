@@ -5,6 +5,7 @@ class EntityManager {
         this.enemies = [];
         this.items = [];
         this.platforms = [];
+        this.projectiles = []
        
 
         this.levelBG = new Sprite({
@@ -52,11 +53,26 @@ class EntityManager {
 
     update() {
         this.player.update();
+
         for (let enemy of this.enemies) {
             enemy.update(this.player);
         }
+
         for (let item of this.items) {
             item.update(this.player);
+        }
+
+        for(let i = this.projectiles.length - 1; i >= 0; i--) {
+            let projectile = this.projectiles[i];
+            projectile.update();
+
+            this.handleProjectileCollisions(projectile, i)
+
+
+            if(projectile.isDead()){
+                this.projectiles.splice(i,1);
+
+            }
         }
 
         this.player.handleCollsions(entityManager.collidables);
@@ -64,14 +80,24 @@ class EntityManager {
 
     render() {
         this.levelBG.render();
+
         this.player.render();
+
 
         for (let enemy of this.enemies) {
             enemy.render();
         }
+
         for (let item of this.items) {
             item.render();
         }
+
+        for (let projectile of this.projectiles) {
+            projectile.render();
+        }
+
+
+
         //platform is undefined but why??????
         // for (platform of this.platforms) {
         //     console.log(platform)
