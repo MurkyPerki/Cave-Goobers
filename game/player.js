@@ -117,6 +117,9 @@ class Player {
             this.isJumping = false;
             this.isGrounded = true;
         }
+        // if (this.isFalling) {
+        //         this.isJumping = false;
+        //     }
     }
 
     jumpReleased() {
@@ -206,12 +209,6 @@ class Player {
                 break;
             }
         }
-        if (this.collided && this.isJumping) {
-            this.verticalVelocity = 26;
-            if (this.isFalling) {
-                this.isJumping = false;
-            }
-        }
 
         // right side player
         for (let platform of platforms) {
@@ -226,13 +223,7 @@ class Player {
                 break;
             }
         }
-        if (this.collided && this.isJumping) {
-            this.verticalVelocity = 26;
-            if (this.isFalling) {
-                this.isJumping = false;
-            }
-        }
-
+    
     }
 
     handleCollsions(platforms) {
