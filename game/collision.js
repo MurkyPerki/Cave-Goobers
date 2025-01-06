@@ -151,8 +151,16 @@ class Collision {
                     enemy.update(player);
                     Collision.handleCollisions(enemy, platforms);
 
-                }
+                
 
+
+                if (Collision.entityCollision(enemy, player)) {
+
+                    const pushForce = 2;
+                    player.horizontalVelocity += enemy.vx * pushForce;
+                    player.verticalVelocity += enemy.vy * pushForce;
+                }
+              }
             }
 
 
@@ -198,8 +206,9 @@ class Collision {
                         break;
                       }
                     }
-                    if (collidedWithPlatform) continue;
-              
+                    if (collidedWithPlatform) {
+                         continue;
+                    }
                   
                     if (projectile.isDead()) {
                       projectiles.splice(i, 1);

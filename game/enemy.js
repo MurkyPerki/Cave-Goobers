@@ -2,7 +2,7 @@
 class Enemy {
     constructor(x, y, width, height) {
         // this.position = createVector(x, y);
-        // this.veloctity = createVector(0, 0);
+        // this.velocity = createVector(0, 0);
         this.x = x
         this.y = y
         this.width = width;

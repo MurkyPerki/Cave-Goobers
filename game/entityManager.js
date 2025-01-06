@@ -14,7 +14,7 @@ class EntityManager {
                 y: 0,
             },
             imageSrc: 'assets/images/gameBG.png',
-        })
+        });
     }
 
     initializeEntities() {
