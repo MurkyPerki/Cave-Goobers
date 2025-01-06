@@ -66,14 +66,14 @@ class EntityManager {
             let projectile = this.projectiles[i];
             projectile.update();
 
-            
+                // backwards indexing 
                 if (Collision.isColliding(
                     projectile.x,
                     projectile.y,
                     projectile.width,
                     projectile.height,
                     this.player)) {
-
+                    
 
                     if (projectile instanceof WindProjectile) {
                         projectile.applyWindPush(this.player);
@@ -84,6 +84,26 @@ class EntityManager {
                     continue;
                 }
             
+                let collidedWithPlatform = false;
+                for (let platform of this.platforms) {
+                  if (Collision.isColliding(
+                        projectile.x, 
+                        projectile.y,
+                        projectile.width,
+                        projectile.height, 
+                        platform
+                      )) {
+
+                    // Remove the projectile so it doesn’t pass through the wall
+                    this.projectiles.splice(i, 1);
+                    collidedWithPlatform = true;
+                    break; // stop checking more platforms
+                  }
+                }
+
+                if (projectile.isDead()) {
+                    this.projectiles.splice(i, 1);
+                  }
 
         }
 

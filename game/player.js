@@ -6,7 +6,7 @@ class Player {
         this.height = height;
 
         this.horizontalVelocity = 0;
-        this.playerSpeed = 12;
+        this.playerSpeed = 2;
         this.verticalVelocity = 0; 
         this.playerGravity = 2;
 
@@ -62,13 +62,13 @@ class Player {
     }
 
     move() {
-        this.horizontalVelocity *= 0.5;
+        this.horizontalVelocity *= 0.8;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
-            this.horizontalVelocity = this.playerSpeed;
+            this.horizontalVelocity += this.playerSpeed;
         }
         if ((keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
-            this.horizontalVelocity = -this.playerSpeed;
+            this.horizontalVelocity -= this.playerSpeed;
         }
 
        
