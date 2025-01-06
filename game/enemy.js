@@ -10,6 +10,14 @@ class Enemy {
         this.vx = 2;
         this.vy = 0;
         // this.moveSpeed = 4;
+
+
+        this.collisionBox = {
+            offsetX: 0, 
+            offsetY: 0, 
+            width: this.width,
+            height: this.height
+        };
     }
 
     update() {
@@ -28,7 +36,7 @@ class Enemy {
         this.y += this.vy
 
         if (this.x + this.width > windowWidth || this.x < 0) {
-            this.veloctityX *= -1;
+            this.vx *= -1;
         }
     }
 
