@@ -40,7 +40,8 @@ class Player {
     }
 
     update(platforms) {
-        this.move();
+        this.walk();
+        this.jump();
         this.applyGravity();
         this.updateCameraBox();
         this.updateCameraPosition();
@@ -62,7 +63,8 @@ class Player {
         rect(this.x, this.y, this.width, this.height);
     }
 
-    move() {
+
+    walk() {
         this.horizontalVelocity *= 0.5;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
@@ -71,16 +73,32 @@ class Player {
         if ((keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
             this.horizontalVelocity = -this.playerSpeed;
         }
-        // player jump
+
+    }
+
+    jump() {
+        // regular jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
             //jumpcount so the player can only jump once until released
-            && this.jumpCount < this.maxJump && this.isGrounded) {
+            && this.jumpCount < this.maxJump
+            && this.isGrounded) {
             this.verticalVelocity = 36;
             this.isJumping = true;
             this.isGrounded = false;
             this.jumpCount++;
-            //player wall glide 
+        }
+
+        // wall jump
+        if ((keyIsDown(UP_ARROW) || keyIsDown(32))
+            && !this.isJumping
+            && this.jumpCount < this.maxJump
+            && this.collided) {
+            console.log('yayayay')
+            this.verticalVelocity = 36;
+            this.isJumping = true;
+            this.jumpCount++
+
         }
     }
 
@@ -104,7 +122,6 @@ class Player {
     jumpReleased() {
         //reset jump count (when key released)
         this.jumpCount = 0;
-
         //if key released velocity halves so that player can hold jump
         if (this.isJumping) {
             this.verticalVelocity = this.verticalVelocity / 2;
@@ -121,7 +138,7 @@ class Player {
             height: 300,
         }
     }
-    
+
     renderCameraBox() {
         fill(0, 0, 255, 50);
         rect(
@@ -164,7 +181,7 @@ class Player {
             this.wallCollDetectionBoxLeft.width,
             this.wallCollDetectionBoxLeft.height
         )
-        fill (252, 186, 3)
+        fill(252, 186, 3)
         rect(
             this.wallCollDetectionBoxRight.x,
             this.wallCollDetectionBoxRight.y,
