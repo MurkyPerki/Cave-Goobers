@@ -6,7 +6,7 @@ class EntityManager {
         this.items = [];
         this.platforms = [];
         this.projectiles = []
-       
+
 
         this.levelBG = new Sprite({
             position: {
@@ -62,15 +62,31 @@ class EntityManager {
             item.update(this.player);
         }
 
-        for(let i = this.projectiles.length - 1; i >= 0; i--) {
+        for (let i = this.projectiles.length - 1; i >= 0; i--) {
             let projectile = this.projectiles[i];
             projectile.update();
 
-            this.handleProjectileCollisions(projectile, i)
+            for (let platform of this.platforms) {
+                if (Collision.isColliding(
+                    projectile.x,
+                    projectile.y,
+                    projectile.width,
+                    projectile.height,
+                    this.player)) {
 
 
-            if(projectile.isDead()){
-                this.projectiles.splice(i,1);
+                    if (projectile instanceof WindProjectile) {
+                        projectile.applyWindPush(this.player);
+                    }
+
+                    // Maybe destroy projectile or have it bounce 
+                    this.projectiles.splice(i, 1);
+                    continue;
+                }
+            }
+
+            if (projectile.isDead()) {
+                this.projectiles.splice(i, 1);
 
             }
         }
@@ -103,6 +119,6 @@ class EntityManager {
         //     console.log(platform)
         //     platform.render();
         // }
-      
+
     }
 }
