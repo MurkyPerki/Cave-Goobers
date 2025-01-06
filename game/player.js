@@ -126,7 +126,7 @@ class Player {
         //reset jump count (when key released)
         this.jumpCount = 0;
         //if key released velocity halves so that player can hold jump
-        if (this.isJumping || this.isFalling) {
+        if (this.isFalling) {
             this.verticalVelocity = this.verticalVelocity / 2;
         }
     }
