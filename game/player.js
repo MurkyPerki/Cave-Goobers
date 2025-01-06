@@ -30,7 +30,7 @@ class Player {
             offsetX: 15,       
             offsetY: 10,        
             width:  width - 35,  
-            height: height - 16  
+            height: height - 17  
         };
 
 
@@ -136,7 +136,7 @@ class Player {
         this.cameraYPos = this.y;
     }
 
-    handleCollsions(platforms) {
+    handleCollisions(platforms) {
         Collision.handleCollisions(this, platforms);
 
         if (this.isGrounded) {

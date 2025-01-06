@@ -52,63 +52,20 @@ class EntityManager {
     }
 
     update() {
-        this.player.update();
+        PhysicsSystem.updatePlayer(this.player, this.collidables);
 
-        for (let enemy of this.enemies) {
-            enemy.update(this.player);
-        }
+        PhysicsSystem.updateEnemies(this.enemies, this.platforms, this.player);
+
 
         for (let item of this.items) {
             item.update(this.player);
         }
 
-        for (let i = this.projectiles.length - 1; i >= 0; i--) {
-            let projectile = this.projectiles[i];
-            projectile.update();
+        PhysicsSystem.updateProjectiles(this.projectiles, this.player, this.platforms);
+  }
 
-                // backwards indexing 
-                if (Collision.isColliding(
-                    projectile.x,
-                    projectile.y,
-                    projectile.width,
-                    projectile.height,
-                    this.player)) {
-                    
-
-                    if (projectile instanceof WindProjectile) {
-                        projectile.applyWindPush(this.player);
-                    }
-
-                    // Maybe destroy projectile or have it bounce 
-                    this.projectiles.splice(i, 1);
-                    continue;
-                }
-            
-                let collidedWithPlatform = false;
-                for (let platform of this.platforms) {
-                  if (Collision.isColliding(
-                        projectile.x, 
-                        projectile.y,
-                        projectile.width,
-                        projectile.height, 
-                        platform
-                      )) {
-
-                    // Remove the projectile so it doesn’t pass through the wall
-                    this.projectiles.splice(i, 1);
-                    collidedWithPlatform = true;
-                    break; // stop checking more platforms
-                  }
-                }
-
-                if (projectile.isDead()) {
-                    this.projectiles.splice(i, 1);
-                  }
-
-        }
-
-        this.player.handleCollsions(entityManager.collidables);
-    }
+       
+    
 
     render() {
         this.levelBG.render();

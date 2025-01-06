@@ -7,8 +7,8 @@ class Enemy {
         this.y = y
         this.width = width;
         this.height = height;
-        this.veloctityX = 2;
-        this.veloctityY = 0;
+        this.vx = 2;
+        this.vy = 0;
         // this.moveSpeed = 4;
     }
 
@@ -24,8 +24,8 @@ class Enemy {
 
     movement() {
         //   this.position.x += this.moveSpeed;
-        this.x += this.veloctityX
-        this.y += this.veloctityY
+        this.x += this.vx
+        this.y += this.vy
 
         if (this.x + this.width > windowWidth || this.x < 0) {
             this.veloctityX *= -1;

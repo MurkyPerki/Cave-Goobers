@@ -128,7 +128,99 @@ class Collision {
 
     
 
-        // add rect vs ellipse collision
+
     }
+
+        class PhysicsSystem {
+
+
+
+
+            static updatePlayer(player, collidables) {
+
+                player.update();
+                player.handleCollisions(collidables)
+            }
+
+
+
+
+
+            static updateEnemies(enemies, platforms, player) {
+                for (let enemy of enemies) {
+                    enemy.update(player);
+                    Collision.handleCollisions(enemy, platforms);
+
+                }
+
+            }
+
+
+            static updateProjectiles(projectiles, player, platforms){
+                for (let i = projectiles.length - 1; i >= 0; i--) {
+                    let projectile = projectiles[i];
+                    projectile.update(); // move
+              
+                   
+                    if (
+                      Collision.isColliding(
+                        projectile.x,
+                        projectile.y,
+                        projectile.width,
+                        projectile.height,
+                        player
+                      )
+                    ) {
+                     
+                      if (projectile instanceof WindProjectile) {
+                        projectile.applyWindPush(player);
+                      }
+                      
+                      projectiles.splice(i, 1);
+                      continue;
+                    }
+              
+                   
+                    let collidedWithPlatform = false;
+                    for (let platform of platforms) {
+                      if (
+                        Collision.isColliding(
+                          projectile.x,
+                          projectile.y,
+                          projectile.width,
+                          projectile.height,
+                          platform
+                        )
+                      ) {
+                        
+                        projectiles.splice(i, 1);
+                        collidedWithPlatform = true;
+                        break;
+                      }
+                    }
+                    if (collidedWithPlatform) continue;
+              
+                  
+                    if (projectile.isDead()) {
+                      projectiles.splice(i, 1);
+                    }
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        
     
     
+        }
