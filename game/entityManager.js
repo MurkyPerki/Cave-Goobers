@@ -66,7 +66,7 @@ class EntityManager {
             let projectile = this.projectiles[i];
             projectile.update();
 
-            for (let platform of this.platforms) {
+            
                 if (Collision.isColliding(
                     projectile.x,
                     projectile.y,
@@ -83,12 +83,8 @@ class EntityManager {
                     this.projectiles.splice(i, 1);
                     continue;
                 }
-            }
+            
 
-            if (projectile.isDead()) {
-                this.projectiles.splice(i, 1);
-
-            }
         }
 
         this.player.handleCollsions(entityManager.collidables);
