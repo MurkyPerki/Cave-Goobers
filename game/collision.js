@@ -93,9 +93,6 @@ class Collision {
                 entity.x += vx;
             }
         }
-    
-    
-
 
         static wallCollision(entity) {
             //collision right
