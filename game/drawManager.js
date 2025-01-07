@@ -12,9 +12,9 @@ class DrawManager {
         entityManager.update();
         entityManager.render();
         // platforms are defined here in sketch but i want to render from entityManager >:(
-            for (let platform of entityManager.platforms) {
-                platform.render();
-            }
+            // for (let platform of entityManager.platforms) {
+            //     platform.render();
+            // }
         pop();
         
         if(!start){

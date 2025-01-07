@@ -81,14 +81,11 @@ class EntityManager {
         for (let projectile of this.projectiles) {
             projectile.render();
         }
-
-
-
-        //platform is undefined but why??????
-        // for (platform of this.platforms) {
-        //     console.log(platform)
-        //     platform.render();
-        // }
+       
+        for (let platform of this.platforms) {
+            console.log(platform)
+            platform.render();
+        }
 
     }
 }
