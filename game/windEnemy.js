@@ -4,11 +4,12 @@ class WindEnemy extends Enemy {
         super(x, y, width, height);
 
         this.windRange = 500;
-        this.windStrength = 10;
         this.windCooldown = 120;
         this.lastAttack = 0;
-        this.windDuration = 60;
-
+        
+        this.projectileSpeed = 5;
+        this.projectileWidth = 20;
+        this.projectileHeight = 20;
 
 
 
@@ -19,7 +20,7 @@ class WindEnemy extends Enemy {
 
         if (frameCount - this.lastAttack > this.windCooldown) {
             if (this.isPlayerInRange(player)) {
-                this.applyWindImpulse(player);
+                this.shootWindProjectile(player);
                 this.lastAttack = frameCount;
             }
             // console.log(this.distance)
@@ -33,17 +34,23 @@ class WindEnemy extends Enemy {
     }
 
 
-    applyWindImpulse(player) {
+    shootWindProjectile(player) {
 
         let direction = createVector(player.x - this.x, player.y - this.y);
         direction.normalize();
 
-        let impulseMagnitude = this.windStrength * 5;
-        let impulse = direction.mult(impulseMagnitude);
+        direction.mult(this.projectileSpeed);
 
+        let projectile = new WindProjectile(
+            this.x + this.width / 2, 
+            this.y + this.height / 2, 
+            direction.x, 
+            direction.y, 
+            this.projectileWidth, 
+            this.projectileHeight
+          );
 
-        player.horizontalVelocity += impulse.x;
-        player.verticalVelocity -= impulse.y;
+          entityManager.projectiles.push(projectile);
     }
 
 

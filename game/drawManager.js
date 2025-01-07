@@ -9,7 +9,6 @@ class DrawManager {
     
         push();
         translate(0, cameraY);
-        entityManager.player.handleCollsions(entityManager.platforms);
         entityManager.update();
         entityManager.render();
         // platforms are defined here in sketch but i want to render from entityManager >:(
