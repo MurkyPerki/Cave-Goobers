@@ -52,10 +52,9 @@ class EntityManager {
     }
 
     update() {
+        this.player.update(this.collidables);
         PhysicsSystem.updatePlayer(this.player, this.collidables);
-
         PhysicsSystem.updateEnemies(this.enemies, this.platforms, this.player);
-
 
         for (let item of this.items) {
             item.update(this.player);
@@ -69,9 +68,7 @@ class EntityManager {
 
     render() {
         this.levelBG.render();
-
         this.player.render();
-
 
         for (let enemy of this.enemies) {
             enemy.render();

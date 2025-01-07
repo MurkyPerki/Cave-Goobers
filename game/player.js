@@ -41,14 +41,14 @@ class Player {
         }
     }
 
-    update(platforms) {
+    update(collidables) {
         this.walk();
         this.jump();
         this.applyGravity();
         this.updateCameraBox();
         this.updateCameraPosition();
         this.updateWallCollDectBox();
-        this.checkWallColl(platforms);
+        this.checkWallColl(collidables);
     }
 
     render() {
@@ -77,7 +77,7 @@ class Player {
 
 
     walk() {
-        this.horizontalVelocity *= 0.5;
+        this.horizontalVelocity *= 0.8;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
             this.horizontalVelocity += this.playerSpeed;
@@ -205,11 +205,11 @@ class Player {
         )
     }
 
-    checkWallColl(platforms) { //rename to walljump or sm
+    checkWallColl(collidables) { //rename to walljump or sm
         this.collided = false;
 
         // checks collision for every platform in platforms array
-        for (let platform of platforms) {
+        for (let platform of collidables) {
             if (Collision.isColliding(
                 this.wallCollDetectionBoxLeft.x,
                 this.wallCollDetectionBoxLeft.y,
@@ -223,7 +223,7 @@ class Player {
         }
 
         // right side player
-        for (let platform of platforms) {
+        for (let platform of collidables) {
             if (Collision.isColliding(
                 this.wallCollDetectionBoxRight.x,
                 this.wallCollDetectionBoxRight.y,
@@ -238,8 +238,8 @@ class Player {
     
     }
 
-    handleCollsions(platforms) {
-        Collision.handleCollisions(this, platforms);
+    handleCollsions(collidables) {
+        Collision.handleCollisions(this, collidables);
 
         if (this.isGrounded) {
             // But the collision code might already be handling the snapping.
