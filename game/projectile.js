@@ -1,50 +1,33 @@
+
 class Projectile {
+    constructor(x, y, vx, vy, width, height) {
+        this.x = x;
+        this.y = y;
+        this.vx = vx;
+        this.vy = vy;
+        this.width = width;
+        this.height = height;
 
+        this.duration = 150;
+    }
 
-constructor(x, y, vx, vy, width, height){
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.duration--;
 
-    this.x = x;
-    this.y = y;
-    this.vx = vx;
-    this.vy = vy;
-    this.width = width;
-    this.height = height;
+    }
 
+    render() {
+        push();
+        fill(200);
+        rect(this.x, this.y, this.width, this.height);
+        pop();
 
-    this.duration = 150;
-}
-    
+    }
 
-update(){ 
+    isDead() {
+        return this.duration <= 0
 
-this.x += this.vx;
-this.y += this.vy;
-
-
-this.duration--;
-
-
-}
-
-
-
-
-render() {
-
-push();
-fill(200);
-rect(this.x, this.y, this.width, this.height);
-pop();
-
-
-}
-
-
-
-isDead() { 
-    return  this.duration <= 0
-
-}
-
-
+    }
 }

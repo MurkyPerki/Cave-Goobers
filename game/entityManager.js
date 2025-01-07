@@ -25,9 +25,9 @@ class EntityManager {
         this.items.push(new Item(750, 500, 100, 80, this.items))
         this.items.push(new Item(100, 350, 100, 80, this.items))
         this.items.push(new Item(900, 200, 100, 80, this.items))
+
         //platforms
         this.createPlatformsTilemap2D(floorCollisions2);
-
         this.collidables = [...this.platforms, ...this.enemies];
     }
 
@@ -43,16 +43,13 @@ class EntityManager {
                     let x = col * tileWidth;
                     let y = row * tileHeight;
                     this.platforms.push(new Platform(x, y, tileWidth, tileHeight))
-
-
                 }
             }
         }
-        //console.log(this.platforms) yes working
     }
 
     update() {
-       // this.player.update(this.collidables);
+        // this.player.update(this.collidables);
         PhysicsSystem.updatePlayer(this.player, this.collidables);
         PhysicsSystem.updateEnemies(this.enemies, this.platforms, this.player);
 
@@ -63,9 +60,6 @@ class EntityManager {
         PhysicsSystem.updateProjectiles(this.projectiles, this.player, this.platforms);
     }
 
-
-
-
     render() {
         this.levelBG.render();
         this.player.render();
@@ -73,19 +67,15 @@ class EntityManager {
         for (let enemy of this.enemies) {
             enemy.render();
         }
-
         for (let item of this.items) {
             item.render();
         }
-
         for (let projectile of this.projectiles) {
             projectile.render();
         }
-       
         for (let platform of this.platforms) {
             console.log(platform)
             platform.render();
         }
-
     }
 }

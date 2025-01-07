@@ -22,25 +22,22 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
- 
+
     //initialize managers
     drawManager = new DrawManager();
     entityManager = new EntityManager();
+    gameScreen = new Gamescreen();
 
     entityManager.initializeEntities();
-    gameScreen = new Gamescreen();
+
 }
 
 function draw() {
-   
     drawManager.managesAll();
-     
-  
-   
 }
 
-function keyPressed(){
-    if(key === " "){
+function keyPressed() {
+    if (key === " ") {
         start = true;
     }
 }

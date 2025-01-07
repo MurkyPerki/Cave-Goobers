@@ -11,5 +11,4 @@ class Platform {
         stroke(20, 25, 28);
         rect(this.x, this.y, this.width, this.height);
     }
-
 }
