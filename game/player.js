@@ -7,7 +7,7 @@ class Player {
 
         this.horizontalVelocity = 0;
         this.playerSpeed = 2.5;
-        this.verticalVelocity = 0; 
+        this.verticalVelocity = 0;
         this.playerGravity = 2;
 
         this.isJumping = false;
@@ -24,6 +24,13 @@ class Player {
             },
             width: 800,
             height: 600,
+        }
+
+        this.collisionBox = {
+            offsetX: 15,
+            offsetY: 10,
+            width: width - 35,
+            height: height - 17
         }
 
         this.wallCollDetectionBoxLeft = {
@@ -68,10 +75,10 @@ class Player {
         stroke(0, 255, 0);
         const cBox = this.collisionBox;
         rect(
-          this.x + cBox.offsetX,
-          this.y + cBox.offsetY,
-          cBox.width,
-          cBox.height
+            this.x + cBox.offsetX,
+            this.y + cBox.offsetY,
+            cBox.width,
+            cBox.height
         );
     }
 
@@ -130,8 +137,8 @@ class Player {
             this.isGrounded = true;
         }
         if (this.isFalling) {
-                this.isJumping = false;
-            }
+            this.isJumping = false;
+        }
     }
 
     jumpReleased() {
@@ -188,6 +195,8 @@ class Player {
         }
     }
 
+
+
     renderWallCollDectBox() {
         fill(252, 3, 232);
         rect(
@@ -235,10 +244,10 @@ class Player {
                 break;
             }
         }
-    
+
     }
 
-    handleCollsions(collidables) {
+    handleCollisions(collidables) {
         Collision.handleCollisions(this, collidables);
 
         if (this.isGrounded) {

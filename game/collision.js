@@ -122,37 +122,21 @@ class Collision {
             entity1.y + entity1.height > entity2.y
         );
     }
-
-
-
-
 }
 
 class PhysicsSystem {
 
-
-
-
     static updatePlayer(player, collidables) {
-
         player.update(collidables);
         player.handleCollisions(collidables)
     }
-
-
-
-
 
     static updateEnemies(enemies, platforms, player) {
         for (let enemy of enemies) {
             enemy.update(player);
             Collision.handleCollisions(enemy, platforms);
 
-
-
-
             if (Collision.entityCollision(enemy, player)) {
-
                 const pushForce = 2;
                 player.horizontalVelocity += enemy.vx * pushForce;
                 player.verticalVelocity += enemy.vy * pushForce;
@@ -165,7 +149,6 @@ class PhysicsSystem {
         for (let i = projectiles.length - 1; i >= 0; i--) {
             let projectile = projectiles[i];
             projectile.update(); // move
-
 
             if (
                 Collision.isColliding(
@@ -184,7 +167,6 @@ class PhysicsSystem {
                 projectiles.splice(i, 1);
                 continue;
             }
-
 
             let collidedWithPlatform = false;
             for (let platform of platforms) {
@@ -210,23 +192,6 @@ class PhysicsSystem {
             if (projectile.isDead()) {
                 projectiles.splice(i, 1);
             }
-
         }
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

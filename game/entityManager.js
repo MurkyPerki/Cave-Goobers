@@ -6,7 +6,7 @@ class EntityManager {
         this.items = [];
         this.platforms = [];
         this.projectiles = []
-
+        this.collidables = [];
 
         this.levelBG = new Sprite({
             position: {
@@ -19,8 +19,8 @@ class EntityManager {
 
     initializeEntities() {
         //enemies
-       // this.enemies.push(new Enemy(10, 200, 30, 30));
-       // this.enemies.push(new WindEnemy(200, 700, 30, 30));
+        // this.enemies.push(new Enemy(10, 200, 30, 30));
+        // this.enemies.push(new WindEnemy(200, 700, 30, 30));
         //items
         this.items.push(new Item(750, 500, 100, 80, this.items))
         this.items.push(new Item(100, 350, 100, 80, this.items))
@@ -29,6 +29,10 @@ class EntityManager {
         this.createPlatformsTilemap2D(floorCollisions2);
 
         this.collidables = [...this.platforms, ...this.enemies];
+        console.log('Platforms:', this.platforms);
+        console.log('Enemies:', this.enemies);
+        console.log('Collidables:', this.collidables);
+
     }
 
     createPlatformsTilemap2D(tilemap2D) {
@@ -61,10 +65,10 @@ class EntityManager {
         }
 
         PhysicsSystem.updateProjectiles(this.projectiles, this.player, this.platforms);
-  }
+    }
 
-       
-    
+
+
 
     render() {
         this.levelBG.render();
