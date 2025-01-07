@@ -18,7 +18,7 @@ class Player {
         this.cameraYPos = this.y;
 
         this.cameraBox = {
-            pos: {
+            position: {
                 x: this.x,
                 y: this.y,
             },
@@ -26,38 +26,24 @@ class Player {
             height: 600,
         }
 
-        this.wallCollDetectionBoxLeft = {
-            x: this.x - 25,
-            y: this.y + 30,
-            width: 25,
-            height: 25,
-        }
+        this.collisionBox = {
+            offsetX: 15,       
+            offsetY: 10,        
+            width:  width - 35,  
+            height: height - 17  
+        };
 
-        this.wallCollDetectionBoxRight = {
-            x: this.x + 25,
-            y: this.y + 30,
-            width: 25,
-            height: 25,
-        }
+
     }
 
-    update(platforms) {
-        this.walk();
-        this.jump();
+    update() {
+        this.move();
         this.applyGravity();
         this.updateCameraBox();
         this.updateCameraPosition();
-        this.updateWallCollDectBox();
-        this.checkWallColl(platforms);
     }
 
     render() {
-        this.renderPlayer();
-        // this.renderCameraBox();
-        this.renderWallCollDectBox();
-    }
-
-    renderPlayer() {
         image(tempSprite, this.x, this.y, this.width, this.height)
         strokeWeight(3)
         //stroke(0, 255, 0);
@@ -75,9 +61,8 @@ class Player {
         );
     }
 
-
-    walk() {
-        this.horizontalVelocity *= 0.5;
+    move() {
+        this.horizontalVelocity *= 0.8;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
             this.horizontalVelocity += this.playerSpeed;
@@ -86,31 +71,16 @@ class Player {
             this.horizontalVelocity -= this.playerSpeed;
         }
 
-    }
-
-    jump() {
-        // regular jump
+       
+        // player jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
             //jumpcount so the player can only jump once until released
-            && this.jumpCount < this.maxJump
-            && this.isGrounded) {
+            && this.jumpCount < this.maxJump) {
             this.verticalVelocity = 36;
             this.isJumping = true;
-            this.isGrounded = false;
             this.jumpCount++;
-        }
-
-        // wall jump
-        if ((keyIsDown(UP_ARROW) || keyIsDown(32))
-            && !this.isJumping
-            && this.jumpCount < this.maxJump
-            && this.collided) {
-            console.log('yayayay')
-            this.verticalVelocity = 36;
-            this.isJumping = true;
-            this.jumpCount++
-
+            //player wall glide 
         }
     }
 
@@ -122,30 +92,38 @@ class Player {
         if (this.isJumping || this.isFalling) {
             this.verticalVelocity -= this.playerGravity;
             this.isFalling = true;
-            this.isGrounded = false;
         }
         else if (this.onPlatform) {
             this.verticalVelocity = 0;
             this.isJumping = false;
-            this.isGrounded = true;
         }
-        if (this.isFalling) {
-                this.isJumping = false;
-            }
     }
+
 
     jumpReleased() {
         //reset jump count (when key released)
         this.jumpCount = 0;
+
         //if key released velocity halves so that player can hold jump
-        if (this.isFalling) {
+        if (this.isJumping) {
             this.verticalVelocity = this.verticalVelocity / 2;
         }
     }
 
+    renderCameraBox() {
+        fill(0, 0, 255, 50);
+        rect(
+            this.cameraBox.position.x,
+            this.cameraBox.position.y,
+            this.cameraBox.width,
+            this.cameraBox.height
+        )
+    }
+
+
     updateCameraBox() {
         this.cameraBox = {
-            pos: {
+            position: {
                 x: this.x - 325,
                 y: this.y - 200,
             },
@@ -154,91 +132,11 @@ class Player {
         }
     }
 
-    renderCameraBox() {
-        fill(0, 0, 255, 50);
-        rect(
-            this.cameraBox.pos.x,
-            this.cameraBox.pos.y,
-            this.cameraBox.width,
-            this.cameraBox.height
-        )
-    }
-
     updateCameraPosition() {
         this.cameraYPos = this.y;
     }
 
-    updateWallCollDectBox() {
-        //left side (magenta colored)
-        this.wallCollDetectionBoxLeft = {
-            x: this.x - 25,
-            y: this.y + 30,
-            width: 25,
-            height: 25,
-
-        }
-
-        //right side (yellow colored)
-        this.wallCollDetectionBoxRight = {
-            x: this.x + 100,
-            y: this.y + 30,
-            width: 25,
-            height: 25,
-
-        }
-    }
-
-    renderWallCollDectBox() {
-        fill(252, 3, 232);
-        rect(
-            this.wallCollDetectionBoxLeft.x,
-            this.wallCollDetectionBoxLeft.y,
-            this.wallCollDetectionBoxLeft.width,
-            this.wallCollDetectionBoxLeft.height
-        )
-        fill(252, 186, 3)
-        rect(
-            this.wallCollDetectionBoxRight.x,
-            this.wallCollDetectionBoxRight.y,
-            this.wallCollDetectionBoxRight.width,
-            this.wallCollDetectionBoxRight.height
-        )
-    }
-
-    checkWallColl(platforms) { //rename to walljump or sm
-        this.collided = false;
-
-        // checks collision for every platform in platforms array
-        for (let platform of platforms) {
-            if (Collision.isColliding(
-                this.wallCollDetectionBoxLeft.x,
-                this.wallCollDetectionBoxLeft.y,
-                this.wallCollDetectionBoxLeft.width,
-                this.wallCollDetectionBoxLeft.height,
-                platform
-            )) {
-                this.collided = true;
-                break;
-            }
-        }
-
-        // right side player
-        for (let platform of platforms) {
-            if (Collision.isColliding(
-                this.wallCollDetectionBoxRight.x,
-                this.wallCollDetectionBoxRight.y,
-                this.wallCollDetectionBoxRight.width,
-                this.wallCollDetectionBoxRight.height,
-                platform
-            )) {
-                this.collided = true;
-                break;
-            }
-        }
-    
-    }
-
-    handleCollsions(platforms) {
+    handleCollisions(platforms) {
         Collision.handleCollisions(this, platforms);
 
         if (this.isGrounded) {
@@ -246,8 +144,6 @@ class Player {
         } else {
             this.isFalling = true;
         }
-
-
     }
 
 
