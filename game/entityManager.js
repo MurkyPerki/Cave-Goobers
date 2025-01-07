@@ -29,10 +29,6 @@ class EntityManager {
         this.createPlatformsTilemap2D(floorCollisions2);
 
         this.collidables = [...this.platforms, ...this.enemies];
-        console.log('Platforms:', this.platforms);
-        console.log('Enemies:', this.enemies);
-        console.log('Collidables:', this.collidables);
-
     }
 
     createPlatformsTilemap2D(tilemap2D) {
@@ -56,7 +52,7 @@ class EntityManager {
     }
 
     update() {
-        this.player.update(this.collidables);
+       // this.player.update(this.collidables);
         PhysicsSystem.updatePlayer(this.player, this.collidables);
         PhysicsSystem.updateEnemies(this.enemies, this.platforms, this.player);
 

@@ -72,7 +72,7 @@ class Player {
         rect(this.x, this.y, this.width, this.height);
 
 
-        stroke(0, 255, 0);
+       // stroke(0, 255, 0);
         const cBox = this.collisionBox;
         rect(
             this.x + cBox.offsetX,
