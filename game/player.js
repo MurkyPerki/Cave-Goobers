@@ -6,7 +6,7 @@ class Player {
         this.height = height;
 
         this.horizontalVelocity = 0;
-        this.playerSpeed = 2;
+        this.playerSpeed = 2.5;
         this.verticalVelocity = 0; 
         this.playerGravity = 2;
 
