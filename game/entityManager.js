@@ -5,7 +5,8 @@ class EntityManager {
         this.enemies = [];
         this.items = [];
         this.platforms = [];
-       
+        this.projectiles = []
+
 
         this.levelBG = new Sprite({
             position: {
@@ -13,7 +14,7 @@ class EntityManager {
                 y: 0,
             },
             imageSrc: 'assets/images/gameBG.png',
-        })
+        });
     }
 
     initializeEntities() {
@@ -51,30 +52,46 @@ class EntityManager {
     }
 
     update() {
-        this.player.update(this.platforms);
-        for (let enemy of this.enemies) {
-            enemy.update(this.player);
-        }
+        PhysicsSystem.updatePlayer(this.player, this.collidables);
+
+        PhysicsSystem.updateEnemies(this.enemies, this.platforms, this.player);
+
+
         for (let item of this.items) {
             item.update(this.player);
         }
-    }
+
+        PhysicsSystem.updateProjectiles(this.projectiles, this.player, this.platforms);
+  }
+
+       
+    
 
     render() {
         this.levelBG.render();
+
         this.player.render();
+
 
         for (let enemy of this.enemies) {
             enemy.render();
         }
+
         for (let item of this.items) {
             item.render();
         }
+
+        for (let projectile of this.projectiles) {
+            projectile.render();
+        }
+
+
+
         //platform is undefined but why??????
         // for (platform of this.platforms) {
         //     console.log(platform)
         //     platform.render();
         // }
-      
+
     }
 }

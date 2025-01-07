@@ -32,17 +32,24 @@ class Collision {
     
     
         static verticalCollision(entity, platforms, nextY, vy) {
+
+            const colX = entity.x + entity.collisionBox.offsetX;
+            const colY = nextY + entity.collisionBox.offsetY; 
+            const colWidth = entity.collisionBox.width;
+            const colHeight = entity.collisionBox.height;
+
+
             for (const platform of platforms) {
-                if (Collision.isColliding(entity.x, nextY, entity.width, entity.height, platform)) {
+                if (Collision.isColliding(colX, colY, colWidth, colHeight, platform)) {
                     if (vy >= 0) {
                         // Collision from above (falling down onto platform)
-                        entity.y = platform.y - entity.height;
+                        entity.y = platform.y - entity.collisionBox.height - entity.collisionBox.offsetY;
                         entity.isGrounded = true;
                         entity.isJumping = false;
                         entity.verticalVelocity = 0;
                     } else {
                         // Collision from below (jumping up into platform)
-                        entity.y = platform.y + platform.height;
+                        entity.y = platform.y + platform.height - entity.collisionBox.offsetY;
                         entity.verticalVelocity = 0;
                     }
                  
@@ -56,19 +63,24 @@ class Collision {
         }
     
         static horizontalCollision(entity, platforms, nextX, vx) {
-
             entity.collidedLeft = false;
             entity.collidedRight = false;
+            
+            const colX = nextX + entity.collisionBox.offsetX;
+            const colY = entity.y + entity.collisionBox.offsetY;
+            const colWidth = entity.collisionBox.width;
+            const colHeight = entity.collisionBox.height;
+
 
             for (const platform of platforms) {
-                if (Collision.isColliding(nextX, entity.y, entity.width, entity.height, platform)) {
+                if (Collision.isColliding(colX, colY, colWidth, colHeight, platform)) {
                     if (vx > 0) {
                         // Collision moving right
-                        entity.x = platform.x - entity.width;
+                        entity.x = platform.x - entity.collisionBox.width - entity.collisionBox.offsetX;
                         entity.collidedRight = true;
                     } else if (vx < 0) {
                         // Collision moving left
-                        entity.x = platform.x + platform.width;
+                        entity.x = platform.x + platform.width - entity.collisionBox.offsetX;
                         entity.collidedLeft = true;
                     }
                     entity.horizontalVelocity = 0;
@@ -113,7 +125,108 @@ class Collision {
 
     
 
-        // add rect vs ellipse collision
+
     }
+
+        class PhysicsSystem {
+
+
+
+
+            static updatePlayer(player, collidables) {
+
+                player.update();
+                player.handleCollisions(collidables)
+            }
+
+
+
+
+
+            static updateEnemies(enemies, platforms, player) {
+                for (let enemy of enemies) {
+                    enemy.update(player);
+                    Collision.handleCollisions(enemy, platforms);
+
+                
+
+
+                if (Collision.entityCollision(enemy, player)) {
+
+                    const pushForce = 2;
+                    player.horizontalVelocity += enemy.vx * pushForce;
+                    player.verticalVelocity += enemy.vy * pushForce;
+                }
+              }
+            }
+
+
+            static updateProjectiles(projectiles, player, platforms){
+                for (let i = projectiles.length - 1; i >= 0; i--) {
+                    let projectile = projectiles[i];
+                    projectile.update(); // move
+              
+                   
+                    if (
+                      Collision.isColliding(
+                        projectile.x,
+                        projectile.y,
+                        projectile.width,
+                        projectile.height,
+                        player
+                      )
+                    ) {
+                     
+                      if (projectile instanceof WindProjectile) {
+                        projectile.applyWindPush(player);
+                      }
+                      
+                      projectiles.splice(i, 1);
+                      continue;
+                    }
+              
+                   
+                    let collidedWithPlatform = false;
+                    for (let platform of platforms) {
+                      if (
+                        Collision.isColliding(
+                          projectile.x,
+                          projectile.y,
+                          projectile.width,
+                          projectile.height,
+                          platform
+                        )
+                      ) {
+                        
+                        projectiles.splice(i, 1);
+                        collidedWithPlatform = true;
+                        break;
+                      }
+                    }
+                    if (collidedWithPlatform) {
+                         continue;
+                    }
+                  
+                    if (projectile.isDead()) {
+                      projectiles.splice(i, 1);
+                    }
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        
     
     
+        }

@@ -4,10 +4,12 @@ class Player {
         this.y = y;
         this.width = width;
         this.height = height;
+
         this.horizontalVelocity = 0;
-        this.playerSpeed = 12;
-        this.verticalVelocity = 0;
+        this.playerSpeed = 2.5;
+        this.verticalVelocity = 0; 
         this.playerGravity = 2;
+
         this.isJumping = false;
         this.isFalling = false;
         this.onPlatform = false;
@@ -61,6 +63,16 @@ class Player {
         //stroke(0, 255, 0);
         noFill();
         rect(this.x, this.y, this.width, this.height);
+
+
+        stroke(0, 255, 0);
+        const cBox = this.collisionBox;
+        rect(
+          this.x + cBox.offsetX,
+          this.y + cBox.offsetY,
+          cBox.width,
+          cBox.height
+        );
     }
 
 
@@ -68,10 +80,10 @@ class Player {
         this.horizontalVelocity *= 0.5;
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
-            this.horizontalVelocity = this.playerSpeed;
+            this.horizontalVelocity += this.playerSpeed;
         }
         if ((keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
-            this.horizontalVelocity = -this.playerSpeed;
+            this.horizontalVelocity -= this.playerSpeed;
         }
 
     }
