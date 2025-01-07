@@ -51,11 +51,13 @@ class Player {
     update(collidables) {
         this.walk();
         this.jump();
+        this.updateWallCollDectBox();
+        this.checkWallColl(collidables);
         this.applyGravity();
         this.updateCameraBox();
         this.updateCameraPosition();
-        this.updateWallCollDectBox();
-        this.checkWallColl(collidables);
+        
+        
     }
 
     render() {
