@@ -15,10 +15,21 @@ class Databasemanager {
 
     async newSession(playerName) {
         try {
-            const query = "INSERT INTO player (name) VALUES (?)";
-            const response = await HICCloud.API.queryDatabase(query, [playerName]);
+            const createPlayerQuery = "INSERT INTO player (name) VALUES (?)";
+            const playerResponse = await HICCloud.API.queryDatabase(createPlayerQuery, [playerName]);
+            const playerId = playerResponse.insertId;
 
-            console.log("Session created succesfully", response);
+
+            console.log("Session created succesfully", playerId);
+
+            const score = 0;
+            const date = 'testdate'
+
+            const createLeaderboardQuery = "INSERT INTO leaderboard (player_id, score, lastUpdated) VALUES(?, ?, ?)";
+            const leaderboardResponse = await HICCloud.API.queryDatabase(createLeaderboardQuery, [playerId, score, date]);
+
+            console.log("Session created succesfully", leaderboardResponse);
+
         } catch (error) {
             console.error("Failed to create session", error);
         }
