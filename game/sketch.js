@@ -1,53 +1,73 @@
-
-//managers
-let drawManager;
-let databaseManager;
-let entityManager;
-let sceneManager; // if necessarry
-let gameScreen;
-let start = false;
-let startScreen;
-
-//sprites/fonts
-let baby;
-let levelBG;
-let pixelFont;
-
-function preload() {
-    pixelFont = loadFont('assets/fonts/pixelFont.ttf')
-    tempSprite = loadImage('assets/images/goboo.png')
-    baby = loadImage('assets/images/baby goober 3.png')
-    startScreen = loadImage('assets/images/startscreenBackground.jpg')
-}
+//player var
+playerX = 400;
+playerY = 300;
+playerW = 50;
+playerH = 50;
+playerSpeed = 10;
+isJumping = false;
+// playerPos = createVector(0, 0);
+playerVelocity = 100;
+playerGravity = 10;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
- 
-    //initialize managers
-    drawManager = new DrawManager();
-    entityManager = new EntityManager();
-
-    entityManager.initializeEntities();
-    gameScreen = new Gamescreen();
+    createCanvas(800, 600);
 }
 
 function draw() {
-   
-    drawManager.managesAll();
-     
-  
-   
+    background(240, 240, 240);
+    // player class functions
+    let newPlayer = new Player(playerX, playerY, playerW, playerH);
+    newPlayer.show();
+    newPlayer.move();
+    newPlayer.jump();
+    newPlayer.gravity();
+
+    console.log('player.y:' + playerY);
+
 }
 
-function keyPressed(){
-    if(key === " "){
-        start = true;
+class Player {
+    constructor(playerX, playerY, playerW, playerH) {
+        this.playerX = playerX;
+        this.playerY = playerY;
+        this.playerW = playerW;
+        this.playerH = playerH;
+        this.playerSpeed = playerSpeed;
+        this.isJumping = isJumping;
+        this.playerVelocity = playerVelocity;
+        this.playerGravity = playerGravity;
+        //this.playerPos = playerPos;
     }
-}
 
-//this has to stay here
-function keyReleased() {
-    if (keyCode === UP_ARROW || keyCode === 32) {
-        entityManager.player.jumpReleased();
+    move() {
+        // player left right movement
+        if (keyIsDown(RIGHT_ARROW)) {
+            playerX = playerX + playerSpeed;
+        }
+
+        if (keyIsDown(LEFT_ARROW)) {
+            playerX = playerX - playerSpeed;
+        }
+    }
+
+    show() {
+        noStroke();
+        fill(0);
+        rect(this.playerX, this.playerY, this.playerW, this.playerH);
+    }
+
+    jump() {
+        if (keyIsDown(UP_ARROW) && !isJumping) {
+            playerY -= playerVelocity;
+
+            isJumping = true;
+        }
+    // if player.touchingGround reset isJumping true = false
+    }
+    
+    //touchingGround()
+
+    gravity() {
+         playerVelocity += playerGravity;
     }
 }
