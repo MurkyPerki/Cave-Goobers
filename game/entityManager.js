@@ -1,8 +1,8 @@
 
 class EntityManager {
     constructor() {
-        this.player = new Player(400, 700, 100, 100);
-        this.enemies = [];
+        this.player = new Player(800, 4000, 100, 100);
+        this.enemies = []; 
         this.items = [];
         this.platforms = [];
         this.projectiles = []
