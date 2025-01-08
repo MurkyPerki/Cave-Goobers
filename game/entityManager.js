@@ -76,6 +76,7 @@ class EntityManager {
             projectile.render();
         }
         for (let platform of this.platforms) {
+            //console.log(platform)
             platform.render();
         }
     }
