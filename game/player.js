@@ -101,16 +101,35 @@ class Player {
             this.isGrounded = false;
             this.jumpCount++;
         }
-        // wall jump
+
+    }
+
+    walkJump() {
+        //nieuwe counters
+
+        // wall jump left 
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
             && this.jumpCount < this.maxJump
-            && this.collided) {
-            console.log('yayayay')
+            && this.collidedLeft) {
             this.verticalVelocity = 36;
             this.isJumping = true;
             this.jumpCount++
         }
+
+        // wall jump right
+        if ((keyIsDown(UP_ARROW) || keyIsDown(32))
+            && !this.isJumping
+            && this.jumpCount < this.maxJump
+            && this.collidedRight) {
+            this.verticalVelocity = 36;
+            this.isJumping = true;
+            this.jumpCount++
+        }
+    }
+    
+    healthbar() {
+        
     }
 
     //! maybe we should rename this method its confusing.
@@ -202,7 +221,8 @@ class Player {
     }
 
     checkWallColl(collidables) {
-        this.collided = false;
+        this.collidedLeft = false;
+        this.collidedRight = false;
         // checks collision for every platform in platforms array
         // left wallHitbox
         for (let platform of collidables) {
@@ -213,7 +233,7 @@ class Player {
                 this.wallCollDetectionBoxLeft.height,
                 platform
             )) {
-                this.collided = true;
+                this.collidedLeft = true;
                 break;
             }
         }
@@ -227,7 +247,7 @@ class Player {
                 this.wallCollDetectionBoxRight.height,
                 platform
             )) {
-                this.collided = true;
+                this.collidedRight = true;
                 break;
             }
         }

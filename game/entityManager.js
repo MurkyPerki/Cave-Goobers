@@ -7,6 +7,7 @@ class EntityManager {
         this.platforms = [];
         this.projectiles = []
         this.collidables = [];
+        this.health = [];
 
         this.levelBG = new Sprite({
             position: {
@@ -25,6 +26,7 @@ class EntityManager {
         this.items.push(new Item(750, 500, 100, 80, this.items))
         this.items.push(new Item(100, 350, 100, 80, this.items))
         this.items.push(new Item(900, 200, 100, 80, this.items))
+        this.health.push(new Health(800, 550, 100, 80, this.items))
 
         //platforms
         this.createPlatformsTilemap2D(floorCollisions2);
@@ -74,7 +76,6 @@ class EntityManager {
             projectile.render();
         }
         for (let platform of this.platforms) {
-            console.log(platform)
             platform.render();
         }
     }
