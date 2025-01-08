@@ -201,9 +201,10 @@ class Player {
         )
     }
 
-    checkWallColl(collidables) { //rename to walljump or sm
+    checkWallColl(collidables) {
         this.collided = false;
         // checks collision for every platform in platforms array
+        // left wallHitbox
         for (let platform of collidables) {
             if (Collision.isColliding(
                 this.wallCollDetectionBoxLeft.x,
@@ -217,7 +218,7 @@ class Player {
             }
         }
 
-        // right side player
+        // right wallHitbox
         for (let platform of collidables) {
             if (Collision.isColliding(
                 this.wallCollDetectionBoxRight.x,
