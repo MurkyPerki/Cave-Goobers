@@ -56,6 +56,10 @@ class EntityManager {
         PhysicsSystem.updatePlayer(this.player, this.collidables);
         PhysicsSystem.updateEnemies(this.enemies, this.platforms, this.player);
 
+        if (this.triggerBox) {
+            this.triggerBox.update(this.player);
+        }
+
         for (let item of this.items) {
             item.update(this.player);
         }
@@ -82,6 +86,8 @@ class EntityManager {
         }
 
         // render trigger box
+        if (this.triggerBox) {
         this.triggerBox.render();
+        }
     }
 }
