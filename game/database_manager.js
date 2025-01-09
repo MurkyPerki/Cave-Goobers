@@ -3,6 +3,7 @@ class Databasemanager {
     constructor() {
         this.setupDatabase();
         this.newSession("test")
+        this.leaderboard();
     }
 
     async setupDatabase() {
@@ -18,15 +19,16 @@ class Databasemanager {
             const createPlayerQuery = "INSERT INTO player (name) VALUES (?)";
             const playerResponse = await HICCloud.API.queryDatabase(createPlayerQuery, [playerName]);
             const playerId = playerResponse.insertId;
+            console.log(playerId)
 
 
             console.log("Session created succesfully", playerId);
 
             const score = 0;
-            const date = 'testdate'
+            const date = "2025-09-08"
 
             const createLeaderboardQuery = "INSERT INTO leaderboard (player_id, score, lastUpdated) VALUES(?, ?, ?)";
-            const leaderboardResponse = await HICCloud.API.queryDatabase(createLeaderboardQuery, [playerId, score, date]);
+            const leaderboardResponse = await HICCloud.API.queryDatabase(createLeaderboardQuery, playerId, score, date);
 
             console.log("Session created succesfully", leaderboardResponse);
 
@@ -34,16 +36,28 @@ class Databasemanager {
             console.error("Failed to create session", error);
         }
     }
-// }
-//     async leaderboard(playerName, score) {
-//     try {
-//         const query = "INSERT INTO leaderboard (player_id, score, lastUpdated) VALUES(?, ?, DATE())";
-//         const response = await HICCloud.API.queryDatabase(query, [playerName, score]);
 
-//         console.log("Session created succesfully", response);
-//     } catch (error) {
-//         console.error("Failed to create session", error);
-//     }
+    async leaderboard() {
+        try {
+           const query = "SELECT player.name, leaderboard.score, leaderboard.lastUpdated FROM leaderboard JOIN player ON leaderboard.player_id = player.id  ORDER BY leaderboard.score DESC LIMIT 10"
+           const response = await HICCloud.API.queryDatabase(query);
+
+           console.log(response);
+        }
+        catch (error) {
+            console.error("Failed to create session", error);
+        }
+    }
+    // }
+    //     async leaderboard(playerName, score) {
+    //     try {
+    //         const query = "INSERT INTO leaderboard (player_id, score, lastUpdated) VALUES(?, ?, DATE())";
+    //         const response = await HICCloud.API.queryDatabase(query, [playerName, score]);
+
+    //         console.log("Session created succesfully", response);
+    //     } catch (error) {
+    //         console.error("Failed to create session", error);
+    //     }
 }
 
 //     async createNewSession(playerName) {
