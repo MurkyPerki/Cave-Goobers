@@ -7,8 +7,9 @@ class Platform {
     }
 
     render() {
-        fill(33, 49, 35);
-        stroke(20, 25, 28);
+        fill(33, 49, 35, 10);
+        noStroke();
+       // stroke(20, 25, 28);
         rect(this.x, this.y, this.width, this.height);
     }
 

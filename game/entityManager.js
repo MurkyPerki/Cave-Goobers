@@ -13,7 +13,7 @@ class EntityManager {
                 x: 0,
                 y: 0,
             },
-            imageSrc: 'assets/images/gameBG.png',
+            imageSrc: 'assets/images/gameBG.jpg',
         });
     }
 
