@@ -4,13 +4,16 @@ class Boss extends Enemy {
        super(x, y, width, height ) 
 
 
+
+       // add hitbox just like in player 
+
     }
 
 
 
     update(){
 
-
+        
 
     }
 
@@ -18,7 +21,7 @@ class Boss extends Enemy {
 
     render() {
 
-
+        // image for boss 
 
 
     }
@@ -27,7 +30,9 @@ class Boss extends Enemy {
 
 
 
+    // add attack for when playwer is grounded
 
+    // add shooting method uses projectile.
 
 
 }
