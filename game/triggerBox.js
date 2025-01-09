@@ -5,6 +5,7 @@ class TriggerBox {
         this.y = y;
         this.width = width;
         this.height = height;
+    
     }
 
     update(player){ 
