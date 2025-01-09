@@ -15,7 +15,15 @@ class TriggerBox {
     }
 
     onPlayerCollide(player){
-        // ill prob overide this
+        if (player.gooberCount >= 5) {
+
+            entityManager.loadBossLevel();
+
+        } else { 
+            console.log(" You need 5 goobers to face your fear")
+        }
+
+
         
     }
 

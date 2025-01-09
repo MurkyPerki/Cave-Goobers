@@ -90,4 +90,25 @@ class EntityManager {
         this.triggerBox.render();
         }
     }
+
+    loadBossLevel() { 
+
+        //clear old level arrays etc.
+        entityManager.enemies = [];
+        entityManager.platforms = [];
+        entityManager.projectiles = [];
+        entityManager.items = [];
+        entityManager.collidables = [];
+
+        // instancing new boss
+        let boss = new Boss(500,300 , 150, 150);
+        entityManager.enemies.push(boss);
+
+
+        // different player position
+        entityManager.player.x = 200;
+        entityManager.player.y = 400;
+
+        // maybe track game state? 
+    }
 }
