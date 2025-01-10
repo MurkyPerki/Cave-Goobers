@@ -82,13 +82,15 @@ class Boss extends Enemy {
         
         this.currentPhase++;
 
+        // im clearing platforms
+        platforms.length = 0;
 
         this.repositionPlatforms(platforms);
     }
 
 
     repositionPlatforms(platforms) {
-
+        
 
     }
 

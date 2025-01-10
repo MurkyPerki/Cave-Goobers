@@ -122,4 +122,27 @@ class EntityManager {
 
         // maybe track game state? 
     }
+
+    checkSlots() {
+
+        let allFilled = entityManager.gooberSlots.every(slot => slot.isFilled);
+        if (allFilled) {
+
+            entityManager.boss.takeDamage();
+
+            resetSlotsAndGoobers();
+        }
+    }
+
+    resetSlotsAndGoobers() {
+        
+        for (let slot of entityManager.gooberSlots) {
+            slot.isFilled = false;
+        }
+
+        for (let i = 0; i < 5; i++) {
+            let gooberItem = new Item(someX, someY, 50, 50, entityManager.items);
+            entityManager.items.push(gooberItem);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 
 class Item {
+    // this a goober for now
     constructor(x, y, width, height, items) {
         this.x = x;
         this.y = y;
