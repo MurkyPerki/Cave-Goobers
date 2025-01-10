@@ -1,9 +1,11 @@
 
 class Databasemanager {
     constructor() {
+        this.leaderboardData;
         this.setupDatabase();
         this.newSession("test")
         this.leaderboard();
+        //this.getDbData();
     }
 
     async setupDatabase() {
@@ -39,13 +41,24 @@ class Databasemanager {
 
     async leaderboard() {
         try {
-           const query = "SELECT player.name, leaderboard.score, leaderboard.lastUpdated FROM leaderboard JOIN player ON leaderboard.player_id = player.id  ORDER BY leaderboard.score DESC LIMIT 10"
-           const response = await HICCloud.API.queryDatabase(query);
+            const createQuery = "SELECT player.name, leaderboard.score, leaderboard.lastUpdated FROM leaderboard JOIN player ON leaderboard.player_id = player.id  ORDER BY leaderboard.score DESC LIMIT 10"
+            const createResponse = await HICCloud.API.queryDatabase(createQuery);
 
-           console.log(response);
+            console.log(createResponse);
         }
         catch (error) {
             console.error("Failed to create session", error);
         }
     }
+
+    // getDbData() {
+    //     // createResponse.array.forEach(data => {
+    //     //     leaderboardData = data;
+    //     // });
+    //     // console.log("this is:" + data)
+    // }
+
+    // displayLeaderboard() {
+
+    // }
 }
