@@ -1,93 +1,130 @@
-class Boss extends Enemy { 
+class Boss extends Enemy {
 
     constructor(x, y, width, height, entityManager) {
-       super(x, y, width, height ) 
-       this.entityManager = entityManager;
+        super(x, y, width, height)
+        this.entityManager = entityManager;
 
 
-       this.health = 3;
-       this.currentPhase = 1
-       this.maxPhases = 3;
+        this.health = 3;
+        this.currentPhase = 1
+        this.maxPhases = 3;
 
-       this.isSwiping = false;
-       this.swipeCooldown = 180;
-       this.swipeTimer = 0;
+        this.isSwiping = false;
+        this.swipeCooldown = 180;
+        this.swipeTimer = 0;
+        this.swipeAnimationTimer = 0;
 
-       this.isShooting = false;
-       this.projectileCooldown = 240;
-       this.projectileTimer = 0;
+        this.isShooting = false;
+        this.projectileSpeed = 10;      
+        this.projectileWidth = 20;     
+        this.projectileHeight = 20;
+        this.projectileRange = 2000;    
+        this.projectileCooldown = 100;    
+        this.lastProjectileFrame = 0;       
+        
+        
 
-       
 
 
-       this.isPhaseChanging = false;
-       
+
+        this.isPhaseChanging = false;
 
 
-       // add hitbox just like in player 
+
+        // add hitbox just like in player 
 
     }
 
-    
+
 
     movement() {
         // probably no movement, overwriting parent class
     }
 
-    update(player){
+    update(player, projectiles) {
 
-        const projectiles = this.entityManager.projectiles;
 
         this.handleTimers(player, projectiles);
-        
+
+
+        if (frameCount - this.lastProjectileFrame > this.projectileCooldown) {
+            if (this.isPlayerInRange(player)) {
+                this.shootProjectileTowardsPlayer(player);
+                this.lastProjectileFrame = frameCount;
+            }
+
+        }
         // is for phase up logic.
         if (this.health < this.currentPhase) {
             this.advancePhase()
         }
-
+    
     }
 
 
-    handleTimers(player,projectiles) {
-         
+    handleTimers(player, projectiles) {
+
         if (this.swipeTimer > 0) {
             this.swipeTimer--;
-        } 
-        if (this.projectileTimer > 0) {
-            this.projectileTimer--;
         }
-
+    
         if (player.isGrounded && this.swipeTimer <= 0) {
             this.doSwipeAttack(player);
             this.swipeTimer = this.swipeCooldown; // reset
         }
 
-        if (this.projectileTimer <= 0) {
-            this.shootProjectileTowardsPlayer(player, projectiles);
-            this.projectileTimer = this.projectileCooldown;
-            
-        }
+        if (this.swipeAnimationTimer > 0) {
+            this.swipeAnimationTimer--;
+            if (this.swipeAnimationTimer === 0) {
+                this.isSwiping = false;
+                // do an area of effect damage check here
+            }
     }
+}
 
     doSwipeAttack(player) {
+        this.isSwiping = true;
+        this.swipeAnimationTimer = 30;
+
         console.log("boss swipes ground")
+    }
+
+    isPlayerInRange(player) {
+        let distance = dist(this.x, this.y, player.x, player.y);
+        return distance <= this.projectileRange
+
     }
 
     shootProjectileTowardsPlayer(player, projectiles) {
         console.log("boss shoots projectile")
+
+        let direction = createVector(player.x - this.x, player.y - this.y);
+        direction.normalize();
+        direction.mult(this.projectileSpeed);
+
+        let projectile = new Projectile(
+            this.x + this.width / 2,
+            this.y + this.height / 2,
+            direction.x,
+            direction.y,
+            this.projectileWidth,
+            this.projectileHeight
+        );
+
+        this.entityManager.projectiles.push(projectile);
     }
 
     takeDamage() {
         this.health--;
         console.log("boss took damage! health is now", this.health)
 
-       if (this.health <= 0) {
+        if (this.health <= 0) {
             this.die();
         }
     }
 
     advancePhase() {
-        
+
         this.currentPhase++;
 
         // im clearing platforms
@@ -123,7 +160,7 @@ class Boss extends Enemy {
         if (this.currentPhase === 2) {
             for (let i = 0; i < slots.length; i++) {
                 slots[i].x = 200 + (i * 80);
-                slots[i].y = 200; 
+                slots[i].y = 200;
             }
         } else if (this.currentPhase === 3) {
             for (let i = 0; i < slots.length; i++) {
@@ -147,8 +184,12 @@ class Boss extends Enemy {
         // image for boss 
 
         push();
-        fill(255);
-        rect(this.x, this.y, this.width, this.height); 
+        if (this.isSwiping) {
+            fill(255, 0, 0)
+        } else {
+            fill(255);
+        }
+        rect(this.x, this.y, this.width, this.height);
         pop();
 
 
@@ -161,6 +202,5 @@ class Boss extends Enemy {
     // add attack for when playwer is grounded
 
     // add shooting method uses projectile.
-
 
 }
