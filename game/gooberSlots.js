@@ -1,6 +1,6 @@
 class GooberSlots {
 
-    constructor() {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
         this.width = 50;
@@ -19,12 +19,14 @@ class GooberSlots {
         }
 
 
-        render() {
+    
+    }
 
-            push();
-            fill(this.isFilled ? 'yellow : white');
-            Rect(this.x, this.y, this.width, this.height);
-            pop();
-        }
+    render() {
+
+        push();
+        fill(this.isFilled ? 'yellow' : 'white');
+        Rect(this.x, this.y, this.width, this.height);
+        pop();
     }
 }
