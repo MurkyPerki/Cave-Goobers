@@ -1,7 +1,7 @@
 
 class Databasemanager {
     constructor() {
-        this.leaderboardData;
+       // this.leaderboardData;
         this.setupDatabase();
         this.newSession("test")
         this.leaderboard();
@@ -41,10 +41,10 @@ class Databasemanager {
 
     async leaderboard() {
         try {
-            const createQuery = "SELECT player.name, leaderboard.score, leaderboard.lastUpdated FROM leaderboard JOIN player ON leaderboard.player_id = player.id  ORDER BY leaderboard.score DESC LIMIT 10"
-            const createResponse = await HICCloud.API.queryDatabase(createQuery);
+            const query = "SELECT player.name, leaderboard.score, leaderboard.lastUpdated FROM leaderboard JOIN player ON leaderboard.player_id = player.id  ORDER BY leaderboard.score DESC LIMIT 10"
+            const response = await HICCloud.API.queryDatabase(query);
 
-            console.log(createResponse);
+            console.log(response);
         }
         catch (error) {
             console.error("Failed to create session", error);
