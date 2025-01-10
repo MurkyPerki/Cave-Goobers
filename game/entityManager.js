@@ -105,6 +105,12 @@ class EntityManager {
             imageSrc: 'assets/images/gameBG.png',
         });
 
+        entityManager.gooberSlots = [];
+
+        for (let i = 0; i < 5; i++) {
+            entityManager.gooberSlots.push(new GooberSlots(300 + i*60, 450))
+        }
+
         // instancing new boss
         let boss = new Boss(500,300 , 150, 150);
         entityManager.enemies.push(boss);
