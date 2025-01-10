@@ -54,4 +54,6 @@ function keyReleased() {
     if (keyCode === UP_ARROW || keyCode === 32) {
         entityManager.player.jumpReleased();
     }
+
+    
 }

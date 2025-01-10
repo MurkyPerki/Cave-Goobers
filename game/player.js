@@ -27,9 +27,9 @@ class Player {
         }
         this.collisionBox = {
             offsetX: 15,
-            offsetY: 10,
+            offsetY: 35,
             width: width - 35,
-            height: height - 17
+            height: height - 35
         }
         this.wallCollDetectionBoxLeft = {
             x: this.x - 25,
@@ -50,10 +50,11 @@ class Player {
         this.jump();
         this.wallJump();
         this.applyGravity();
-        this.updateCameraBox();
-        this.updateCameraPosition();
         this.updateWallCollDectBox();
         this.checkWallColl(collidables);
+        this.updateCameraBox();
+        this.updateCameraPosition();
+        
     }
 
     render() {
@@ -69,7 +70,7 @@ class Player {
         noFill();
         rect(this.x, this.y, this.width, this.height);
 
-        // stroke(0, 255, 0);
+        stroke(0, 255, 0);
         const cBox = this.collisionBox;
         rect(
             this.x + cBox.offsetX,

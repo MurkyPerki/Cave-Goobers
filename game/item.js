@@ -1,5 +1,6 @@
 
 class Item {
+    // this a goober for now
     constructor(x, y, width, height, items) {
         this.x = x;
         this.y = y;
@@ -20,10 +21,25 @@ class Item {
     }
 
     pickedUp(player) {
+        
+        const hitboxX = player.x + player.collisionBox.offsetX;
+        const hitboxY = player.y + player.collisionBox.offsetY;
+        const hitboxW = player.collisionBox.width;
+        const hitboxH = player.collisionBox.height;
+
         if (this.isPickedUp) {
             this.shrinkAndRemove();
-        } else if (Collision.entityCollision(this, player)) {
+        } else if (Collision.isColliding(
+            hitboxX,
+            hitboxY,
+            hitboxW,
+            hitboxH,
+            this)) {
             this.isPickedUp = true;
+
+            player.gooberCount++;
+
+            console.log("player goobers", player.gooberCount);
         } else {
             this.animate();
         }
@@ -55,10 +71,10 @@ class Item {
             return;
         }
 
-        noStroke()
-        fill(0, 140, 255)
-        image(baby, this.x, this.y, this.width, this.height)
-        // rect(this.x, this.y, this.width, this.height, 40, 20)
+        noStroke();
+        fill(0, 140, 255);
+        image(baby, this.x, this.y, this.width, this.height);
+        
 
         //hitbox render
         // noFill();
