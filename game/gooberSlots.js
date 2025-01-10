@@ -10,7 +10,19 @@ class GooberSlots {
 
     update(player) {
 
-        if (Collision.isColliding(player.collisionBox.x, player.collisionBox.y, player.collisionBox.width, player.collisionBox.height, this)) {
+        const hitboxX = player.x + player.collisionBox.offsetX;
+        const hitboxY = player.y + player.collisionBox.offsetY;
+        const hitboxW = player.collisionBox.width;
+        const hitboxH = player.collisionBox.height;
+      
+
+        if (Collision.isColliding(
+            hitboxX, 
+            hitboxY, 
+            hitboxW, 
+            hitboxH,
+            this)) {
+
             if (player.gooberCount > 0 && !this.isFilled) {
                 player.gooberCount--;
                 this.isFilled = true;
