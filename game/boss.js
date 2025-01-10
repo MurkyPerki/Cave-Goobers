@@ -5,13 +5,13 @@ class Boss extends Enemy {
 
 
        this.health = 3;
-       
+       this.isSwiping = false;
+       this.swipeCooldown = 180;
+       this.swipeTimer = 0;
 
-
-
-
-
-
+       this.isShooting = false;
+       this.projectileTImer = 240;
+       this.projectileTimer = 0;
 
        this.currentPhase = 1
        this.maxPhases = 3;
@@ -66,6 +66,39 @@ class Boss extends Enemy {
     doSwipeAttack(player) {
         console.log("boss swipes ground")
     }
+
+    shootProjectileTowardsPlayer(player, projectiles) {
+        console.log("boss shoots projectile")
+    }
+
+    takeDamage() {
+        this.health--;
+       if (this.health <= 0) {
+            this.die();
+        }
+    }
+
+    advancePhase(platforms) {
+        
+        this.currentPhase++;
+
+
+        this.repositionPlatforms(platforms);
+    }
+
+
+    repositionPlatforms(platforms) {
+
+
+    }
+
+
+    die() {
+
+        console.log("boss is dead")
+        // show end screen
+    }
+
 
     render() {
 
