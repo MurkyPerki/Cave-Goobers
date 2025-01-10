@@ -10,7 +10,7 @@ class GooberSlots {
 
     update(player, boss) {
 
-        if (Collision.isColliding(this.x, this.y, this.width, this.height, player)) {
+        if (Collision.isColliding(this.x, this.y, this.width, this.height, player.collisionBox)) {
             if (player.gooberCount > 0 && !this.isFilled) {
                 player.gooberCount--;
                 this.isFilled = true;

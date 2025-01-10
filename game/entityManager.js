@@ -7,7 +7,9 @@ class EntityManager {
         this.platforms = [];
         this.projectiles = []
         this.collidables = [];
-        this.triggerBox
+        this.triggerBox;
+
+        this.gooberSlots = [];
 
         this.levelBG = new Sprite({
             position: {
@@ -27,7 +29,7 @@ class EntityManager {
         this.items.push(new Item(100, 350, 100, 80, this.items))
         this.items.push(new Item(900, 200, 100, 80, this.items))
         //boss level triggerBox
-        this.triggerBox = new TriggerBox(0, 1000 , width, 50)
+        this.triggerBox = new TriggerBox(0, 1000, width, 50)
 
         //platforms
         this.createPlatformsTilemap2D(floorCollisions2);
@@ -64,7 +66,7 @@ class EntityManager {
             item.update(this.player);
         }
 
-        if (this.gooberSLots) {
+        if (this.gooberSlots) {
             for (let slot of this.gooberSlots) {
                 slot.update(this.player);
             }
@@ -92,16 +94,17 @@ class EntityManager {
             // console.log(platform)
             platform.render();
         }
-
-        this.slot.render();
+        for (let slot of this.gooberSlots) {
+            slot.render();
+        }
 
         // render trigger box
         if (this.triggerBox) {
-        this.triggerBox.render();
+            this.triggerBox.render();
         }
     }
 
-    loadBossLevel() { 
+    loadBossLevel() {
 
         //clear old level arrays etc.
         this.enemies = [];
@@ -111,19 +114,19 @@ class EntityManager {
         this.collidables = [];
 
         this.levelBG = new Sprite({
-            position: { x: 0, y: 0},
+            position: { x: 0, y: 0 },
             imageSrc: 'assets/images/gameBG.png',
         });
 
         this.gooberSlots = [];
 
         for (let i = 0; i < 5; i++) {
-            this.gooberSlots.push(new GooberSlots(300 + i*60, 450))
+            this.gooberSlots.push(new GooberSlots(300 + i * 60, 450))
         }
 
         // instancing new boss
-        let boss = new Boss(500,300 , 150, 150);
-        this.enemies.push(boss);
+        this.boss = new Boss(500, 300, 150, 150, this);
+        this.enemies.push(this.boss);
 
 
         // different player position
@@ -138,24 +141,37 @@ class EntityManager {
         // maybe track game state? 
     }
 
-    createBossPlatforms(){
+    createBossPlatforms() {
 
-       this.platforms.push(new Platform(200, 500, 200, 50))     
+        this.platforms.push(new Platform(200, 500, 200, 50))
     }
 
     checkSlots() {
+        
+        if (this.gooberSlots.length === 0) {
+            return;
+        }
 
-        let allFilled = this.gooberSlots.every(slot => slot.isFilled);
+        
+        let allFilled = true;
+        for (let i = 0; i < this.gooberSlots.length; i++) {
+            if (!this.gooberSlots[i].isFilled) {
+                allFilled = false;
+                break;
+            }
+        }
+
+        
         if (allFilled) {
+            
+            this.boss.advancePhase();
 
-            this.boss.takeDamage();
-
-            resetSlotsAndGoobers();
+            this.resetSlotsAndGoobers();
         }
     }
 
     resetSlotsAndGoobers() {
-        
+
         for (let slot of this.gooberSlots) {
             slot.isFilled = false;
         }
@@ -163,7 +179,7 @@ class EntityManager {
         for (let i = 0; i < 5; i++) {
             const someX = random(100, 1000);
             const someY = random(100, 600);
-            let gooberItem = new Item(someX, someY, 50, 50, entityManager.items);
+            let gooberItem = new Item(someX, someY, 50, 50, this.items);
             this.items.push(gooberItem);
         }
     }
