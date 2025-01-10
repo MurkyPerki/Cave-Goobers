@@ -11,7 +11,7 @@ class Player {
         this.playerGravity = 2;
 
         this.gooberCount = 5;
-        this.health = 5;
+        this.health = 5
 
         this.isJumping = false;
         this.isFalling = false;
@@ -70,17 +70,31 @@ class Player {
         image(tempSprite, this.x, this.y, this.width, this.height)
         strokeWeight(3)
         //stroke(0, 255, 0);
+        noStroke()
         noFill();
         rect(this.x, this.y, this.width, this.height);
 
-        stroke(0, 255, 0);
-        const cBox = this.collisionBox;
-        rect(
-            this.x + cBox.offsetX,
-            this.y + cBox.offsetY,
-            cBox.width,
-            cBox.height
-        );
+        // stroke(0, 255, 0);
+        // const cBox = this.collisionBox;
+        // rect(
+        //     this.x + cBox.offsetX,
+        //     this.y + cBox.offsetY,
+        //     cBox.width,
+        //     cBox.height
+        // );
+    }
+
+    takeDamage() {
+        console.log("player took damage")
+        this.health--;
+        if (this.health <= 0) {
+            this.die();
+        }
+
+    }
+
+    die(){
+        // put game overscreen here
     }
 
     walk() {

@@ -17,6 +17,7 @@ class Platform {
             fill(150, 0, 60);  
         } else {
             // The default style
+            noStroke();
             fill(33, 49, 35, 10);
         }
 

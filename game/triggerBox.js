@@ -30,10 +30,10 @@ class TriggerBox {
 
     render() {
 
-        push();
-        fill(0, 255, 0, 50);
-        rect(this.x, this.y, this.width, this.height);
-        pop();
+        // push();
+        // fill(0, 255, 0, 50, 0);
+        // rect(this.x, this.y, this.width, this.height);
+        // pop();
 
     }
 }

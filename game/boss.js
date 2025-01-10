@@ -186,11 +186,14 @@ class Boss extends Enemy {
 
         // phase 3
         if (this.currentPhase === 2) {
-            plats.push(new Platform(100, 300, 200, 40,true));
+            plats.push(new Platform(100, 567, 200, 40,true));
+            plats.push(new Platform(1300, 900, 200, 40,true));
+            plats.push(new Platform(500, 200, 200, 40,true));
             plats.push(new Platform(0, 1000, width, 50,true))
         }
 
         if (this.currentPhase === 3) {
+            plats.push(new Platform(100, 300, 200, 40,true));
             plats.push(new Platform(100, 300, 200, 40,true));
             plats.push(new Platform(0, 1000, width, 50,true))
         }
@@ -201,12 +204,21 @@ class Boss extends Enemy {
         const slots = this.entityManager.gooberSlots;
 
         if (this.currentPhase === 1) {
-            slots[0].x = 600; slots[0].y = 400;
+            console.log("phase1")
+            slots[0].x = 100; slots[0].y = 400;
             slots[1].x = 300; slots[1].y = 220;
-            slots[2].x = 400; slots[2].y = 250;
-            slots[3].x = 500; slots[3].y = 280;
-            slots[4].x = 600; slots[4].y = 200;
+            slots[2].x = 400; slots[2].y = 900;
+            slots[3].x = 700; slots[3].y = 800;
+            slots[4].x = 1200; slots[4].y = 500;
         } else if (this.currentPhase === 2) {
+            console.log("phase2")
+            slots[0].x = 100; slots[0].y = 300;
+            slots[1].x = 400; slots[1].y = 400;
+            slots[2].x = 900; slots[2].y = 600;
+            slots[3].x = 950; slots[3].y = 950;
+            slots[4].x = 1500; slots[4].y = 200;
+        }  else if (this.currentPhase === 3) {
+            console.log("phase3")
             slots[0].x = 100; slots[0].y = 300;
             slots[1].x = 150; slots[1].y = 350;
             slots[2].x = 200; slots[2].y = 400;
