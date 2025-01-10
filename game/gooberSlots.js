@@ -11,8 +11,7 @@ class GooberSlots {
     update(player, boss) {
 
         if (Collision.isColliding(this.x, this.y, this.width, this.height, player)) {
-            if (player.gooberCount > 0 && !this.isFIlled) {
-
+            if (player.gooberCount > 0 && !this.isFilled) {
                 player.gooberCount--;
                 this.isFilled = true;
             }
@@ -26,7 +25,7 @@ class GooberSlots {
 
         push();
         fill(this.isFilled ? 'yellow' : 'white');
-        Rect(this.x, this.y, this.width, this.height);
+        rect(this.x, this.y, this.width, this.height);
         pop();
     }
 }

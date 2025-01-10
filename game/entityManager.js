@@ -64,6 +64,14 @@ class EntityManager {
             item.update(this.player);
         }
 
+        if (this.gooberSLots) {
+            for (let slot of this.gooberSlots) {
+                slot.update(this.player);
+            }
+
+            this.checkSlots();
+        }
+
         PhysicsSystem.updateProjectiles(this.projectiles, this.player, this.platforms);
     }
 
@@ -85,6 +93,8 @@ class EntityManager {
             platform.render();
         }
 
+        this.slot.render();
+
         // render trigger box
         if (this.triggerBox) {
         this.triggerBox.render();
@@ -94,41 +104,51 @@ class EntityManager {
     loadBossLevel() { 
 
         //clear old level arrays etc.
-        entityManager.enemies = [];
-        entityManager.platforms = [];
-        entityManager.projectiles = [];
-        entityManager.items = [];
-        entityManager.collidables = [];
+        this.enemies = [];
+        this.platforms = [];
+        this.projectiles = [];
+        this.items = [];
+        this.collidables = [];
 
-        entityManager.levelBG = new Sprite({
+        this.levelBG = new Sprite({
             position: { x: 0, y: 0},
             imageSrc: 'assets/images/gameBG.png',
         });
 
-        entityManager.gooberSlots = [];
+        this.gooberSlots = [];
 
         for (let i = 0; i < 5; i++) {
-            entityManager.gooberSlots.push(new GooberSlots(300 + i*60, 450))
+            this.gooberSlots.push(new GooberSlots(300 + i*60, 450))
         }
 
         // instancing new boss
         let boss = new Boss(500,300 , 150, 150);
-        entityManager.enemies.push(boss);
+        this.enemies.push(boss);
 
 
         // different player position
-        entityManager.player.x = 200;
-        entityManager.player.y = 400;
+        this.player.x = 200;
+        this.player.y = 400;
+
+        //helper func for creating first set of platforms
+        this.createBossPlatforms(this.platforms);
+
+        this.collidables = [...this.platforms, ...this.enemies];
 
         // maybe track game state? 
     }
 
+    createBossPlatforms(){
+
+       this.platforms.push(new Platform(200, 500, 200, 50))     
+    }
+
     checkSlots() {
 
-        let allFilled = entityManager.gooberSlots.every(slot => slot.isFilled);
+        let allFilled = this.gooberSlots.every(slot => slot.isFilled);
         if (allFilled) {
 
-            entityManager.boss.takeDamage();
+            this.boss.takeDamage();
 
             resetSlotsAndGoobers();
         }
@@ -136,13 +156,15 @@ class EntityManager {
 
     resetSlotsAndGoobers() {
         
-        for (let slot of entityManager.gooberSlots) {
+        for (let slot of this.gooberSlots) {
             slot.isFilled = false;
         }
 
         for (let i = 0; i < 5; i++) {
+            const someX = random(100, 1000);
+            const someY = random(100, 600);
             let gooberItem = new Item(someX, someY, 50, 50, entityManager.items);
-            entityManager.items.push(gooberItem);
+            this.items.push(gooberItem);
         }
     }
 }
