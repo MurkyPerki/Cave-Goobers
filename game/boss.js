@@ -1,7 +1,8 @@
 class Boss extends Enemy { 
 
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, entityManager) {
        super(x, y, width, height ) 
+       this.entityManager = entityManager;
 
 
        this.health = 3;
@@ -31,12 +32,14 @@ class Boss extends Enemy {
         // probably no movement, overwriting parent class
     }
 
-    update(player, platforms, projectiles){
+    update(player){
+
+        const projectiles = this.entityManager.projectiles;
 
         this.handleTimers(player, projectiles);
 
         if (this.health < this.currentPhase) {
-            this.advancePhase(platforms)
+            this.advancePhase()
         }
 
     }
@@ -78,20 +81,31 @@ class Boss extends Enemy {
         }
     }
 
-    advancePhase(platforms) {
+    advancePhase() {
         
         this.currentPhase++;
 
         // im clearing platforms
-        platforms.length = 0;
+        this.entityManager.platforms.length = 0;
 
-        this.repositionPlatforms(platforms);
+        this.repositionPlatforms();
+
+        this.entityManager.gooberSlots.forEach((slot, index) => {
+            slot.x = 200 + index * 80;
+            slot.y = 300;            
+        });
     }
 
 
-    repositionPlatforms(platforms) {
-        
+    repositionPlatforms() {
 
+        if (this.currentPhase === 2) {
+            platforms.push(new Platform(200, 500, 250, 50));
+            platforms.push(new Platform(100, 300, 200, 40));
+        }
+        if (this.currentPhase === 3) {
+            platforms.push(new Platform(100, 300, 200, 40));
+        }
     }
 
 
