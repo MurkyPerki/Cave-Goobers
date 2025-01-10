@@ -1,7 +1,7 @@
 
 class EntityManager {
     constructor() {
-        this.player = new Player(400, 700, 100, 100);
+        this.player = new Player(825, 5260, 100, 100);
         this.enemies = [];
         this.items = [];
         this.platforms = [];
@@ -26,11 +26,11 @@ class EntityManager {
         // this.enemies.push(new Enemy(10, 200, 30, 30));
         // this.enemies.push(new WindEnemy(200, 700, 30, 30));
         //items
-        this.items.push(new Item(905, 2958, 100, 80, this.items))
+        this.items.push(new Item(905, 2600, 100, 80, this.items))
         this.items.push(new Item(152, 1940, 100, 80, this.items))
         this.items.push(new Item(1301, 3476, 100, 80, this.items))
         this.items.push(new Item(303, 4794, 100, 80, this.items))
-        this.items.push(new Item(84, 3800, 100, 80, this.items))
+        this.items.push(new Item(84, 3600, 100, 80, this.items))
         //boss level triggerBox
         this.triggerBox = new TriggerBox(0, 1000, width, 50)
 
@@ -118,7 +118,7 @@ class EntityManager {
 
         this.levelBG = new Sprite({
             position: { x: 0, y: 0 },
-            imageSrc: 'assets/images/gameBG.png',
+            imageSrc: 'assets/images/old gameBG.png',
         });
 
         this.gooberSlots = [];
@@ -152,12 +152,12 @@ class EntityManager {
 
     createBossPlatforms() {
 
-        this.platforms.push(new Platform(300, 600, 200, 50))
-        this.platforms.push(new Platform(1400, 800, 200, 50))
-        this.platforms.push(new Platform(700, 700, 150, 50))
-        this.platforms.push(new Platform(1000, 700, 160, 50))
-        this.platforms.push(new Platform(1200, 650, 100, 50))
-        this.platforms.push(new Platform(0, 1000, width, 50))
+        this.platforms.push(new Platform(300, 600, 200, 50,true))
+        this.platforms.push(new Platform(1400, 800, 200, 50,true))
+        this.platforms.push(new Platform(700, 700, 150, 50,true))
+        this.platforms.push(new Platform(1000, 700, 160, 50,true))
+        this.platforms.push(new Platform(1200, 650, 100, 50,true))
+        this.platforms.push(new Platform(0, 1000, width, 50,true))
     }
 
     checkSlots() {

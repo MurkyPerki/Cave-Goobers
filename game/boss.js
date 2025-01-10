@@ -178,21 +178,21 @@ class Boss extends Enemy {
 
         // phase 2
         if (this.currentPhase === 1) {
-            plats.push(new Platform(200, 500, 250, 50));
-            plats.push(new Platform(100, 300, 200, 40));
-            plats.push(new Platform(800, 300, 200, 40));
-            plats.push(new Platform(0, 1000, width, 50))
+            plats.push(new Platform(200, 500, 250, 50,true));
+            plats.push(new Platform(100, 300, 200, 40,true));
+            plats.push(new Platform(800, 300, 200, 40,true));
+            plats.push(new Platform(0, 1000, width, 50,true))
         }
 
         // phase 3
         if (this.currentPhase === 2) {
-            plats.push(new Platform(100, 300, 200, 40));
-            plats.push(new Platform(0, 1000, width, 50))
+            plats.push(new Platform(100, 300, 200, 40,true));
+            plats.push(new Platform(0, 1000, width, 50,true))
         }
 
         if (this.currentPhase === 3) {
-            plats.push(new Platform(100, 300, 200, 40));
-            plats.push(new Platform(0, 1000, width, 50))
+            plats.push(new Platform(100, 300, 200, 40,true));
+            plats.push(new Platform(0, 1000, width, 50,true))
         }
     }
 

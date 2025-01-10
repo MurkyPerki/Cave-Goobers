@@ -10,6 +10,9 @@ class Player {
         this.verticalVelocity = 0;
         this.playerGravity = 2;
 
+        this.gooberCount = 5;
+        this.health = 5;
+
         this.isJumping = false;
         this.isFalling = false;
         this.onPlatform = false;
