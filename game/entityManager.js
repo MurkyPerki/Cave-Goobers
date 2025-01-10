@@ -122,9 +122,15 @@ class EntityManager {
 
         this.gooberSlots = [];
 
-        for (let i = 0; i < 5; i++) {
-            this.gooberSlots.push(new GooberSlots(300 + i * 60, 450))
-        }
+        // for (let i = 0; i < 5; i++) {
+        //     this.gooberSlots.push(new GooberSlots(300 + i * 60, 450))
+        // }
+
+        this.gooberSlots.push(new GooberSlots(300, 400, 60, 450))
+        this.gooberSlots.push(new GooberSlots(1400, 400 , 60, 450))
+        this.gooberSlots.push(new GooberSlots(700, 500,  60, 450))
+        this.gooberSlots.push(new GooberSlots(1000, 600,  60, 450))
+        this.gooberSlots.push(new GooberSlots(1200, 600,  60, 450))
 
         // instancing new boss
         this.boss = new Boss(width / 2, 950, 150, 150, this);
@@ -145,7 +151,11 @@ class EntityManager {
 
     createBossPlatforms() {
 
-        this.platforms.push(new Platform(200, 500, 200, 50))
+        this.platforms.push(new Platform(300, 600, 200, 50))
+        this.platforms.push(new Platform(1400, 800, 200, 50))
+        this.platforms.push(new Platform(700, 700, 150, 50))
+        this.platforms.push(new Platform(1000, 700, 160, 50))
+        this.platforms.push(new Platform(1200, 650, 100, 50))
         this.platforms.push(new Platform(0, 1000, width, 50))
     }
 

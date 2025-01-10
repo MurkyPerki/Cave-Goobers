@@ -4,33 +4,26 @@ class Boss extends Enemy {
         super(x, y, width, height)
         this.entityManager = entityManager;
 
-
-        this.health = 3;
-        this.currentPhase = 1
+        this.health = 4;
+        this.currentPhase = 0
         this.maxPhases = 3;
 
-        this.isSwiping = false;
-        this.swipeCooldown = 180;
-        this.swipeTimer = 0;
-        this.swipeAnimationTimer = 0;
+        this.isCharging = false;
+        this.chargeFrames = 30;
+        this.chargeTimer = 0;
+        this.slamCooldown = 180;
+        this.slamCooldownTimer = 0;
+        this.chargeRed = 0;
 
         this.isShooting = false;
-        this.projectileSpeed = 10;      
-        this.projectileWidth = 20;     
+        this.projectileSpeed = 10;
+        this.projectileWidth = 20;
         this.projectileHeight = 20;
-        this.projectileRange = 2000;    
-        this.projectileCooldown = 100;    
-        this.lastProjectileFrame = 0;       
-        
-        
-
-
-
+        this.projectileRange = 2000;
+        this.projectileCooldown = 100;
+        this.lastProjectileFrame = 0;
 
         this.isPhaseChanging = false;
-
-
-
         // add hitbox just like in player 
 
     }
@@ -44,7 +37,7 @@ class Boss extends Enemy {
     update(player, projectiles) {
 
 
-        this.handleTimers(player, projectiles);
+        this.handleSlamLogic(player, projectiles);
 
 
         if (frameCount - this.lastProjectileFrame > this.projectileCooldown) {
@@ -58,35 +51,75 @@ class Boss extends Enemy {
         if (this.health < this.currentPhase) {
             this.advancePhase()
         }
-    
+
     }
 
 
-    handleTimers(player, projectiles) {
+    handleSlamLogic(player) {
 
-        if (this.swipeTimer > 0) {
-            this.swipeTimer--;
-        }
-    
-        if (player.isGrounded && this.swipeTimer <= 0) {
-            this.doSwipeAttack(player);
-            this.swipeTimer = this.swipeCooldown; // reset
-        }
 
-        if (this.swipeAnimationTimer > 0) {
-            this.swipeAnimationTimer--;
-            if (this.swipeAnimationTimer === 0) {
-                this.isSwiping = false;
-                // do an area of effect damage check here
+        if (!this.isCharging) {
+            if (this.slamCooldownTimer > 0) {
+                this.slamCooldownTimer--;
+            } else {
+                this.startSlamCharge();
             }
+        }
+        else {
+
+            this.chargeTimer--;
+
+
+            let progress = 1 - (this.chargeTimer / this.chargeFrames);
+            this.chargeRed = Math.floor(progress * 255);
+
+
+            if (this.chargeTimer <= 0) {
+                this.performSlamDamage(player);
+                // Reset
+                this.isCharging = false;
+                this.chargeRed = 0;      // back to normal color
+                this.chargeTimer = 0;
+                this.slamCooldownTimer = this.slamCooldown;
+            }
+        }
     }
-}
 
-    doSwipeAttack(player) {
-        this.isSwiping = true;
-        this.swipeAnimationTimer = 30;
+    startSlamCharge() {
+        this.isCharging = true;
+        this.chargeTimer = this.chargeFrames; // 30
+        this.chargeRed = 0;
+    }
 
-        console.log("boss swipes ground")
+
+
+
+    performSlamDamage(player) {
+        console.log("did slam damage")
+
+        let slamX = 0;
+        let slamY = this.y + this.height;
+        let slamW = width;
+        let slamH = 50;
+
+        let playerx = player.x + player.collisionBox.offsetX;
+        let playery = player.y + player.collisionBox.offsetY;
+        let playerw = player.collisionBox.width;
+        let playerh = player.collisionBox.height;
+
+        if (Collision.isColliding(
+            slamX, slamY, slamW, slamH,
+            {
+                x: playerx,
+                y: playery,
+                width: playerw,
+                height: playerh
+            })) {
+
+            console.log("player got hit")
+            player.health--;
+        }
+
     }
 
     isPlayerInRange(player) {
@@ -126,13 +159,15 @@ class Boss extends Enemy {
     advancePhase() {
 
         this.currentPhase++;
-
         // im clearing platforms
         this.entityManager.platforms.length = 0;
-
         this.repositionPlatforms();
-
         this.positionGooberSlots()
+
+        this.entityManager.collidables = [
+            ...this.entityManager.platforms,
+            ...this.entityManager.enemies
+        ]
     }
 
 
@@ -142,14 +177,22 @@ class Boss extends Enemy {
 
 
         // phase 2
-        if (this.currentPhase === 2) {
+        if (this.currentPhase === 1) {
             plats.push(new Platform(200, 500, 250, 50));
             plats.push(new Platform(100, 300, 200, 40));
+            plats.push(new Platform(800, 300, 200, 40));
+            plats.push(new Platform(0, 1000, width, 50))
         }
 
         // phase 3
+        if (this.currentPhase === 2) {
+            plats.push(new Platform(100, 300, 200, 40));
+            plats.push(new Platform(0, 1000, width, 50))
+        }
+
         if (this.currentPhase === 3) {
             plats.push(new Platform(100, 300, 200, 40));
+            plats.push(new Platform(0, 1000, width, 50))
         }
     }
 
@@ -157,16 +200,18 @@ class Boss extends Enemy {
     positionGooberSlots() {
         const slots = this.entityManager.gooberSlots;
 
-        if (this.currentPhase === 2) {
-            for (let i = 0; i < slots.length; i++) {
-                slots[i].x = 200 + (i * 80);
-                slots[i].y = 200;
-            }
-        } else if (this.currentPhase === 3) {
-            for (let i = 0; i < slots.length; i++) {
-                slots[i].x = 600 + (i * 60);
-                slots[i].y = 400;
-            }
+        if (this.currentPhase === 1) {
+            slots[0].x = 600; slots[0].y = 400;
+            slots[1].x = 300; slots[1].y = 220;
+            slots[2].x = 400; slots[2].y = 250;
+            slots[3].x = 500; slots[3].y = 280;
+            slots[4].x = 600; slots[4].y = 200;
+        } else if (this.currentPhase === 2) {
+            slots[0].x = 100; slots[0].y = 300;
+            slots[1].x = 150; slots[1].y = 350;
+            slots[2].x = 200; slots[2].y = 400;
+            slots[3].x = 250; slots[3].y = 450;
+            slots[4].x = 300; slots[4].y = 500;
         }
     }
 
@@ -184,11 +229,7 @@ class Boss extends Enemy {
         // image for boss 
 
         push();
-        if (this.isSwiping) {
-            fill(255, 0, 0)
-        } else {
-            fill(255);
-        }
+        fill(255, 255 - this.chargeRed, 255 - this.chargeRed);
         rect(this.x, this.y, this.width, this.height);
         pop();
 
