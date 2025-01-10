@@ -10,11 +10,13 @@ class GooberSlots {
 
     update(player) {
 
-        if (Collision.isColliding(this.x, this.y, this.width, this.height, player)) {
+        if (Collision.isColliding(player.collisionBox.x, player.collisionBox.y, player.collisionBox.width, player.collisionBox.height, this)) {
             if (player.gooberCount > 0 && !this.isFilled) {
                 player.gooberCount--;
                 this.isFilled = true;
             }
+
+            console.log("goobers placed. player goobers:", player.gooberCount)
         }
 
 

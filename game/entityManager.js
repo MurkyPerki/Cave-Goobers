@@ -25,9 +25,11 @@ class EntityManager {
         // this.enemies.push(new Enemy(10, 200, 30, 30));
         // this.enemies.push(new WindEnemy(200, 700, 30, 30));
         //items
-        this.items.push(new Item(750, 500, 100, 80, this.items))
-        this.items.push(new Item(100, 350, 100, 80, this.items))
-        this.items.push(new Item(900, 200, 100, 80, this.items))
+        this.items.push(new Item(905, 2958, 100, 80, this.items))
+        this.items.push(new Item(152, 1940, 100, 80, this.items))
+        this.items.push(new Item(1301, 3476, 100, 80, this.items))
+        this.items.push(new Item(303, 4794, 100, 80, this.items))
+        this.items.push(new Item(84, 3800, 100, 80, this.items))
         //boss level triggerBox
         this.triggerBox = new TriggerBox(0, 1000, width, 50)
 
@@ -164,6 +166,8 @@ class EntityManager {
 
         
         if (allFilled) {
+
+            this.boss.takeDamage();
             
             this.boss.advancePhase();
 

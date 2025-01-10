@@ -95,7 +95,7 @@ class Boss extends Enemy {
 
         this.repositionPlatforms();
 
-        positionGooberSlots()
+        this.positionGooberSlots()
     }
 
 
@@ -137,7 +137,7 @@ class Boss extends Enemy {
 
     die() {
 
-        console.log("boss is dead")
+        console.log("boss is dead, you win?")
         // show end screen
     }
 
