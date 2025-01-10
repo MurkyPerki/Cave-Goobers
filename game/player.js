@@ -25,21 +25,18 @@ class Player {
             width: 800,
             height: 600,
         }
-
         this.collisionBox = {
             offsetX: 15,
             offsetY: 10,
             width: width - 35,
             height: height - 17
         }
-
         this.wallCollDetectionBoxLeft = {
             x: this.x - 25,
             y: this.y + 30,
             width: 25,
             height: 25,
         }
-
         this.wallCollDetectionBoxRight = {
             x: this.x + 25,
             y: this.y + 30,
@@ -71,8 +68,7 @@ class Player {
         noFill();
         rect(this.x, this.y, this.width, this.height);
 
-
-       // stroke(0, 255, 0);
+        // stroke(0, 255, 0);
         const cBox = this.collisionBox;
         rect(
             this.x + cBox.offsetX,
@@ -81,7 +77,6 @@ class Player {
             cBox.height
         );
     }
-
 
     walk() {
         this.horizontalVelocity *= 0.8;
@@ -92,7 +87,6 @@ class Player {
         if ((keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
             this.horizontalVelocity -= this.playerSpeed;
         }
-
     }
 
     jump() {
@@ -108,24 +102,40 @@ class Player {
             this.jumpCount++;
         }
 
-        // wall jump
+    }
+
+    walkJump() {
+        //nieuwe counters
+
+        // wall jump left 
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
             && this.jumpCount < this.maxJump
-            && this.collided) {
-            console.log('yayayay')
+            && this.collidedLeft) {
             this.verticalVelocity = 36;
             this.isJumping = true;
             this.jumpCount++
-
         }
+
+        // wall jump right
+        if ((keyIsDown(UP_ARROW) || keyIsDown(32))
+            && !this.isJumping
+            && this.jumpCount < this.maxJump
+            && this.collidedRight) {
+            this.verticalVelocity = 36;
+            this.isJumping = true;
+            this.jumpCount++
+        }
+    }
+    
+    healthbar() {
+        
     }
 
     //! maybe we should rename this method its confusing.
     applyGravity() {
         // update player y pos
         this.y -= this.verticalVelocity;
-
         if (this.isJumping || this.isFalling) {
             this.verticalVelocity -= this.playerGravity;
             this.isFalling = true;
@@ -184,18 +194,14 @@ class Player {
             height: 25,
 
         }
-
         //right side (yellow colored)
         this.wallCollDetectionBoxRight = {
             x: this.x + 100,
             y: this.y + 30,
             width: 25,
             height: 25,
-
         }
     }
-
-
 
     renderWallCollDectBox() {
         fill(252, 3, 232);
@@ -214,10 +220,11 @@ class Player {
         )
     }
 
-    checkWallColl(collidables) { //rename to walljump or sm
-        this.collided = false;
-
+    checkWallColl(collidables) {
+        this.collidedLeft = false;
+        this.collidedRight = false;
         // checks collision for every platform in platforms array
+        // left wallHitbox
         for (let platform of collidables) {
             if (Collision.isColliding(
                 this.wallCollDetectionBoxLeft.x,
@@ -226,12 +233,12 @@ class Player {
                 this.wallCollDetectionBoxLeft.height,
                 platform
             )) {
-                this.collided = true;
+                this.collidedLeft = true;
                 break;
             }
         }
 
-        // right side player
+        // right wallHitbox
         for (let platform of collidables) {
             if (Collision.isColliding(
                 this.wallCollDetectionBoxRight.x,
@@ -240,25 +247,20 @@ class Player {
                 this.wallCollDetectionBoxRight.height,
                 platform
             )) {
-                this.collided = true;
+                this.collidedRight = true;
                 break;
             }
         }
-
     }
 
     handleCollisions(collidables) {
         Collision.handleCollisions(this, collidables);
-
         if (this.isGrounded) {
             // But the collision code might already be handling the snapping.
         } else {
             this.isFalling = true;
         }
-
-
     }
-
 
     renderDebug() {
         // Debug information

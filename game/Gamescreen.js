@@ -14,6 +14,4 @@ class Gamescreen {
         textSize(24); 
         text("Press space to begin", this.x / 2, this.y / 2 + 20);
     }
-
-
 }

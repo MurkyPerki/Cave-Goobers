@@ -11,7 +11,6 @@ class Item {
         this.aniRange = 10;
         this.isPickedUp = false;
         this.items = items;
-
     }
 
     update(player) {
