@@ -10,7 +10,7 @@ class Boss extends Enemy {
        this.swipeTimer = 0;
 
        this.isShooting = false;
-       this.projectileTImer = 240;
+       this.projectileCooldown = 240;
        this.projectileTimer = 0;
 
        this.currentPhase = 1
@@ -33,7 +33,7 @@ class Boss extends Enemy {
 
     update(player, platforms, projectiles){
 
-        this.handleTimer(player, projectiles);
+        this.handleTimers(player, projectiles);
 
         if (this.health < this.currentPhase) {
             this.advancePhase(platforms)
@@ -105,7 +105,7 @@ class Boss extends Enemy {
         // image for boss 
 
         push();
-        fill();
+        fill(255);
         rect(this.x, this.y, this.width, this.height); 
         pop();
 

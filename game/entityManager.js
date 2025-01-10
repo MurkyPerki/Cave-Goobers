@@ -100,6 +100,11 @@ class EntityManager {
         entityManager.items = [];
         entityManager.collidables = [];
 
+        entityManager.levelBG = new Sprite({
+            position: { x: 0, y: 0},
+            imageSrc: 'assets/images/gameBG.png',
+        });
+
         // instancing new boss
         let boss = new Boss(500,300 , 150, 150);
         entityManager.enemies.push(boss);
