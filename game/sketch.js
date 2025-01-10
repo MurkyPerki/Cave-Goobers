@@ -27,6 +27,7 @@ function setup() {
     drawManager = new DrawManager();
     entityManager = new EntityManager();
     gameScreen = new Gamescreen();
+    databaseManager = new Databasemanager();
 
     entityManager.initializeEntities();
 
