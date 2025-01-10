@@ -48,6 +48,7 @@ class Player {
     update(collidables) {
         this.walk();
         this.jump();
+        this.wallJump();
         this.applyGravity();
         this.updateCameraBox();
         this.updateCameraPosition();
@@ -104,33 +105,21 @@ class Player {
 
     }
 
-    walkJump() {
+    wallJump() {
         //nieuwe counters
 
-        // wall jump left 
+        // wall jump
         if ((keyIsDown(UP_ARROW) || keyIsDown(32))
             && !this.isJumping
             && this.jumpCount < this.maxJump
-            && this.collidedLeft) {
+            && this.collided) {
+            console.log('yayayay')
             this.verticalVelocity = 36;
             this.isJumping = true;
             this.jumpCount++
         }
+    }
 
-        // wall jump right
-        if ((keyIsDown(UP_ARROW) || keyIsDown(32))
-            && !this.isJumping
-            && this.jumpCount < this.maxJump
-            && this.collidedRight) {
-            this.verticalVelocity = 36;
-            this.isJumping = true;
-            this.jumpCount++
-        }
-    }
-    
-    healthbar() {
-        
-    }
 
     //! maybe we should rename this method its confusing.
     applyGravity() {
@@ -221,8 +210,7 @@ class Player {
     }
 
     checkWallColl(collidables) {
-        this.collidedLeft = false;
-        this.collidedRight = false;
+        this.collided = false;
         // checks collision for every platform in platforms array
         // left wallHitbox
         for (let platform of collidables) {
@@ -233,7 +221,7 @@ class Player {
                 this.wallCollDetectionBoxLeft.height,
                 platform
             )) {
-                this.collidedLeft = true;
+                this.collided = true;
                 break;
             }
         }
@@ -247,7 +235,7 @@ class Player {
                 this.wallCollDetectionBoxRight.height,
                 platform
             )) {
-                this.collidedRight = true;
+                this.collided = true;
                 break;
             }
         }
