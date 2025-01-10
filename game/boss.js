@@ -6,6 +6,9 @@ class Boss extends Enemy {
 
 
        this.health = 3;
+       this.currentPhase = 1
+       this.maxPhases = 3;
+
        this.isSwiping = false;
        this.swipeCooldown = 180;
        this.swipeTimer = 0;
@@ -14,8 +17,7 @@ class Boss extends Enemy {
        this.projectileCooldown = 240;
        this.projectileTimer = 0;
 
-       this.currentPhase = 1
-       this.maxPhases = 3;
+       
 
 
        this.isPhaseChanging = false;
@@ -57,7 +59,7 @@ class Boss extends Enemy {
 
         if (player.isGrounded && this.swipeTimer <= 0) {
             this.doSwipeAttack(player);
-            this.swipeTimer = this.swipeCooldown;
+            this.swipeTimer = this.swipeCooldown; // reset
         }
 
         if (this.projectileTimer <= 0) {
@@ -77,6 +79,8 @@ class Boss extends Enemy {
 
     takeDamage() {
         this.health--;
+        console.log("boss took damage! health is now", this.health)
+
        if (this.health <= 0) {
             this.die();
         }
@@ -91,24 +95,44 @@ class Boss extends Enemy {
 
         this.repositionPlatforms();
 
-        for (let i = 0; i < this.entityManager.gooberSlots.length; i++) {
-            let slot = this.entityManager.gooberSlots[i];
-            slot.x = 200 + i * 80;
-            slot.y = 300;
-        }
+        positionGooberSlots()
     }
 
 
     repositionPlatforms() {
+        // so its smaller and i dont have to type it out.
+        const plats = this.entityManager.platforms;
 
+
+        // phase 2
         if (this.currentPhase === 2) {
-            this.entityManager.platforms.push(new Platform(200, 500, 250, 50));
-            this.entityManager.platforms.push(new Platform(100, 300, 200, 40));
+            plats.push(new Platform(200, 500, 250, 50));
+            plats.push(new Platform(100, 300, 200, 40));
         }
+
+        // phase 3
         if (this.currentPhase === 3) {
-            this.entityManager.platforms.push(new Platform(100, 300, 200, 40));
+            plats.push(new Platform(100, 300, 200, 40));
         }
     }
+
+
+    positionGooberSlots() {
+        const slots = this.entityManager.gooberSlots;
+
+        if (this.currentPhase === 2) {
+            for (let i = 0; i < slots.length; i++) {
+                slots[i].x = 200 + (i * 80);
+                slots[i].y = 200; 
+            }
+        } else if (this.currentPhase === 3) {
+            for (let i = 0; i < slots.length; i++) {
+                slots[i].x = 600 + (i * 60);
+                slots[i].y = 400;
+            }
+        }
+    }
+
 
 
     die() {
