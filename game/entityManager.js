@@ -125,7 +125,7 @@ class EntityManager {
         }
 
         // instancing new boss
-        this.boss = new Boss(500, 300, 150, 150, this);
+        this.boss = new Boss(width / 2, 950, 150, 150, this);
         this.enemies.push(this.boss);
 
 
@@ -144,6 +144,7 @@ class EntityManager {
     createBossPlatforms() {
 
         this.platforms.push(new Platform(200, 500, 200, 50))
+        this.platforms.push(new Platform(0, 1000, width, 50))
     }
 
     checkSlots() {

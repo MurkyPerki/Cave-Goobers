@@ -37,7 +37,8 @@ class Boss extends Enemy {
         const projectiles = this.entityManager.projectiles;
 
         this.handleTimers(player, projectiles);
-
+        
+        // is for phase up logic.
         if (this.health < this.currentPhase) {
             this.advancePhase()
         }
@@ -90,21 +91,22 @@ class Boss extends Enemy {
 
         this.repositionPlatforms();
 
-        this.entityManager.gooberSlots.forEach((slot, index) => {
-            slot.x = 200 + index * 80;
-            slot.y = 300;            
-        });
+        for (let i = 0; i < this.entityManager.gooberSlots.length; i++) {
+            let slot = this.entityManager.gooberSlots[i];
+            slot.x = 200 + i * 80;
+            slot.y = 300;
+        }
     }
 
 
     repositionPlatforms() {
 
         if (this.currentPhase === 2) {
-            platforms.push(new Platform(200, 500, 250, 50));
-            platforms.push(new Platform(100, 300, 200, 40));
+            this.entityManager.platforms.push(new Platform(200, 500, 250, 50));
+            this.entityManager.platforms.push(new Platform(100, 300, 200, 40));
         }
         if (this.currentPhase === 3) {
-            platforms.push(new Platform(100, 300, 200, 40));
+            this.entityManager.platforms.push(new Platform(100, 300, 200, 40));
         }
     }
 
