@@ -84,7 +84,12 @@ class Player {
     }
 
     walk() {
-        this.horizontalVelocity *= 0.8;
+
+        if (this.isGrounded) {
+            this.horizontalVelocity *= 0.5; 
+        } else {
+            this.horizontalVelocity *= 0.8; 
+        }
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
             this.horizontalVelocity += this.playerSpeed;
