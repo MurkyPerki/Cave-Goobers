@@ -1,0 +1,22 @@
+MDA Formulier
+Mechanics
+-	Jumping: De speler moet omhoog springen om obstakels te overwinnen of doelen te bereiken.
+-	Hold-jump: De speler kan een langere sprong maken door de sprongknop ingedrukt te houden.
+-	Walking: Beweging door het level.
+-	Pick up: Items zoals goobers en health verzamelen.
+Dynamics
+-	Collecting: Het verzamelen van goobers en gezondheidsitems biedt een gevoel van vooruitgang en beloning.
+-	Exploring: Het ontdekken van nieuwe gebieden in de spelwereld.
+-	Fighting: Het verslaan van vijanden, inclusief een eindbaasgevecht.
+-	Escape: Het vermijden van gevaren en obstakels om te overleven.
+Aesthetics
+-	Fantasy: De game wereld is verzonnen met goobers (soort orcs), een cave met verschillende biomes.
+-	Discovery: Een gevoel van ontdekking en uitdaging.
+-	Sensation: Het gevoel van spanning bij gevechten en uitdagingen.
+-	Expression: De speler kan zijn/haar eigen stijl en strategie kiezen (alle items verzamelen, maar dan wel een moeilijkere pad kiezen of niet alle items maar een makkelijkere pad).
+-	Challenge: Het bereiken van de top en het overwinnen van de eindbaas, bovenop de leaderboard komen.
+
+Koppeling tussen Mechanics, Dynamics en Aesthetics
+Door de mechanics: jumping, walking en hold-jump kun je door de biomes heen bewegen en onderzoeken (dynamic exploring, aesthetic discovery). 
+Doordat je de biomes kan exploren kun je goobers vinden die je kan oppakken (mechanic pick up, dynamic collecting). 
+Door de boss te kunnen verslaan (dynamic fighting) krijg je uitdaging (aesthetics challenge). 
