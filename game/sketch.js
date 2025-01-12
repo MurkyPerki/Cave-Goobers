@@ -1,10 +1,10 @@
 
 //managers
+let gameScreen;
+let entityManager;
 let drawManager;
 let databaseManager;
-let entityManager;
 let sceneManager; // if necessarry
-let gameScreen;
 let start = true;
 let bossDefeated = false;
 let playerDefeated = false;
@@ -25,15 +25,19 @@ function preload() {
     startScreen = loadImage('assets/images/startscreenBackground.jpg')
     endScreen = loadImage('assets/images/endscreenBG.jpg')
     restartScreen = loadImage('assets/images/restartscreenBG.jpg')
+
+    bossImage = loadImage('assets/images/boss.png');
+    gooberSlotEmptyImg = loadImage('assets/images/slot.png');
+    gooberSlotFilledImg = loadImage('assets/images/filled slot.png');
 }
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
     //initialize managers
-    drawManager = new DrawManager();
-    entityManager = new EntityManager();
     gameScreen = new Gamescreen();
+    entityManager = new EntityManager();
+    drawManager = new DrawManager();
     databaseManager = new Databasemanager();
 
     entityManager.initializeEntities();
@@ -44,9 +48,28 @@ function draw() {
     drawManager.managesAll();
 }
 
+function restartGame() {
+   
+    gameScreen.gameState = 'start';
+    
+  
+    entityManager = new EntityManager();
+    entityManager.initializeEntities();
+    
+   
+    playerDefeated = false;
+    bossDefeated = false;
+    
+    console.log("Game has restarted");
+}
+
 function keyPressed() {
- gameScreen.startgame();
- gameScreen.restartgame();
+
+    if (gameScreen.gameState === 'start' && key === ' ') {
+        gameScreen.startgame();
+    } else if ((gameScreen.gameState === 'end' || gameScreen.gameState === 'restart') && key === 'r') {
+        restartGame();
+    }
 }
 
 //this has to stay here

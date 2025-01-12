@@ -10,8 +10,9 @@ class Player {
         this.verticalVelocity = 0;
         this.playerGravity = 2;
 
-        this.gooberCount = 5;
-        this.health = 5
+        this.gooberCount = 0;
+        this.health = 5;
+        this.hitTimer = 0;
 
         this.isJumping = false;
         this.isFalling = false;
@@ -57,48 +58,45 @@ class Player {
         this.checkWallColl(collidables);
         this.updateCameraBox();
         this.updateCameraPosition();
+
+        if (this.hitTimer > 0) {
+            this.hitTimer--;
+          }
         
     }
 
     render() {
         this.renderPlayer();
         // this.renderCameraBox();
-        this.renderWallCollDectBox();
+        // this.renderWallCollDectBox();
     }
 
     renderPlayer() {
+        push();
+
+        if (this.hitTimer > 0) {
+            tint(255, 0, 0);
+          } else {
+            noTint();
+          }
+
         image(tempSprite, this.x, this.y, this.width, this.height)
-        strokeWeight(3)
-        //stroke(0, 255, 0);
-        noStroke()
+     
+        noStroke();
         noFill();
         rect(this.x, this.y, this.width, this.height);
 
-        // stroke(0, 255, 0);
-        // const cBox = this.collisionBox;
-        // rect(
-        //     this.x + cBox.offsetX,
-        //     this.y + cBox.offsetY,
-        //     cBox.width,
-        //     cBox.height
-        // );
-    }
-
-    takeDamage() {
-        console.log("player took damage")
-        this.health--;
-        if (this.health <= 0) {
-            this.die();
-        }
-
-    }
-
-    die(){
-        // put game overscreen here
+   
+        pop();
     }
 
     walk() {
-        this.horizontalVelocity *= 0.8;
+
+        if (this.isGrounded) {
+            this.horizontalVelocity *= 0.5; 
+        } else {
+            this.horizontalVelocity *= 0.8; 
+        }
         //  left right movement
         if ((keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
             this.horizontalVelocity += this.playerSpeed;
@@ -210,22 +208,22 @@ class Player {
         }
     }
 
-    renderWallCollDectBox() {
-        fill(252, 3, 232);
-        rect(
-            this.wallCollDetectionBoxLeft.x,
-            this.wallCollDetectionBoxLeft.y,
-            this.wallCollDetectionBoxLeft.width,
-            this.wallCollDetectionBoxLeft.height
-        )
-        fill(252, 186, 3)
-        rect(
-            this.wallCollDetectionBoxRight.x,
-            this.wallCollDetectionBoxRight.y,
-            this.wallCollDetectionBoxRight.width,
-            this.wallCollDetectionBoxRight.height
-        )
-    }
+    // renderWallCollDectBox() {
+    //     fill(252, 3, 232);
+    //     rect(
+    //         this.wallCollDetectionBoxLeft.x,
+    //         this.wallCollDetectionBoxLeft.y,
+    //         this.wallCollDetectionBoxLeft.width,
+    //         this.wallCollDetectionBoxLeft.height
+    //     )
+    //     fill(252, 186, 3)
+    //     rect(
+    //         this.wallCollDetectionBoxRight.x,
+    //         this.wallCollDetectionBoxRight.y,
+    //         this.wallCollDetectionBoxRight.width,
+    //         this.wallCollDetectionBoxRight.height
+    //     )
+    // }
 
     checkWallColl(collidables) {
         this.collided = false;
