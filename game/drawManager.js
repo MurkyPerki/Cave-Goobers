@@ -6,12 +6,11 @@ class DrawManager {
 
         gameScreen.update();
 
-        if (playerDefeated) {
-            gameScreen.gameState = 'restart';
-        } else if (bossDefeated) {
-            gameScreen.gameState = 'end';
-        }
 
+        if (entityManager.player.health <= 0) {
+            gameScreen.gameState = 'restart';
+        }
+      
 
         //camera
         if (gameScreen.gameState === 'playing') {
@@ -23,13 +22,7 @@ class DrawManager {
             entityManager.render();
             pop();
 
-            if (entityManager.player.health <= 0) {
-                gamescreen.gameState = 'restart';
-            }
 
-        } else {
-            // If not playing, update the gamescreen display (start, end, or restart)
-            gamescreen.update();
-        }
+        } 
     }
 }

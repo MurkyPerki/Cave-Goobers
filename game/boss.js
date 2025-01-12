@@ -1,12 +1,14 @@
 class Boss extends Enemy {
 
-    constructor(x, y, width, height, entityManager) {
+    constructor(x, y, width, height, entityManager,gameScreen) {
         super(x, y, width, height)
         this.entityManager = entityManager;
+        this.gameScreen = gameScreen;
+       
 
         this.health = 4;
         this.currentPhase = 0
-        this.maxPhases = 3;
+        this.maxPhases = 4;
 
         this.isCharging = false;
         this.chargeFrames = 120;
@@ -26,6 +28,7 @@ class Boss extends Enemy {
         this.isPhaseChanging = false;
         // add hitbox just like in player 
 
+       
     }
 
 
@@ -36,7 +39,7 @@ class Boss extends Enemy {
 
     update(player) {
 
-
+        
         this.handleSlamLogic(player);
 
 
@@ -160,6 +163,17 @@ class Boss extends Enemy {
     advancePhase() {
 
         this.currentPhase++;
+
+        if (this.currentPhase > this.maxPhases) {
+            if (this.gameScreen) {
+                this.gameScreen.gameState = 'end';
+            } else {
+                console.error("gameScreen is undefined. Cannot set gameState.");
+            }
+            return;
+        }
+
+
         // im clearing platforms
         this.entityManager.platforms.length = 0;
         this.repositionPlatforms();
@@ -175,24 +189,28 @@ class Boss extends Enemy {
     repositionPlatforms() {
         // so its smaller and i dont have to type it out.
         const plats = this.entityManager.platforms;
-
+      
 
         // phase 2
         if (this.currentPhase === 1) {
-            plats.push(new Platform(200, 500, 250, 50, true));
-            plats.push(new Platform(100, 300, 200, 40, true));
-            plats.push(new Platform(800, 300, 200, 40, true));
+            plats.push(new Platform(200, 600, 300, 50, true)); // Left platform
+            plats.push(new Platform(1200, 700, 300, 50, true)); // Right platform
+            plats.push(new Platform(800, 300, 150, 40, true)); // Middle platform
             plats.push(new Platform(0, 1000, width, 50, true))
         }
 
         // phase 3
         if (this.currentPhase === 2) {
-            plats.push(new Platform(100, 300, 200, 40, true));
+            plats.push(new Platform(200, 600, 300, 50, true)); // Left platform
+            plats.push(new Platform(1200, 700, 300, 50, true)); // Right platform
+            plats.push(new Platform(800, 300, 150, 40, true)); // Middle platform
             plats.push(new Platform(0, 1000, width, 50, true))
         }
 
         if (this.currentPhase === 3) {
-            plats.push(new Platform(100, 300, 200, 40, true));
+            plats.push(new Platform(200, 600, 300, 50, true)); // Left platform
+            plats.push(new Platform(1200, 700, 300, 50, true)); // Right platform
+            plats.push(new Platform(800, 300, 150, 40, true)); // Middle platform
             plats.push(new Platform(0, 1000, width, 50, true))
         }
     }
@@ -219,9 +237,15 @@ class Boss extends Enemy {
 
 
     die() {
-
-        console.log("boss is dead, you win?")
-        // show end screen
+        
+        if (this.health <= 0) {
+            if (typeof gameScreen === "undefined") {
+                console.error("gameScreen is undefined!");
+                return;
+            }
+            gameScreen.gameState = 'end';
+            console.log("Game state set to 'end'.");
+        }
     }
 
 
@@ -237,7 +261,7 @@ class Boss extends Enemy {
         noFill();
         stroke(0, 255, 0);
         rect(0, this.y + this.height / 2, width, 50);
-       
+
 
 
 

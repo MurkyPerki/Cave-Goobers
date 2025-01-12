@@ -9,6 +9,8 @@ class EntityManager {
         this.collidables = [];
         this.health = [];
         this.triggerBox;
+        
+        
 
         this.gooberSlots = [];
 
@@ -19,6 +21,8 @@ class EntityManager {
             },
             imageSrc: 'assets/images/gameBG.jpg',
         });
+
+    
     }
 
     initializeEntities() {
@@ -130,9 +134,7 @@ class EntityManager {
 
         this.gooberSlots = [];
 
-        // for (let i = 0; i < 5; i++) {
-        //     this.gooberSlots.push(new GooberSlots(300 + i * 60, 450))
-        // }
+
 
         this.gooberSlots.push(new GooberSlots(300, 400, 60, 450))
         this.gooberSlots.push(new GooberSlots(1400, 400, 60, 450))
@@ -141,7 +143,7 @@ class EntityManager {
         this.gooberSlots.push(new GooberSlots(1200, 600, 60, 450))
 
         // instancing new boss
-        this.boss = new Boss(width / 2, 950, 150, 150, this);
+        this.boss = new Boss(width / 2, 950, 150, 150, this, gameScreen);
         this.enemies.push(this.boss);
 
 

@@ -163,6 +163,9 @@ class PhysicsSystem {
                 if (projectile instanceof WindProjectile) {
                     projectile.applyWindPush(player);
                 }
+                if (projectile instanceof Projectile) {
+                    player.health -= 1;
+                }
 
                 projectiles.splice(i, 1);
                 continue;
