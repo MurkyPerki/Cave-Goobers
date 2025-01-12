@@ -63,7 +63,7 @@ class Player {
     render() {
         this.renderPlayer();
         // this.renderCameraBox();
-        this.renderWallCollDectBox();
+        // this.renderWallCollDectBox();
     }
 
     renderPlayer() {
@@ -73,14 +73,14 @@ class Player {
         noFill();
         rect(this.x, this.y, this.width, this.height);
 
-        stroke(0, 255, 0);
-        const cBox = this.collisionBox;
-        rect(
-            this.x + cBox.offsetX,
-            this.y + cBox.offsetY,
-            cBox.width,
-            cBox.height
-        );
+        // stroke(0, 255, 0);
+        // const cBox = this.collisionBox;
+        // rect(
+        //     this.x + cBox.offsetX,
+        //     this.y + cBox.offsetY,
+        //     cBox.width,
+        //     cBox.height
+        // );
     }
 
     walk() {
@@ -201,22 +201,22 @@ class Player {
         }
     }
 
-    renderWallCollDectBox() {
-        fill(252, 3, 232);
-        rect(
-            this.wallCollDetectionBoxLeft.x,
-            this.wallCollDetectionBoxLeft.y,
-            this.wallCollDetectionBoxLeft.width,
-            this.wallCollDetectionBoxLeft.height
-        )
-        fill(252, 186, 3)
-        rect(
-            this.wallCollDetectionBoxRight.x,
-            this.wallCollDetectionBoxRight.y,
-            this.wallCollDetectionBoxRight.width,
-            this.wallCollDetectionBoxRight.height
-        )
-    }
+    // renderWallCollDectBox() {
+    //     fill(252, 3, 232);
+    //     rect(
+    //         this.wallCollDetectionBoxLeft.x,
+    //         this.wallCollDetectionBoxLeft.y,
+    //         this.wallCollDetectionBoxLeft.width,
+    //         this.wallCollDetectionBoxLeft.height
+    //     )
+    //     fill(252, 186, 3)
+    //     rect(
+    //         this.wallCollDetectionBoxRight.x,
+    //         this.wallCollDetectionBoxRight.y,
+    //         this.wallCollDetectionBoxRight.width,
+    //         this.wallCollDetectionBoxRight.height
+    //     )
+    // }
 
     checkWallColl(collidables) {
         this.collided = false;
