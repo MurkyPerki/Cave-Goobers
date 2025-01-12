@@ -111,11 +111,7 @@ class EntityManager {
             this.triggerBox.render();
         }
 
-        push();         
-        fill(255);        
-        textSize(20);      
-        text("Player Health: " + this.player.health, this.player.x + 50, this.player.y - 100);
-        pop();             
+              
     }
 
     loadBossLevel() {
@@ -188,7 +184,7 @@ class EntityManager {
 
         if (allFilled) {
 
-            this.boss.takeDamage();
+            this.boss.takeDamage(this.player);
 
             this.boss.advancePhase();
 
@@ -203,8 +199,8 @@ class EntityManager {
         }
 
         for (let i = 0; i < 5; i++) {
-            const someX = random(100, 1000);
-            const someY = random(100, 600);
+            const someX = random(400, 1000);
+            const someY = random(400, 600);
             let gooberItem = new Item(someX, someY, 50, 50, this.items);
             this.items.push(gooberItem);
         }

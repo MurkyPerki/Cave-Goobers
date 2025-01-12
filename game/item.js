@@ -76,9 +76,6 @@ class Item {
         image(baby, this.x, this.y, this.width, this.height);
         
 
-        //hitbox render
-        // noFill();
-        // stroke(0, 255, 0)
-        // rect(this.x, this.y, this.width, this.height)
+     
     }
 }

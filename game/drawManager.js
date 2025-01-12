@@ -24,5 +24,14 @@ class DrawManager {
 
 
         } 
+
+        push();
+        fill(255);
+        textSize(24);
+        // show Health 
+        text("Health: " + entityManager.player.health, 105, 40);
+        // show Goober count
+        text("Goobers: " + entityManager.player.gooberCount, 120, 80);
+        pop();
     }
 }

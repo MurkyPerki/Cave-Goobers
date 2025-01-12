@@ -10,8 +10,9 @@ class Player {
         this.verticalVelocity = 0;
         this.playerGravity = 2;
 
-        this.gooberCount = 5;
+        this.gooberCount = 0;
         this.health = 5;
+        this.hitTimer = 0;
 
         this.isJumping = false;
         this.isFalling = false;
@@ -57,6 +58,10 @@ class Player {
         this.checkWallColl(collidables);
         this.updateCameraBox();
         this.updateCameraPosition();
+
+        if (this.hitTimer > 0) {
+            this.hitTimer--;
+          }
         
     }
 
@@ -67,20 +72,22 @@ class Player {
     }
 
     renderPlayer() {
+        push();
+
+        if (this.hitTimer > 0) {
+            tint(255, 0, 0);
+          } else {
+            noTint();
+          }
+
         image(tempSprite, this.x, this.y, this.width, this.height)
-        strokeWeight(3)
-        //stroke(0, 255, 0);
+     
+        noStroke();
         noFill();
         rect(this.x, this.y, this.width, this.height);
 
-        // stroke(0, 255, 0);
-        // const cBox = this.collisionBox;
-        // rect(
-        //     this.x + cBox.offsetX,
-        //     this.y + cBox.offsetY,
-        //     cBox.width,
-        //     cBox.height
-        // );
+   
+        pop();
     }
 
     walk() {

@@ -122,6 +122,7 @@ class Boss extends Enemy {
 
             console.log("player got hit")
             player.health--;
+            player.hitTimer = 20;
         }
 
     }
@@ -153,6 +154,7 @@ class Boss extends Enemy {
 
     takeDamage() {
         this.health--;
+        
         console.log("boss took damage! health is now", this.health)
 
         if (this.health <= 0) {
@@ -254,13 +256,17 @@ class Boss extends Enemy {
         // image for boss 
 
         push()
-        fill(255, 255 - this.chargeRed, 255 - this.chargeRed);
-        rect(this.x, this.y, this.width, this.height);
+        imageMode(CENTER);
+        if (this.isCharging) {
+            tint(255, 255 - this.chargeRed, 255 - this.chargeRed);
+        }
+        image(bossImage, this.x + this.width / 2, this.y + this.height / 2, this.width, this.height);
+      
 
 
-        noFill();
-        stroke(0, 255, 0);
-        rect(0, this.y + this.height / 2, width, 50);
+        // noFill();
+        // stroke(0, 255, 0);
+        // rect(0, this.y + this.height / 2, width, 50);
 
 
 

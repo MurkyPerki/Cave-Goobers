@@ -25,6 +25,8 @@ function preload() {
     startScreen = loadImage('assets/images/startscreenBackground.jpg')
     endScreen = loadImage('assets/images/endscreenBG.jpg')
     restartScreen = loadImage('assets/images/restartscreenBG.jpg')
+
+    bossImage = loadImage('assets/images/boss.png');
 }
 
 function setup() {
@@ -60,7 +62,7 @@ function restartGame() {
 }
 
 function keyPressed() {
-    
+
     if (gameScreen.gameState === 'start' && key === ' ') {
         gameScreen.startgame();
     } else if ((gameScreen.gameState === 'end' || gameScreen.gameState === 'restart') && key === 'r') {
