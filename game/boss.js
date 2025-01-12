@@ -9,7 +9,7 @@ class Boss extends Enemy {
         this.maxPhases = 3;
 
         this.isCharging = false;
-        this.chargeFrames = 30;
+        this.chargeFrames = 120;
         this.chargeTimer = 0;
         this.slamCooldown = 180;
         this.slamCooldownTimer = 0;
@@ -34,10 +34,10 @@ class Boss extends Enemy {
         // probably no movement, overwriting parent class
     }
 
-    update(player, projectiles) {
+    update(player) {
 
 
-        this.handleSlamLogic(player, projectiles);
+        this.handleSlamLogic(player);
 
 
         if (frameCount - this.lastProjectileFrame > this.projectileCooldown) {
@@ -89,6 +89,7 @@ class Boss extends Enemy {
         this.isCharging = true;
         this.chargeTimer = this.chargeFrames; // 30
         this.chargeRed = 0;
+        console.log("Boss started charging slam");
     }
 
 
@@ -98,7 +99,7 @@ class Boss extends Enemy {
         console.log("did slam damage")
 
         let slamX = 0;
-        let slamY = this.y + this.height;
+        let slamY = this.y + this.height / 2;
         let slamW = width;
         let slamH = 50;
 
@@ -128,7 +129,7 @@ class Boss extends Enemy {
 
     }
 
-    shootProjectileTowardsPlayer(player, projectiles) {
+    shootProjectileTowardsPlayer(player) {
         console.log("boss shoots projectile")
 
         let direction = createVector(player.x - this.x, player.y - this.y);
@@ -178,21 +179,21 @@ class Boss extends Enemy {
 
         // phase 2
         if (this.currentPhase === 1) {
-            plats.push(new Platform(200, 500, 250, 50,true));
-            plats.push(new Platform(100, 300, 200, 40,true));
-            plats.push(new Platform(800, 300, 200, 40,true));
-            plats.push(new Platform(0, 1000, width, 50,true))
+            plats.push(new Platform(200, 500, 250, 50, true));
+            plats.push(new Platform(100, 300, 200, 40, true));
+            plats.push(new Platform(800, 300, 200, 40, true));
+            plats.push(new Platform(0, 1000, width, 50, true))
         }
 
         // phase 3
         if (this.currentPhase === 2) {
-            plats.push(new Platform(100, 300, 200, 40,true));
-            plats.push(new Platform(0, 1000, width, 50,true))
+            plats.push(new Platform(100, 300, 200, 40, true));
+            plats.push(new Platform(0, 1000, width, 50, true))
         }
 
         if (this.currentPhase === 3) {
-            plats.push(new Platform(100, 300, 200, 40,true));
-            plats.push(new Platform(0, 1000, width, 50,true))
+            plats.push(new Platform(100, 300, 200, 40, true));
+            plats.push(new Platform(0, 1000, width, 50, true))
         }
     }
 
@@ -228,9 +229,18 @@ class Boss extends Enemy {
 
         // image for boss 
 
-        push();
+        push()
         fill(255, 255 - this.chargeRed, 255 - this.chargeRed);
         rect(this.x, this.y, this.width, this.height);
+
+
+        noFill();
+        stroke(0, 255, 0);
+        rect(0, this.y + this.height / 2, width, 50);
+       
+
+
+
         pop();
 
 

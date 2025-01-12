@@ -86,6 +86,7 @@ class EntityManager {
 
         for (let enemy of this.enemies) {
             enemy.render();
+            // boss.render();
         }
         for (let item of this.items) {
             item.render();
@@ -105,6 +106,12 @@ class EntityManager {
         if (this.triggerBox) {
             this.triggerBox.render();
         }
+
+        push();         
+        fill(255);        
+        textSize(20);      
+        text("Player Health: " + this.player.health, this.player.x + 50, this.player.y - 100);
+        pop();             
     }
 
     loadBossLevel() {
@@ -128,14 +135,15 @@ class EntityManager {
         // }
 
         this.gooberSlots.push(new GooberSlots(300, 400, 60, 450))
-        this.gooberSlots.push(new GooberSlots(1400, 400 , 60, 450))
-        this.gooberSlots.push(new GooberSlots(700, 500,  60, 450))
-        this.gooberSlots.push(new GooberSlots(1000, 600,  60, 450))
-        this.gooberSlots.push(new GooberSlots(1200, 600,  60, 450))
+        this.gooberSlots.push(new GooberSlots(1400, 400, 60, 450))
+        this.gooberSlots.push(new GooberSlots(700, 500, 60, 450))
+        this.gooberSlots.push(new GooberSlots(1000, 600, 60, 450))
+        this.gooberSlots.push(new GooberSlots(1200, 600, 60, 450))
 
         // instancing new boss
         this.boss = new Boss(width / 2, 950, 150, 150, this);
         this.enemies.push(this.boss);
+
 
 
         // different player position
@@ -152,21 +160,21 @@ class EntityManager {
 
     createBossPlatforms() {
 
-        this.platforms.push(new Platform(300, 600, 200, 50,true))
-        this.platforms.push(new Platform(1400, 800, 200, 50,true))
-        this.platforms.push(new Platform(700, 700, 150, 50,true))
-        this.platforms.push(new Platform(1000, 700, 160, 50,true))
-        this.platforms.push(new Platform(1200, 650, 100, 50,true))
-        this.platforms.push(new Platform(0, 1000, width, 50,true))
+        this.platforms.push(new Platform(300, 600, 200, 50, true))
+        this.platforms.push(new Platform(1400, 800, 200, 50, true))
+        this.platforms.push(new Platform(700, 700, 150, 50, true))
+        this.platforms.push(new Platform(1000, 700, 160, 50, true))
+        this.platforms.push(new Platform(1200, 650, 100, 50, true))
+        this.platforms.push(new Platform(0, 1000, width, 50, true))
     }
 
     checkSlots() {
-        
+
         if (this.gooberSlots.length === 0) {
             return;
         }
 
-        
+
         let allFilled = true;
         for (let i = 0; i < this.gooberSlots.length; i++) {
             if (!this.gooberSlots[i].isFilled) {
@@ -175,11 +183,11 @@ class EntityManager {
             }
         }
 
-        
+
         if (allFilled) {
 
             this.boss.takeDamage();
-            
+
             this.boss.advancePhase();
 
             this.resetSlotsAndGoobers();
