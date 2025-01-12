@@ -27,6 +27,8 @@ function preload() {
     restartScreen = loadImage('assets/images/restartscreenBG.jpg')
 
     bossImage = loadImage('assets/images/boss.png');
+    gooberSlotEmptyImg = loadImage('assets/images/slot.png');
+    gooberSlotFilledImg = loadImage('assets/images/filled slot.png');
 }
 
 function setup() {

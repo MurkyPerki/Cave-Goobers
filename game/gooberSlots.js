@@ -6,6 +6,9 @@ class GooberSlots {
         this.width = 50;
         this.height = 50;
         this.isFilled = false;
+
+        this.emptyImage = gooberSlotEmptyImg;
+        this.filledImage = gooberSlotFilledImg;
     }
 
     update(player) {
@@ -14,12 +17,12 @@ class GooberSlots {
         const hitboxY = player.y + player.collisionBox.offsetY;
         const hitboxW = player.collisionBox.width;
         const hitboxH = player.collisionBox.height;
-      
+
 
         if (Collision.isColliding(
-            hitboxX, 
-            hitboxY, 
-            hitboxW, 
+            hitboxX,
+            hitboxY,
+            hitboxW,
             hitboxH,
             this)) {
 
@@ -32,14 +35,19 @@ class GooberSlots {
         }
 
 
-    
+
     }
 
     render() {
 
         push();
-        fill(this.isFilled ? 'yellow' : 'white');
-        rect(this.x, this.y, this.width, this.height);
+        if (this.isFilled) {
+            imageMode(CORNER);  // or CENTER if you prefer; adjust accordingly.
+            image(this.filledImage, this.x, this.y, this.width, this.height);
+          } else {
+            imageMode(CORNER);
+            image(this.emptyImage, this.x, this.y, this.width, this.height);
+          }
         pop();
     }
 }
